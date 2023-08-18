@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import Inscription from "../../pages/Inscription/Inscription";
 import Connexion from "../../pages/Connexion/Connexion";
