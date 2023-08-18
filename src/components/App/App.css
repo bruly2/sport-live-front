@@ -11,6 +11,10 @@
   transition: filter 300ms;
 }
 
+h1 {
+  color: #e06849;
+}
+
 .logo:hover {
   filter: drop-shadow(0 0 2em rgba(100, 108, 255, 0.6666666667));
 }
