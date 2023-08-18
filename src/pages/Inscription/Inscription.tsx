@@ -1,4 +1,11 @@
+import Header from "../../layout/Header/Header";
+
 const Inscription = () => {
-    return <h1>Inscription</h1>;
+    return (
+        <>
+            <Header />
+            <h1>Inscription</h1>
+        </>
+    );
 };
 export default Inscription;
