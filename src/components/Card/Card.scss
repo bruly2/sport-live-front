@@ -1,17 +1,18 @@
-section {
+@use "../../assets/styles/variables" as *;
+
+.card {
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+    width: 45%;
+    min-height: 220px;
     display: flex;
-    gap: 15px;
-    max-width: 1080px;
-    margin: 0 auto;
-    .card {
-        background-color: #fff;
-        border-radius: 1rem;
-        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
-        width: 50%;
-        height: 220px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    align-items: center;
+    justify-content: center;
+    @media (max-width: $layout-breakpoint-small) {
+        width: 100%;
     }
-   
+    h2 {
+        text-transform: uppercase;
+    }
 }
