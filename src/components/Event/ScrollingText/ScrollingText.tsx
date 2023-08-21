@@ -3,7 +3,7 @@ import "./scrollingtext.scss";
 const ScrollingText = () => {
     return (
         <div id="scrolling-text">
-            <h2>Défilement des messages</h2>
+            <span>Défilement des messages</span>
         </div>
     );
 };
