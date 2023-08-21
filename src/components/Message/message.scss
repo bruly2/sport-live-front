@@ -15,9 +15,10 @@
         padding: 20px;
         border: 1px solid;
         background-color: color.scale($color-primary, $lightness: -20%);
+        font-family: "Climate Crisis", display;
     }
     textarea:placeholder {
         font-size: 3em;
-        color: red;
+        // color: red;
     }
 }
