@@ -9,37 +9,39 @@ const Header = () => {
 
     return (
         <>
-            {/* // BOUTON DE CONNEXION PROVISOIRE : */}
-            <a
-                href="#"
-                onClick={() => {
-                    setConnected(!connected);
-                }}
-            >
-                Toggle provisoire de connexion
-            </a>
-            {connected ? (
-                //    1.NAV Visiteur
-                <nav>
-                    <div>
-                        <Link to="/">
-                            <img src={LogoSportLive} alt="" />
-                        </Link>
-                        <Link to="/">
-                            <p>Sport Live</p>
-                        </Link>
-                    </div>
-                </nav>
-            ) : (
-                //    2.NAV Utilisateur
-                <nav className="connected">
-                    <div>
-                        <Link to="/">
-                            <button type="button">Déconnexion</button>
-                        </Link>
-                    </div>
-                </nav>
-            )}
+            <header>
+                {/* // BOUTON DE CONNEXION PROVISOIRE : */}
+                <a
+                    href="#"
+                    onClick={() => {
+                        setConnected(!connected);
+                    }}
+                >
+                    Toggle provisoire de connexion
+                </a>
+                {connected ? (
+                    //    1.NAV Visiteur
+                    <nav>
+                        <div>
+                            <Link to="/">
+                                <img src={LogoSportLive} alt="" />
+                            </Link>
+                            <Link to="/">
+                                <p>Sport Live</p>
+                            </Link>
+                        </div>
+                    </nav>
+                ) : (
+                    //    2.NAV Utilisateur
+                    <nav className="connected">
+                        <div>
+                            <Link to="/">
+                                <button type="button">Déconnexion</button>
+                            </Link>
+                        </div>
+                    </nav>
+                )}
+            </header>
         </>
     );
 };
