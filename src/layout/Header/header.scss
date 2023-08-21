@@ -1,0 +1,42 @@
+@use "../../assets/styles/variables" as *;
+
+nav {
+    width: 100%;
+    border-bottom: 1px solid $color-black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    @media (max-width: $layout-breakpoint-small) {
+        justify-content: flex-start;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        @media (max-width: $layout-breakpoint-small) {
+            gap: 5px;
+        }
+        img {
+            display: inline-block;
+            border-radius: 5px;
+            background-color: white;
+            padding: 5px;
+            max-width: 100%;
+            @media (max-width: $layout-breakpoint-small) {
+                width: 70px;
+            }
+        }
+        p {
+            display: inline-block;
+            font-size: 2em;
+            @media (max-width: $layout-breakpoint-small) {
+                font-size: 1.2em;
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+        }
+    }
+}
