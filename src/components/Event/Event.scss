@@ -1,0 +1,20 @@
+@use "../../assets/styles/variables" as *;
+
+#event {
+   h1{
+    padding-right: 168px;
+    padding-bottom: 1px;
+   }
+   .description_event{
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      font-size: 25px;
+   }
+   .defile_message {
+      border-top: 1px solid;
+      border-bottom: 1px solid;
+      font-size: 40px;
+      margin: 90px;
+   }
+}

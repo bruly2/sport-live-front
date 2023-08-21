@@ -1,4 +1,13 @@
+import {Event} from "../../components/Event/Event"
+
+import { Card } from "../../components/Card/Card";
 const Hub = () => {
-    return <h1>Hub</h1>;
+    return (
+        <>
+        <Event />
+        <Card />
+       
+        </>
+    )
 };
 export default Hub;
