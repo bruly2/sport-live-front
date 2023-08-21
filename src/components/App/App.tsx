@@ -1,5 +1,7 @@
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
+import Header from "../../layout/Header/Header";
+import Footer from "../../layout/Footer/Footer";
 import Inscription from "../../pages/Inscription/Inscription";
 import Connexion from "../../pages/Connexion/Connexion";
 import Hub from "../../pages/Hub/Hub";
@@ -10,6 +12,7 @@ import Error from "../../pages/Error/Error";
 function App() {
     return (
         <>
+            <Header />
             <Routes>
                 {/* Page "/" d'index provisoire */}
                 <Route path="/" element={<Hub />} />
@@ -20,6 +23,7 @@ function App() {
                 <Route path="/hub/sondage" element={<Poll />} />
                 <Route path="*" element={<Error />} />
             </Routes>
+            <Footer />
         </>
     );
 }
