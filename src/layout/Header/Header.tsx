@@ -2,6 +2,7 @@ import { useState } from "react";
 import LogoSportLive from "../../assets/img/sport-live.png";
 import "./header.scss";
 import { Link } from "react-router-dom";
+import Button from "../../components/Button/Button";
 
 const Header = () => {
     // VARIABLE DE CONNEXION PROVISOIRE :
@@ -36,7 +37,11 @@ const Header = () => {
                     <nav className="connected">
                         <div>
                             <Link to="/">
-                                <button type="button" className="btn-secondary">Déconnexion</button>
+                                <Button
+                                    type={"button"}
+                                    className={"btn-secondary"}
+                                    content={"Déconnexion"}
+                                />
                             </Link>
                         </div>
                     </nav>

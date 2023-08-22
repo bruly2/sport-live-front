@@ -1,5 +1,6 @@
 import "./message.scss";
 import { useState } from "react";
+import Button from "../Button/Button";
 
 const Message = () => {
     const [textArea, setTextArea] = useState("");
@@ -36,7 +37,7 @@ const Message = () => {
         <>
             <main id="message">
                 <h2>
-                    Surveillez l'écran du stade pouv voir votre message en
+                    Surveillez l'écran du stade pour voir votre message en
                     direct&nbsp;!
                 </h2>
 
@@ -50,9 +51,7 @@ const Message = () => {
                             onChange={(e) => handleTest(e)}
                         ></textarea>
                         <p className="errorform">{errorForm}</p>
-                        <button type="submit" className="btn-primary-2">
-                            Valider
-                        </button>
+                        <Button type={"submit"} className={"btn-primary-2"} content={"Valider"} />
                     </form>
                 ) : (
                     <h1>Message envoyé</h1>

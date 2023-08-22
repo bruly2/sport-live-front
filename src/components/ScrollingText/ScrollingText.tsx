@@ -1,5 +1,6 @@
 import "./scrollingtext.scss";
 import { useState } from "react";
+import Button from "../Button/Button";
 
 const messages = [
     {
@@ -34,9 +35,7 @@ const ScrollingText = () => {
                 <span>{displayMessage}</span>
             </div>
             {/* Bouton provisoire */}
-            <button className="btn-secondary" onClick={createMessage}>
-                Afficher un message
-            </button>
+            <Button className={"btn-secondary"} onClick={createMessage} content={"Afficher un message"} />            
         </>
     );
 };

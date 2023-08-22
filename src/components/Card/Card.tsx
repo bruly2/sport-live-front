@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
 import "./Card.scss";
+import Button from "../Button/Button";
 
-export const Card = ({ title, img }) => {
+export const Card = ({ title, img, link }) => {
     return (
         <>
             <Link
-                // ATTENTION A RENDRE LE LIEN DYNAMIQUE AVEC LE TITLE. BACKTIPS = BUG
-                to="/hub/message"
+                to={link}
                 className="card"
                 style={{ backgroundImage: `url( ${img} )` }}
             >
-                {/* <h2>{title}</h2> */}
-                <button className="btn-primary">{title}</button>
+                <Button className={"btn-primary"} content={title} />
             </Link>
         </>
     );
