@@ -36,7 +36,7 @@ const Header = () => {
                     <nav className="connected">
                         <div>
                             <Link to="/">
-                                <button type="button">Déconnexion</button>
+                                <button type="button" className="btn-secondary">Déconnexion</button>
                             </Link>
                         </div>
                     </nav>
