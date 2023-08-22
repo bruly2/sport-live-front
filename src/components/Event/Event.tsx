@@ -1,5 +1,4 @@
 import "./Event.scss";
-import ScrollingText from "./ScrollingText/ScrollingText";
 
 export const Event = () => {
     return (
@@ -16,7 +15,6 @@ export const Event = () => {
                     </p>
                 </div>
             </main>
-            <ScrollingText />
         </>
     );
 };
