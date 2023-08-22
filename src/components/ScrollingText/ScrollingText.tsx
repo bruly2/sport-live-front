@@ -34,8 +34,17 @@ const ScrollingText = () => {
             <div id="scrolling-text">
                 <span>{displayMessage}</span>
             </div>
-            {/* Bouton provisoire */}
-            <Button className={"btn-secondary"} onClick={createMessage} content={"Afficher un message"} />            
+
+            {/* Bouton provisoire à supprimer */}
+            {displayMessage !== [] && (
+                <div style={{ margin: "-10px 0 20px" }}>
+                    <Button
+                        className={"btn-secondary"}
+                        onClick={createMessage}
+                        content={"Afficher un message"}
+                    />
+                </div>
+            )}
         </>
     );
 };

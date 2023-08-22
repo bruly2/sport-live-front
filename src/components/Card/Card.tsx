@@ -1,17 +1,58 @@
 import { Link } from "react-router-dom";
 import "./Card.scss";
 import Button from "../Button/Button";
+import Message from "../Message/Message";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
-export const Card = ({ title, img, link }) => {
+import styled from "styled-components";
+
+export const Card = ({ title, img }) => {
+    const [showBigCard, setShowBigCard] = useState(false);
+
     return (
         <>
-            <Link
-                to={link}
+            {!showBigCard ? (
+                <div
+                    style={{
+                        backgroundImage: `url( ${img} )`,
+                    }}
+                    className="card"
+                    onClick={() => setShowBigCard(true)}
+                >
+                    <Button className={"btn-primary"} content={title} />
+                </div>
+            ) : (
+                <div
+                    style={{ flexGrow: 10 }}
+                    className="card"
+                    onClick={() => setShowBigCard(false)}
+                >
+                    <p>test</p>
+                    {/* <Message /> */}
+                </div>
+            )}
+
+            {/* <motion.div
+                // to={link}
                 className="card"
+                layoutId={id}
                 style={{ backgroundImage: `url( ${img} )` }}
+                onClick={() => setCardId(id)}
             >
                 <Button className={"btn-primary"} content={title} />
-            </Link>
+            </motion.div> */}
+            {/* <AnimatePresence>
+                {cardId && (
+                    <motion.div
+                        layoutId={cardId}
+                        onClick={() => setCardId(null)}
+                        className="card open"
+                    >
+                        test
+                    </motion.div>
+                )}
+            </AnimatePresence> */}
         </>
     );
 };

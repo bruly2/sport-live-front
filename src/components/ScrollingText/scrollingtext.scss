@@ -1,10 +1,10 @@
 @use "../../assets/styles/variables" as *;
 
 #scrolling-text {
-    background-color: $color-primary;
+    // background-color: $color-secondary;
     color: $color-secondary;
     font-size: 4em;
-    margin: 40px 0;
+    margin: 20px 0;
     text-transform: uppercase;
     font-family: "Climate crises", display;
     @media (max-width: $layout-breakpoint-small) {

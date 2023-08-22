@@ -1,14 +1,18 @@
 @use "../../assets/styles/variables" as *;
 
 .card {
-    background-color: #fff;
+    background-color: $color-secondary;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
     border-radius: 1rem;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
-    width: 45%;
     min-height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    flex-grow: 1;
     @media (max-width: $layout-breakpoint-small) {
         width: 100%;
     }

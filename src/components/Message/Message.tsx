@@ -51,7 +51,11 @@ const Message = () => {
                             onChange={(e) => handleTest(e)}
                         ></textarea>
                         <p className="errorform">{errorForm}</p>
-                        <Button type={"submit"} className={"btn-primary-2"} content={"Valider"} />
+                        <Button
+                            type={"submit"}
+                            className={"btn-primary-2"}
+                            content={"Valider"}
+                        />
                     </form>
                 ) : (
                     <h1>Message envoyé</h1>

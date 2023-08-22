@@ -1,7 +1,14 @@
+@use "../../assets/styles/variables" as *;
+
 #event {
     text-align: left;
     .description_event {
         text-align: left;
-        font-size: 42px;
+        font-family: "Climate Crisis", display, Avenir, Helvetica, Arial,
+            sans-serif;
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 2em;
+        word-spacing: 0.3em;
     }
 }

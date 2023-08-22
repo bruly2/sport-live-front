@@ -5,12 +5,13 @@ footer {
     text-align: center;
     a {
         margin: 20px;
+        color: $color-white;
         @media (max-width: $layout-breakpoint-small) {
             display: block;
         }
     }
     hr {
         margin-bottom: 30px;
-        border: 2px solid $color-primary;
+        border: 2px solid $color-secondary;
     }
 }
