@@ -13,7 +13,7 @@ export const Card = ({ title, img }) => {
     return (
         <>
             {!showBigCard ? (
-                <div
+                <motion.div
                     style={{
                         backgroundImage: `url( ${img} )`,
                     }}
@@ -21,7 +21,7 @@ export const Card = ({ title, img }) => {
                     onClick={() => setShowBigCard(true)}
                 >
                     <Button className={"btn-primary"} content={title} />
-                </div>
+                </motion.div>
             ) : (
                 <div
                     style={{ flexGrow: 10 }}
