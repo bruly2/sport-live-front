@@ -36,13 +36,11 @@ const ScrollingText = () => {
             </div>
 
             {/* Bouton provisoire à supprimer */}
-            {displayMessage !== [] && (
+            {displayMessage && (
                 <div style={{ margin: "-10px 0 20px" }}>
-                    <Button
-                        className={"btn-secondary"}
-                        onClick={createMessage}
-                        content={"Afficher un message"}
-                    />
+                    <Button className={"btn-secondary"} onClick={createMessage}>
+                        Afficher un message
+                    </Button>
                 </div>
             )}
         </>

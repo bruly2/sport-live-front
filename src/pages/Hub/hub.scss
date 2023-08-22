@@ -1,9 +1,13 @@
+@use "../../assets/styles/variables" as *;
+
 section {
     display: flex;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     gap: 30px;
     max-width: 1080px;
     margin: 0 auto;
     justify-content: center;
-    position: relative;
+    @media (max-width: $layout-breakpoint-small) {
+        flex-wrap: wrap;
+    }
 }

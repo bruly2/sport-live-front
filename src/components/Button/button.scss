@@ -36,4 +36,12 @@ button {
     &:active {
         transform: scale(0.93);
     }
+    &.close {
+        color: $color-black;
+        padding: 0;
+        font-size: 2em;
+        position: absolute;
+        top: 0;
+        right: 20px;
+    }
 }

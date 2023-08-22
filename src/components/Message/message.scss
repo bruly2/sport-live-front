@@ -2,9 +2,10 @@
 @use "sass:color";
 
 #message {
-    background-color: $color-primary;
+    // background-color: $color-primary;
+    position: relative;
     padding: 30px;
-
+    width: 100%;
     textarea {
         width: 100%;
         min-height: 200px;

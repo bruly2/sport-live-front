@@ -1,13 +1,11 @@
-import { Link } from "react-router-dom";
 import "./Card.scss";
 import Button from "../Button/Button";
 import Message from "../Message/Message";
+import Poll from "../Poll/Poll";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-import styled from "styled-components";
-
-export const Card = ({ title, img }) => {
+export const Card = ({ title, img, id }) => {
     const [showBigCard, setShowBigCard] = useState(false);
 
     return (
@@ -17,42 +15,38 @@ export const Card = ({ title, img }) => {
                     style={{
                         backgroundImage: `url( ${img} )`,
                     }}
+                    // initial={{ x: 0 }}
+                    // animate={{ x: 300 }}
+                    // transition={{ duration: 0.6 }}
                     className="card"
                     onClick={() => setShowBigCard(true)}
+                    layoutId={id}
                 >
-                    <Button className={"btn-primary"} content={title} />
+                    <Button className={"btn-primary"}>{title}</Button>
                 </motion.div>
             ) : (
-                <div
-                    style={{ flexGrow: 10 }}
-                    className="card"
-                    onClick={() => setShowBigCard(false)}
-                >
-                    <p>test</p>
-                    {/* <Message /> */}
-                </div>
-            )}
-
-            {/* <motion.div
-                // to={link}
-                className="card"
-                layoutId={id}
-                style={{ backgroundImage: `url( ${img} )` }}
-                onClick={() => setCardId(id)}
-            >
-                <Button className={"btn-primary"} content={title} />
-            </motion.div> */}
-            {/* <AnimatePresence>
-                {cardId && (
+                <AnimatePresence>
                     <motion.div
-                        layoutId={cardId}
-                        onClick={() => setCardId(null)}
-                        className="card open"
+                        style={{ flexGrow: 10 }}
+                        className="card on mobile"
+                        layoutId={id}
+                        // onClick={() => setShowBigCard(false)}
                     >
-                        test
+                        {/* <`${title}` /> */}
+                        {id === 1 ? (
+                            <Message
+                                closeBigCard={() => setShowBigCard(false)}
+                            />
+                        ) : (
+                            id === 2 && (
+                                <Poll
+                                    closeBigCard={() => setShowBigCard(false)}
+                                />
+                            )
+                        )}
                     </motion.div>
-                )}
-            </AnimatePresence> */}
+                </AnimatePresence>
+            )}
         </>
     );
 };

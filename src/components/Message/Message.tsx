@@ -1,8 +1,9 @@
 import "./message.scss";
 import { useState } from "react";
 import Button from "../Button/Button";
+import { IoIosClose } from "react-icons/Io";
 
-const Message = () => {
+const Message = ({ closeBigCard }) => {
     const [textArea, setTextArea] = useState("");
 
     const [errorForm, setErrorForm] = useState("");
@@ -35,7 +36,16 @@ const Message = () => {
 
     return (
         <>
-            <main id="message">
+            <article id="message">
+                <Button
+                    type={"button"}
+                    className={"close"}
+                    onClick={closeBigCard}
+                >
+                    <span>
+                        <IoIosClose />
+                    </span>
+                </Button>
                 <h2>
                     Surveillez l'écran du stade pour voir votre message en
                     direct&nbsp;!
@@ -46,21 +56,19 @@ const Message = () => {
                         <textarea
                             name="message-content"
                             id="message-content"
-                            placeholder="Allez Monaco !!"
+                            placeholder="Go Spurs Go !!"
                             value={textArea}
                             onChange={(e) => handleTest(e)}
                         ></textarea>
                         <p className="errorform">{errorForm}</p>
-                        <Button
-                            type={"submit"}
-                            className={"btn-primary-2"}
-                            content={"Valider"}
-                        />
+                        <Button type={"submit"} className={"btn-primary-2"}>
+                            Valider
+                        </Button>
                     </form>
                 ) : (
                     <h1>Message envoyé</h1>
                 )}
-            </main>
+            </article>
         </>
     );
 };
