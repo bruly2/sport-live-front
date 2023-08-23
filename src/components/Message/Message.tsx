@@ -46,8 +46,8 @@ const Message = ({ closeBigCard }) => {
                     </span>
                 </Button>
                 <h2>
-                    Surveillez l'écran du stade pour voir votre message en
-                    direct&nbsp;!
+                    Surveillez l'écran du stade pour voir votre message
+                    affiché&nbsp;!
                 </h2>
 
                 {!showConfirmation ? (

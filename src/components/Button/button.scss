@@ -34,10 +34,11 @@ button {
     }
     &.close {
         color: $color-black;
+        margin: 20px;
         padding: 0;
         font-size: 2em;
         position: absolute;
         top: 0;
-        right: 20px;
+        right: 0;
     }
 }
