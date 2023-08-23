@@ -1,13 +1,20 @@
 @use "../../assets/styles/variables" as *;
 
-#scrolling-text {
+#scrolling {
     // background-color: $color-secondary;
-    color: $color-secondary;
-    font-size: 4em;
     margin: 20px 0;
-    text-transform: uppercase;
-    font-family: "Climate crises", display;
-    @media (max-width: $layout-breakpoint-small) {
-        font-size: 2em;
+    position: relative;
+    text-align: right;
+    .scrolling-text {
+        color: $color-secondary;
+        font-size: 4em;
+        display: inline-block;
+        // margin-right: -300px;
+        width: fit-content;
+        text-transform: uppercase;
+        font-family: "Climate crises", display;
+        @media (max-width: $layout-breakpoint-small) {
+            font-size: 2em;
+        }
     }
 }

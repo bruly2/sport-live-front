@@ -15,8 +15,6 @@
     cursor: pointer;
     flex-grow: 1;
 
-    transform: translate3d(0px, 130px, 40px) scale(0.9, 0.5);
-
     @media (max-width: $layout-breakpoint-small) {
         width: 100%;
         margin-left: 20px;
