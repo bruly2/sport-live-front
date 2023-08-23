@@ -30,7 +30,12 @@ const ScrollingText = () => {
         setDisplayMessage(messages[1].content);
     };
 
-    const windowsSize = window.innerWidth;
+    // Calcul la longueur de l'écran en px
+    const [windowSize, setWindowSize] = useState(0);
+    useEffect(() => {
+        const windowsWidth = window.innerWidth;
+        setWindowSize(windowsWidth);
+    }, []);
 
     // Calcul la longueur du msg en px
     const [divMessageWidth, setDivMessageWidth] = useState(0);
@@ -49,7 +54,7 @@ const ScrollingText = () => {
                     style={{ marginRight: `-${divMessageWidth}px` }}
                     animate={{
                         transform: `translate3d(-${
-                            windowsSize + divMessageWidth
+                            windowSize + divMessageWidth
                         }px,0,0)`,
                     }}
                     transition={{ repeat: Infinity, duration: 15 }}
