@@ -6,6 +6,13 @@
     position: relative;
     padding: 30px;
     width: 100%;
+    h2 {
+        margin-right: 40px;
+        text-align: left;
+        text-transform: initial;
+        color: $color-black;
+        font-weight: 400;
+    }
     textarea {
         width: 100%;
         min-height: 200px;
@@ -14,12 +21,11 @@
         font-size: 3em;
         border-radius: 16px;
         padding: 20px;
-        border: 1px solid;
+        border: 1px solid $color-black;
         background-color: color.scale($color-primary, $lightness: -20%);
         font-family: "Climate Crisis", display;
-    }
-    textarea:placeholder {
-        font-size: 3em;
-        // color: red;
+        &::placeholder {
+            color: color.scale($color-black, $lightness: 5%);
+        }
     }
 }

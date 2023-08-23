@@ -14,9 +14,6 @@
     justify-content: center;
     cursor: pointer;
     flex-grow: 1;
-
-   
-
     @media (max-width: $layout-breakpoint-small) {
         width: 100%;
         margin-left: 20px;
@@ -25,7 +22,10 @@
     h2 {
         text-transform: uppercase;
     }
-    &.mobile.on {
+    &.card-open {
+        cursor: initial;
+    }
+    &.card-mobile {
         @media (max-width: $layout-breakpoint-small) {
             position: absolute;
             top: 0;
