@@ -30,7 +30,7 @@ export const Card = ({ title, img, id }) => {
                 <AnimatePresence>
                     <motion.div
                         style={{ flexGrow: 10 }}
-                        className="card on mobile"
+                        className="card card-open card-mobile"
                         layoutId={id}
                         // onClick={() => setShowBigCard(false)}
                     >

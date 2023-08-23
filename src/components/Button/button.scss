@@ -8,7 +8,6 @@ button {
     border-radius: 99em;
     padding: 12px 24px;
     cursor: pointer;
-    transition: 0.2s;
     font-weight: 600;
     &.btn-primary {
         background-color: $color-primary;
@@ -32,9 +31,6 @@ button {
         &:hover {
             background-color: color.scale($color-white, $lightness: -5%);
         }
-    }
-    &:active {
-        transform: scale(0.93);
     }
     &.close {
         color: $color-black;

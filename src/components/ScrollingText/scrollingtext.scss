@@ -14,8 +14,8 @@
         width: fit-content;
         text-transform: uppercase;
         font-family: "Climate Crisis", display;
-    }
-    @media (max-width: $layout-breakpoint-small) {
-        font-size: 2em;
+        @media (max-width: $layout-breakpoint-small) {
+            font-size: 6em;
+        }
     }
 }
