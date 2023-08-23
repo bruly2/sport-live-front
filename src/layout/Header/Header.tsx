@@ -40,8 +40,9 @@ const Header = () => {
                                 <Button
                                     type={"button"}
                                     className={"btn-secondary"}
-                                    content={"Déconnexion"}
-                                />
+                                >
+                                    Déconnexion
+                                </Button>
                             </Link>
                         </div>
                     </nav>

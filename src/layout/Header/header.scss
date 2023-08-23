@@ -7,7 +7,6 @@ header nav {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    margin-bottom: 50px;
     &.connected {
         justify-content: flex-end;
         padding-right: 30px;
@@ -20,7 +19,7 @@ header nav {
     div {
         display: flex;
         align-items: center;
-        gap: 15px;
+        gap: 5px;
         @media (max-width: $layout-breakpoint-small) {
             gap: 5px;
         }
@@ -29,7 +28,7 @@ header nav {
             border-radius: 5px;
             background-color: white;
             padding: 5px;
-            max-width: 100%;
+            max-width: 60%;
             @media (max-width: $layout-breakpoint-small) {
                 width: 70px;
             }
@@ -37,6 +36,8 @@ header nav {
         p {
             display: inline-block;
             font-size: 2em;
+            color: $color-white;
+            text-transform: uppercase;
             @media (max-width: $layout-breakpoint-small) {
                 font-size: 1.2em;
                 text-transform: uppercase;

@@ -1,17 +1,52 @@
-import { Link } from "react-router-dom";
 import "./Card.scss";
 import Button from "../Button/Button";
+import Message from "../Message/Message";
+import Poll from "../Poll/Poll";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
-export const Card = ({ title, img, link }) => {
+export const Card = ({ title, img, id }) => {
+    const [showBigCard, setShowBigCard] = useState(false);
+
     return (
         <>
-            <Link
-                to={link}
-                className="card"
-                style={{ backgroundImage: `url( ${img} )` }}
-            >
-                <Button className={"btn-primary"} content={title} />
-            </Link>
+            {!showBigCard ? (
+                <motion.div
+                    style={{
+                        backgroundImage: `url( ${img} )`,
+                    }}
+                    // initial={{ x: 0 }}
+                    // animate={{ x: 300 }}
+                    // transition={{ duration: 0.6 }}
+                    className="card"
+                    onClick={() => setShowBigCard(true)}
+                    layoutId={id}
+                >
+                    <Button className={"btn-primary"}>{title}</Button>
+                </motion.div>
+            ) : (
+                <AnimatePresence>
+                    <motion.div
+                        style={{ flexGrow: 10 }}
+                        className="card on mobile"
+                        layoutId={id}
+                        // onClick={() => setShowBigCard(false)}
+                    >
+                        {/* <`${title}` /> */}
+                        {id === 1 ? (
+                            <Message
+                                closeBigCard={() => setShowBigCard(false)}
+                            />
+                        ) : (
+                            id === 2 && (
+                                <Poll
+                                    closeBigCard={() => setShowBigCard(false)}
+                                />
+                            )
+                        )}
+                    </motion.div>
+                </AnimatePresence>
+            )}
         </>
     );
 };

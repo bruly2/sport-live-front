@@ -10,7 +10,7 @@
     line-height: 1.5;
     font-weight: 400;
     color: $color-black;
-    background-color: $color-white;
+    background-color: $color-primary;
     font-size: 16px;
 }
 
@@ -37,6 +37,16 @@ a {
 
 h1 {
     font-family: "Climate Crisis", display, Avenir, Helvetica, Arial, sans-serif;
+    color: $color-secondary;
+    text-transform: uppercase;
+    font-size: 3em;
+    letter-spacing: 0.1em;
+    word-spacing: 0.5em;
+    @media (max-width: $layout-breakpoint-small) {
+        font-size: 2em;
+        letter-spacing: initial;
+        word-spacing: initial;
+    }
 }
 
 h2 {
@@ -46,5 +56,9 @@ h2 {
 
 main {
     max-width: 1080px;
-    margin: 0 auto;
+    margin: 30px auto;
+    @media (max-width: $layout-breakpoint-small) {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }

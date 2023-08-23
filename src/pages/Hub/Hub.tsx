@@ -10,16 +10,8 @@ const Hub = () => {
             <Event />
             <ScrollingText />
             <section>
-                <Card
-                    title={"Message"}
-                    img={"/sport-live-copy.png"}
-                    link={"/hub/message"}
-                />
-                <Card
-                    title={"Sondage"}
-                    img={"/sport-live-copy.png"}
-                    link={"/hub/sondage"}
-                />
+                <Card title={"Message"} img={"/sport-live-copy.png"} id={1} />
+                <Card title={"Sondage"} img={"/sport-live-copy.png"} id={2} />
             </section>
         </>
     );
