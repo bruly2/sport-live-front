@@ -1,5 +1,5 @@
 import "./scrollingtext.scss";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Button from "../Button/Button";
 import { motion } from "framer-motion";
 
@@ -26,9 +26,9 @@ const ScrollingText = () => {
     const [displayMessage, setDisplayMessage] = useState([messages[0].content]);
 
     // Affichage du 1er message
-    const createMessage = () => {
+    const createMessage = useCallback(() => {
         setDisplayMessage(messages[1].content);
-    };
+    }, []);
 
     // Calcul la longueur de l'écran en px
     const [windowSize, setWindowSize] = useState(0);
@@ -57,7 +57,11 @@ const ScrollingText = () => {
                             windowSize + divMessageWidth
                         }px,0,0)`,
                     }}
-                    transition={{ repeat: Infinity, duration: 15 }}
+                    transition={{
+                        repeat: Infinity,
+                        duration: 12,
+                        ease: "linear",
+                    }}
                     ref={messageElement}
                 >
                     {displayMessage}

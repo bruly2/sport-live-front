@@ -1,16 +1,12 @@
 import "./message.scss";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Button from "../Button/Button";
 import { IoIosClose } from "react-icons/Io";
 
 const Message = ({ closeBigCard }) => {
     const [textArea, setTextArea] = useState("");
 
-    const [errorForm, setErrorForm] = useState("");
-
-    const [showConfirmation, setShowConfirmation] = useState(false);
-
-    const handleTest = (e) => {
+    const isWriting = (e) => {
         setTextArea(e.target.value);
     };
 
@@ -19,7 +15,10 @@ const Message = ({ closeBigCard }) => {
         checkForm();
     };
 
-    const checkForm = () => {
+    // Vérification form
+    const [errorForm, setErrorForm] = useState("");
+    const [showConfirmation, setShowConfirmation] = useState(false);
+    const checkForm = useCallback(() => {
         // Form vide
         if (textArea === "") {
             return setErrorForm("Tapez votre texte pour envoyer un message");
@@ -32,7 +31,7 @@ const Message = ({ closeBigCard }) => {
         // => Formulaire validé
         setShowConfirmation(true);
         console.log(textArea);
-    };
+    }, [handleSubmit]);
 
     return (
         <>
@@ -58,7 +57,7 @@ const Message = ({ closeBigCard }) => {
                             id="message-content"
                             placeholder="Go Spurs Go !!"
                             value={textArea}
-                            onChange={(e) => handleTest(e)}
+                            onChange={(e) => isWriting(e)}
                         ></textarea>
                         <p className="errorform">{errorForm}</p>
                         <Button type={"submit"} className={"btn-primary-2"}>
@@ -66,7 +65,10 @@ const Message = ({ closeBigCard }) => {
                         </Button>
                     </form>
                 ) : (
-                    <h1>Message envoyé</h1>
+                    <>
+                        <h1>Message envoyé</h1>
+                        <h3>{textArea}</h3>
+                    </>
                 )}
             </article>
         </>

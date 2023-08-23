@@ -17,7 +17,9 @@ export const Card = ({ title, img, id }) => {
                     }}
                     // initial={{ x: 0 }}
                     // animate={{ x: 300 }}
-                    // transition={{ duration: 0.6 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
                     className="card"
                     onClick={() => setShowBigCard(true)}
                     layoutId={id}

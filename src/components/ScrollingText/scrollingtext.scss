@@ -6,6 +6,7 @@
     margin: 20px 0;
     position: relative;
     text-align: right;
+    overflow-x: hidden;
     .scrolling-text {
         color: $color-secondary;
         font-size: 5em;
