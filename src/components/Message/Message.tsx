@@ -1,19 +1,18 @@
 import "./message.scss";
 import { useState, useCallback } from "react";
 import Button from "../Button/Button";
-import { IoIosClose } from "react-icons/Io";
+import { IoIosClose } from "react-icons/io";
 
 const Message = ({ closeBigCard }) => {
-    const [textArea, setTextArea] = useState("");
+  const [textArea, setTextArea] = useState("");
 
     const isWriting = (e) => {
         setTextArea(e.target.value);
     };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        checkForm();
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    checkForm();
+  };
 
     // Vérification form
     const [errorForm, setErrorForm] = useState("");
