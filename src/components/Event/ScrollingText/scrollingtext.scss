@@ -6,8 +6,26 @@
     font-size: 4em;
     margin: 40px 0;
     text-transform: uppercase;
+    display: flex;
+   
     font-family: "Climate crises", display;
     @media (max-width: $layout-breakpoint-small) {
         font-size: 2em;
     }
+    span {
+        white-space: nowrap;
+        // margin-right: 40px; 
+        opacity: 1; 
+        animation: scrolling-text 50s linear infinite;
+
+    }
+    @keyframes scrolling-text {
+        0% {
+            transform: translateX(100%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
 }
+
