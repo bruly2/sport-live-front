@@ -1,20 +1,20 @@
 @use "../../assets/styles/variables" as *;
+@use "sass:color";
 
 #scrolling {
-    // background-color: $color-secondary;
+    // background-color: color.scale($color-primary, $lightness: -20%);
     margin: 20px 0;
     position: relative;
     text-align: right;
     .scrolling-text {
         color: $color-secondary;
-        font-size: 4em;
+        font-size: 5em;
         display: inline-block;
-        // margin-right: -300px;
         width: fit-content;
         text-transform: uppercase;
-        font-family: "Climate crises", display;
-        @media (max-width: $layout-breakpoint-small) {
-            font-size: 2em;
-        }
+        font-family: "Climate Crisis", display;
+    }
+    @media (max-width: $layout-breakpoint-small) {
+        font-size: 2em;
     }
 }
