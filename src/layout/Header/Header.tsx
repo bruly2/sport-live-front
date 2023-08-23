@@ -22,7 +22,7 @@ const Header = () => {
                 </a>
                 {connected ? (
                     //    1.NAV Visiteur
-                    <nav>
+                    <nav role="navigation" aria-label="main navigation">
                         <div>
                             <Link to="/">
                                 <img src={LogoSportLive} alt="" />
@@ -34,7 +34,11 @@ const Header = () => {
                     </nav>
                 ) : (
                     //    2.NAV Utilisateur
-                    <nav className="connected">
+                    <nav
+                        className="connected"
+                        role="navigation"
+                        aria-label="main navigation"
+                    >
                         <div>
                             <Link to="/">
                                 <Button

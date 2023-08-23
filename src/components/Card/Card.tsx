@@ -3,10 +3,20 @@ import Button from "../Button/Button";
 import Message from "../Message/Message";
 import Poll from "../Poll/Poll";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 export const Card = ({ title, img, id }) => {
     const [showBigCard, setShowBigCard] = useState(false);
+
+    // ! BUG SCROLL HAUT DE PAGE EN MOBILE
+
+    // Affiche la Card en grand + scroll en haut de page pour le mobile
+    const handleCard = useCallback(() => {
+        setShowBigCard(true);
+        if (window.innerWidth < 768) {
+            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        }
+    }, []);
 
     return (
         <>
@@ -21,7 +31,7 @@ export const Card = ({ title, img, id }) => {
                     whileTap={{ scale: 0.98 }}
                     transition={{ duration: 0.2 }}
                     className="card"
-                    onClick={() => setShowBigCard(true)}
+                    onClick={handleCard}
                     layoutId={id}
                 >
                     <Button className={"btn-primary"}>{title}</Button>
@@ -30,16 +40,17 @@ export const Card = ({ title, img, id }) => {
                 <AnimatePresence>
                     <motion.div
                         style={{ flexGrow: 10 }}
+                        role="dialog"
                         className="card card-open card-mobile"
                         layoutId={id}
-                        // onClick={() => setShowBigCard(false)}
                     >
-                        {/* <`${title}` /> */}
+                        {/* Ouverture de la CARD ID 1 = Message */}
                         {id === 1 ? (
                             <Message
                                 closeBigCard={() => setShowBigCard(false)}
                             />
                         ) : (
+                            //  Ouverture de la CARD ID 2 = Sondage
                             id === 2 && (
                                 <Poll
                                     closeBigCard={() => setShowBigCard(false)}

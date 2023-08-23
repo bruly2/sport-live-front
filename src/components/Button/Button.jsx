@@ -1,11 +1,12 @@
 import "./button.scss";
 import { motion } from "framer-motion";
 
-const Button = ({ type, className, onClick, children }) => {
+const Button = ({ type, className, onClick, ariaLabel, children }) => {
     return (
         <motion.button
             type={type}
             className={className}
+            aria-label={ariaLabel}
             onClick={onClick}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
