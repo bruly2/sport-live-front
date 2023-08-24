@@ -3,6 +3,8 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import Button from "../Button/Button";
 import { motion } from "framer-motion";
 
+//  TODO : Durée d'affichage des msg en fonction de la longueur du tableau
+
 const messages = [
     {
         user: "Christophe",
@@ -23,7 +25,7 @@ const messages = [
 ];
 
 const ScrollingText = () => {
-    const [displayMessage, setDisplayMessage] = useState([messages[0].content]);
+    const [displayMessage, setDisplayMessage] = useState(messages);
 
     // Affichage du 1er message
     const createMessage = useCallback(() => {
@@ -47,7 +49,6 @@ const ScrollingText = () => {
 
     return (
         <>
-            {/* TODO Durée d'affichage des msg en fonction de la longuer */}
             <div id="scrolling">
                 <motion.div
                     className="scrolling-text"
@@ -59,23 +60,16 @@ const ScrollingText = () => {
                     }}
                     transition={{
                         repeat: Infinity,
-                        duration: 12,
+                        duration: 40,
                         ease: "linear",
                     }}
                     ref={messageElement}
                 >
-                    {displayMessage}
+                    {displayMessage.map((message, key) => (
+                        <span key={key}>{message.content}</span>
+                    ))}
                 </motion.div>
             </div>
-
-            {/* Bouton provisoire à supprimer */}
-            {displayMessage && (
-                <div style={{ margin: "-10px 0 20px" }}>
-                    <Button className={"btn-secondary"} onClick={createMessage}>
-                        Afficher le 2e message
-                    </Button>
-                </div>
-            )}
         </>
     );
 };
