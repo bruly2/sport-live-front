@@ -46,7 +46,6 @@ const Message = ({ closeBigCard }) => {
         else if (textArea.length < 3) {
             return setErrorForm("Votre message est trop court");
         }
-
         // => Formulaire validé
         setShowConfirmation(true);
         console.log(textArea);
