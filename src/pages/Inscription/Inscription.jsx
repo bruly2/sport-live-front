@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import "./inscription.scss";
 import Button from "../../components/Button/Button";
+import { Link } from "react-router-dom";
 
 const Inscription = () => {
     // FETCH
@@ -33,14 +34,21 @@ const Inscription = () => {
         watch,
         formState: { errors, isSubmitSuccessful },
     } = useForm({ mode: "onTouched" });
-    const onSubmit = (data) => inscriptionFetch(data);
+    const onSubmit = (data) => {
+        inscriptionFetch(data);
+    };
 
     return (
         <>
             {isSubmitSuccessful ? (
                 <>
                     <h1>{watch("alias")}, votre compte est crée 🥳</h1>
-                    <h2>TODO : Redirection vers la page de Connexion</h2>
+                    <p>Cliquez ici pour vous connecter</p>
+                    <Link to="/connexion">
+                        <Button className={"btn-primary-2"} type={"button"}>
+                            Connexion
+                        </Button>
+                    </Link>
                     {/* TODO Redirection vers la page connexion */}
                 </>
             ) : (
