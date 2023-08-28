@@ -3,6 +3,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import Button from "../Button/Button";
 import { IoIosClose } from "react-icons/io";
 import { motion } from "framer-motion";
+import Authentication from "../../utils/authentication/Authentication";
 
 const Message = ({ closeBigCard }) => {
     // TODO vérifier les caractères espaces
@@ -62,7 +63,7 @@ const Message = ({ closeBigCard }) => {
     }, [closeBigCard]);
 
     return (
-        <>
+        <Authentication>
             <article id="message">
                 <Button
                     type={"button"}
@@ -112,7 +113,7 @@ const Message = ({ closeBigCard }) => {
                     </>
                 )}
             </article>
-        </>
+        </Authentication>
     );
 };
 export default Message;

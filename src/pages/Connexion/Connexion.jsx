@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./connexion.scss";
 import Button from "../../components/Button/Button";
 import Loader from "../../layout/Loader/Loader";
 import { useState } from "react";
 
 const Connexion = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
     // FORM + FETCH
@@ -32,7 +32,7 @@ const Connexion = () => {
             console.log(`Connexion réussie !! 🥳🥳 Récupération du token :`);
             console.log(result.token);
             localStorage.setItem("token", result.token);
-            setIsLoading(false);
+            navigate("/hub");
         } else {
             setError("root.serverError", {
                 type: "server",
@@ -47,7 +47,6 @@ const Connexion = () => {
             {isSubmitSuccessful ? (
                 <>
                     {/* TODO Redirection vers le hub */}
-                    {/* {navigate("/connexion")} */}
                     <h1>TODO : Redirection vers le HUB</h1>
                 </>
             ) : (
