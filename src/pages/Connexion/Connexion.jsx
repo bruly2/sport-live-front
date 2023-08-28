@@ -19,13 +19,16 @@ const Connexion = () => {
     } = useForm({ mode: "onTouched" });
 
     const onSubmit = async (data) => {
-        const response = await fetch("http://localhost:8000/api/login_check", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
+        const response = await fetch(
+            `${import.meta.env.VITE_API_BASE_URL}/login_check`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            }
+        );
         const result = await response.json();
         if (response.status === 200) {
             setIsLoading(true);

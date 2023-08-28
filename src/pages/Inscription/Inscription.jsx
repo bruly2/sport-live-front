@@ -9,7 +9,7 @@ const Inscription = () => {
         console.log(data);
         try {
             const response = await fetch(
-                "http://localhost:8000/api/users/register",
+                `${import.meta.env.VITE_API_BASE_URL}/users/register`,
                 {
                     method: "POST",
                     headers: {
