@@ -44,11 +44,9 @@ const Inscription = () => {
                 <>
                     <h1>{watch("alias")}, votre compte est crée 🥳</h1>
                     <p>Cliquez ici pour vous connecter</p>
-                    <Link to="/connexion">
-                        <Button className={"btn-primary-2"} type={"button"}>
-                            Connexion
-                        </Button>
-                    </Link>
+                    <Button className={"btn-primary-2"} type={"button"}>
+                        <Link to="/connexion">Connexion</Link>
+                    </Button>
                     {/* TODO Redirection vers la page connexion */}
                 </>
             ) : (
@@ -123,18 +121,6 @@ const Inscription = () => {
                                 {errors.email.message}
                             </span>
                         )}
-
-                        {/* ROLE 
-                TODO : A compléter automatiquement */}
-                        <label htmlFor="role">Role</label>
-                        <select
-                            disabled
-                            defaultValue="user"
-                            {...register("role")}
-                        >
-                            <option value="user">User</option>
-                            <option value="admin">Admin</option>
-                        </select>
 
                         {/* MOT DE PASSE
                 TODO : Compléter la vérif password */}
