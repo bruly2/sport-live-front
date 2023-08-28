@@ -3,6 +3,7 @@ import { IoIosClose } from "react-icons/io";
 import PollElement from "../PollElement/PollElement";
 import "./poll.scss";
 import { useEffect } from "react";
+import Authentication from "../../utils/authentication/Authentication";
 
 const Poll = ({ closeBigCard }) => {
     // Ferme la Card au clavier
@@ -15,7 +16,7 @@ const Poll = ({ closeBigCard }) => {
         window.addEventListener("keydown", close);
     }, [closeBigCard]);
     return (
-        <>
+        <Authentication>
             <article id="poll">
                 <Button
                     type={"button"}
@@ -35,7 +36,7 @@ const Poll = ({ closeBigCard }) => {
                     Voter
                 </Button>
             </article>
-        </>
+        </Authentication>
     );
 };
 export default Poll;
