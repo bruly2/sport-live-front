@@ -73,13 +73,14 @@ const Connexion = () => {
                             <label htmlFor="username">Email</label>
                             <input
                                 type="email"
+                                aria-invalid={errors.email ? "true" : "false"}
                                 placeholder="Adresse email ?"
                                 {...register("username", {
                                     required: "Champs obligatoire",
                                 })}
                             />
                             {errors.username && (
-                                <span className="error-form">
+                                <span className="error-form" role = "alert">
                                     {errors.username.message}
                                 </span>
                             )}
@@ -89,12 +90,13 @@ const Connexion = () => {
                             <input
                                 type="password"
                                 placeholder="mot de passe"
+                                aria-invalid={errors.password ? "true" : "false"}
                                 {...register("password", {
                                     required: "Mot de passe obligatoire",
                                 })}
                             />
                             {errors.password && (
-                                <span className="error-form">
+                                <span className="error-form" role ="alert">
                                     {errors.password.message}
                                 </span>
                             )}
