@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const Connexion = () => {
     // const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     // FORM + FETCH
     const {
