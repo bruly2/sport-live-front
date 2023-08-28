@@ -10,6 +10,7 @@ const Connexion = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     // FORM + FETCH
+    // TODO Ajouter le catch d'erreur
     const {
         register,
         handleSubmit,
@@ -36,7 +37,7 @@ const Connexion = () => {
             setError("root.serverError", {
                 type: "server",
                 message:
-                    "Mauvais identifiant ou mot de passe, merci de vous reconnectez",
+                    "Mauvais identifiant ou mot de passe, merci de vous reconnecter",
             });
         }
     };
@@ -69,9 +70,9 @@ const Connexion = () => {
 
                             {/* PSEUDO */}
 
-                            <label htmlFor="username">Pseudo</label>
+                            <label htmlFor="username">Email</label>
                             <input
-                                type="text"
+                                type="email"
                                 placeholder="Adresse email ?"
                                 {...register("username", {
                                     required: "Champs obligatoire",

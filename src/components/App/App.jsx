@@ -14,7 +14,7 @@ function App() {
             <Header />
             <Routes>
                 {/* Page "/" d'index provisoire */}
-                <Route path="/" element={<Hub />} />
+                <Route path="/public/index.html" element={<Hub />} />
                 <Route path="/inscription" element={<Inscription />} />
                 <Route path="/connexion" element={<Connexion />} />
                 <Route path="/hub" element={<Hub />} />
