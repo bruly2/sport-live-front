@@ -50,7 +50,7 @@ const Inscription = () => {
                     {/* TODO Redirection vers la page connexion */}
                 </>
             ) : (
-                <>
+                <main>
                     <h1>Création d'un compte</h1>
                     <h2>En 30 secondes seulement</h2>
                     <form
@@ -160,7 +160,7 @@ const Inscription = () => {
                             Valider
                         </Button>
                     </form>
-                </>
+                </main>
             )}
         </>
     );
