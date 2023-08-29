@@ -1,9 +1,9 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./connexion.scss";
 import Button from "../../components/Button/Button";
 import Loader from "../../layout/Loader/Loader";
-import { useState } from "react";
 
 const Connexion = () => {
     const navigate = useNavigate();
@@ -11,6 +11,7 @@ const Connexion = () => {
 
     // FORM + FETCH
     // TODO Ajouter le catch d'erreur
+    // TODO Add Loader
     const {
         register,
         handleSubmit,
@@ -30,6 +31,7 @@ const Connexion = () => {
             }
         );
         const result = await response.json();
+        // response.headers.common.Authorization = `bearer ${result.token}`;
         if (response.status === 200) {
             setIsLoading(true);
             console.log(`Connexion réussie !! 🥳🥳 Récupération du token :`);

@@ -9,6 +9,9 @@ const Footer = () => {
                 <Link to="/donnees-personnelles">Données personnelles</Link> |
                 <Link to="/mentions-legales">Mentions légales</Link> |
                 <Link to="/contact">Contact</Link>
+                {/* Ci-dessous à supprimer */}|{" "}
+                <Link to="/inscription">Inscription</Link>|{" "}
+                <Link to="/connexion">Connexion</Link>
             </nav>
         </footer>
     );

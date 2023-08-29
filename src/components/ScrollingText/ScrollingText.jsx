@@ -32,13 +32,18 @@ const ScrollingText = () => {
     const [displayMessage, setDisplayMessage] = useState(messages);
 
     useEffect(() => {
-        messageFetch();
+        allMessagesFetch();
     }, []);
 
-    const messageFetch = async () => {
+    const allMessagesFetch = async () => {
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/messages`
+                `${import.meta.env.VITE_API_BASE_URL}/messages`,
+                {
+                    // headers: {
+                    //   Authorization: `bearer ${token}`
+                    // },
+                }
             );
             const result = await response.json();
             console.log(result);
