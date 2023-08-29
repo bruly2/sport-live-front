@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import "./inscription.scss";
 import Button from "../../components/Button/Button";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Inscription = () => {
     // FETCH
@@ -37,6 +38,12 @@ const Inscription = () => {
         inscriptionFetch(data);
     };
 
+    // MOTION
+    const xInput = {
+        initial: { x: -20, opacity: 0 },
+        animate: { x: 0, opacity: 1 },
+    };
+
     return (
         <>
             {isSubmitSuccessful ? (
@@ -57,10 +64,16 @@ const Inscription = () => {
                         onSubmit={handleSubmit(onSubmit)}
                     >
                         {/* PSEUDO */}
-                        <label htmlFor="alias">Pseudo</label>
-                        <input
+                        <label className="hidden" htmlFor="alias">
+                            Pseudo
+                        </label>
+                        <motion.input
+                            variants={xInput}
+                            initial="initial"
+                            animate="animate"
+                            transition={{ delay: 0.1 }}
                             type="text"
-                            placeholder="pseudo"
+                            placeholder="Pseudo"
                             aria-invalid={errors.alias ? "true" : "false"}
                             {...register("alias", {
                                 required: "Champs obligatoire",
@@ -82,8 +95,14 @@ const Inscription = () => {
                         )}
 
                         {/* PRENOM */}
-                        <label htmlFor="firstname">Prénom</label>
-                        <input
+                        <label className="hidden" htmlFor="firstname">
+                            Prénom
+                        </label>
+                        <motion.input
+                            variants={xInput}
+                            initial="initial"
+                            animate="animate"
+                            transition={{ delay: 0.2 }}
                             type="text"
                             aria-invalid={errors.firstname ? "true" : "false"}
                             placeholder="Prénom"
@@ -103,10 +122,16 @@ const Inscription = () => {
                         )}
 
                         {/* NOM */}
-                        <label htmlFor="lastname">Nom</label>
-                        <input
+                        <label className="hidden" htmlFor="lastname">
+                            Nom
+                        </label>
+                        <motion.input
+                            variants={xInput}
+                            initial="initial"
+                            animate="animate"
+                            transition={{ delay: 0.3 }}
                             type="text"
-                            placeholder="nom"
+                            placeholder="Nom"
                             aria-invalid={errors.nom ? "true" : "false"}
                             {...register("lastname", {
                                 required: "Nom obligatoire",
@@ -125,10 +150,16 @@ const Inscription = () => {
 
                         {/* Email 
                 TODO : Compléter la vérif email */}
-                        <label htmlFor="nom">Email</label>
-                        <input
+                        <label className="hidden" htmlFor="nom">
+                            Email
+                        </label>
+                        <motion.input
+                            variants={xInput}
+                            initial="initial"
+                            animate="animate"
+                            transition={{ delay: 0.4 }}
                             type="email"
-                            placeholder="email"
+                            placeholder="Email"
                             aria-invalid={errors.email ? "true" : "false"}
                             {...register("email", {
                                 required: "Email obligatoire",
@@ -142,11 +173,17 @@ const Inscription = () => {
 
                         {/* MOT DE PASSE
                 TODO : Compléter la vérif password */}
-                        <label htmlFor="password">Mot de passe</label>
-                        <input
+                        <label className="hidden" htmlFor="password">
+                            Mot de passe
+                        </label>
+                        <motion.input
+                            variants={xInput}
+                            initial="initial"
+                            animate="animate"
+                            transition={{ delay: 0.5 }}
                             type="password"
                             aria-invalid={errors.password ? "true" : "false"}
-                            placeholder="mot de passe"
+                            placeholder="Mot de passe"
                             {...register("password", {
                                 required: "Mot de passe obligatoire",
                             })}
@@ -158,10 +195,14 @@ const Inscription = () => {
                         )}
 
                         {/* CONFIRME MOT DE PASSE */}
-                        <label htmlFor="passwordVerif">
+                        <label className="hidden" htmlFor="passwordVerif">
                             Confirmer le mot de passe
                         </label>
-                        <input
+                        <motion.input
+                            variants={xInput}
+                            initial="initial"
+                            animate="animate"
+                            transition={{ delay: 0.6 }}
                             type="password"
                             placeholder="Confirmer votre mot de passe"
                             aria-invalid={

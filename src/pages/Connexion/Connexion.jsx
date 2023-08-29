@@ -33,7 +33,6 @@ const Connexion = () => {
             }
         );
         const result = await response.json();
-        // response.headers.common.Authorization = `bearer ${result.token}`;
         if (response.status === 200) {
             console.log(`Connexion réussie !! 🥳🥳 Récupération du token :`);
             console.log(result.token);
@@ -81,33 +80,39 @@ const Connexion = () => {
 
                             {/* PSEUDO */}
 
-                            <label htmlFor="username">Email</label>
+                            <label className="hidden" htmlFor="username">
+                                Email
+                            </label>
                             <input
                                 type="email"
                                 aria-invalid={errors.email ? "true" : "false"}
-                                placeholder="Adresse email ?"
+                                placeholder="Adresse email"
                                 {...register("username", {
                                     required: "Champs obligatoire",
                                 })}
                             />
                             {errors.username && (
-                                <span className="error-form" role = "alert">
+                                <span className="error-form" role="alert">
                                     {errors.username.message}
                                 </span>
                             )}
 
                             {/* MOT DE PASSE */}
-                            <label htmlFor="password">Mot de passe</label>
+                            <label className="hidden" htmlFor="password">
+                                Mot de passe
+                            </label>
                             <input
                                 type="password"
-                                placeholder="mot de passe"
-                                aria-invalid={errors.password ? "true" : "false"}
+                                placeholder="Mot de passe"
+                                aria-invalid={
+                                    errors.password ? "true" : "false"
+                                }
                                 {...register("password", {
                                     required: "Mot de passe obligatoire",
                                 })}
                             />
                             {errors.password && (
-                                <span className="error-form" role ="alert">
+                                <span className="error-form" role="alert">
                                     {errors.password.message}
                                 </span>
                             )}

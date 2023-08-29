@@ -1,35 +1,13 @@
 import "./scrollingtext.scss";
-import { useState, useRef, useEffect, useCallback } from "react";
-import Button from "../Button/Button";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 
 //  TODO : Durée d'affichage des msg en fonction de la longueur du tableau
 
-const messages = [
-    {
-        user: "Christophe",
-        content: "1er Message 💪",
-    },
-    {
-        user: "Kévin",
-        content: "2e message qui est beaucoup beaucoup plus long",
-    },
-    {
-        user: "Thomas",
-        content: "3e message",
-    },
-    {
-        user: "Bruno",
-        content: "4e message",
-    },
-    {
-        user: "Karine",
-        content: "🥳😇🥵👀",
-    },
-];
-
 const ScrollingText = () => {
-    const [displayMessage, setDisplayMessage] = useState(messages);
+    const [displayMessage, setDisplayMessage] = useState([]);
+
+    let token = localStorage.getItem("token");
 
     useEffect(() => {
         allMessagesFetch();
@@ -39,23 +17,15 @@ const ScrollingText = () => {
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/messages`,
-                {
-                    // headers: {
-                    //   Authorization: `bearer ${token}`
-                    // },
-                }
+                { headers: { Authorization: `bearer ${token}` } }
             );
             const result = await response.json();
             console.log(result);
+            setDisplayMessage(result);
         } catch (error) {
             console.error("❌ Erreur ❌");
         }
     };
-
-    // Affichage du 1er message
-    const createMessage = useCallback(() => {
-        setDisplayMessage(messages[1].content);
-    }, []);
 
     // Calcul la longueur de l'écran en px
     const [windowSize, setWindowSize] = useState(0);
@@ -90,8 +60,8 @@ const ScrollingText = () => {
                     }}
                     ref={messageElement}
                 >
-                    {displayMessage.map((message, key) => (
-                        <span key={key}>{message.content}</span>
+                    {displayMessage.map((message) => (
+                        <span key={message.id}>{message.content}</span>
                     ))}
                 </motion.div>
             </div>
