@@ -11,3 +11,13 @@ section {
         flex-wrap: wrap;
     }
 }
+
+.privacy-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $color-secondary;
+    z-index: 2;
+}

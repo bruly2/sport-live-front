@@ -5,12 +5,13 @@ export const Event = () => {
         <>
             <main id="event">
                 <div>
-                    <h1>Nom évènement</h1>
+                    <h1>Meeting de Paris</h1>
                 </div>
 
                 <div className="description_event">
                     <p>
-                        <span>Date</span>, <span>heure</span>, <span>lieu</span>
+                        <span>27/05/23</span> - <span>19h</span> -&nbsp;
+                        <span>Paris</span>
                     </p>
                 </div>
             </main>

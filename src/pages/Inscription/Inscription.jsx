@@ -4,25 +4,27 @@ import Button from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 
 const Inscription = () => {
-  // FETCH
-  const inscriptionFetch = async (data) => {
-    console.log(data);
-    try {
-      const response = await fetch("http://localhost:8000/api/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const result = await response.json();
-      console.log(
-        `🥳🥳 Utilisateur : ${result.firstname} enregistré en BDD !! 🥳🥳`
-      );
-    } catch (error) {
-      console.error("❌ Erreur ❌");
-    }
-  };
+
+    // FETCH
+    const inscriptionFetch = async (data) => {
+        try {
+            const response = await fetch(
+                `${import.meta.env.VITE_API_BASE_URL}/users/register`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                }
+            );
+            const result = await response.json();
+            console.log(
+                `🥳🥳 Utilisateur : ${result.firstname} enregistré en BDD !! 🥳🥳`
+            );
+        } catch (error) {
+            console.error("❌ Erreur ❌");
+        }
+    };
 
   // FORM
   const {
@@ -48,6 +50,7 @@ const Inscription = () => {
         </>
       ) : (
         <>
+        <main>
           <h1>Création d'un compte</h1>
           <h2>En 30 secondes seulement</h2>
           <form className="connexion" onSubmit={handleSubmit(onSubmit)}>
@@ -61,7 +64,7 @@ const Inscription = () => {
                 required: "Champs obligatoire",
                 minLength: {
                   value: 3,
-                  message: "3 carateres minium",
+                  message: "3 carateres minimum",
                 },
               })}
             />
@@ -135,8 +138,7 @@ const Inscription = () => {
               <span className="error-form" role="alert">{errors.password.message}</span>
             )}
 
-            {/* CONFIRME MOT DE PASSE
-                TODO : Compléter la vérif password */}
+            {/* CONFIRME MOT DE PASSE */}
             <label htmlFor="passwordVerif">Confirmer le mot de passe</label>
             <input
               type="password"
@@ -146,7 +148,7 @@ const Inscription = () => {
                 required: "Champs obligatoire",
                 validate: (val) => {
                   if (watch("password") != val) {
-                    return "les mots de passe ne corresponde pas";
+                    return "Les mots de passe ne correspondent pas";
                   }
                 },
               })}

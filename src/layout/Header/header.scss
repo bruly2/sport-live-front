@@ -8,34 +8,36 @@ header nav {
     justify-content: center;
     padding: 10px;
     &.connected {
-        justify-content: flex-end;
-        padding-right: 30px;
+        justify-content: space-between;
+        padding: 10px 30px;
+        @media (max-width: $layout-breakpoint-small) {
+            padding: 8px 10px;
+            button {
+                padding: 8px 12px;
+                font-size: 0.7em;
+            }
+        }
     }
-
-    @media (max-width: $layout-breakpoint-small) {
-        justify-content: flex-start;
-    }
-
     div {
         display: flex;
         align-items: center;
         gap: 5px;
         @media (max-width: $layout-breakpoint-small) {
-            gap: 5px;
+            gap: 0;
         }
         img {
             display: inline-block;
             border-radius: 5px;
             background-color: white;
             padding: 5px;
-            max-width: 60%;
+            max-width: 55%;
             @media (max-width: $layout-breakpoint-small) {
                 width: 70px;
             }
         }
         p {
             display: inline-block;
-            font-size: 2em;
+            font-size: 1.6em;
             color: $color-white;
             text-transform: uppercase;
             @media (max-width: $layout-breakpoint-small) {

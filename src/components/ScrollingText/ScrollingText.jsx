@@ -8,11 +8,11 @@ import { motion } from "framer-motion";
 const messages = [
     {
         user: "Christophe",
-        content: "1er message",
+        content: "1er Message 💪",
     },
     {
         user: "Kévin",
-        content: "2e message qui est beaucoup beaucoup beaucoup plus long",
+        content: "2e message qui est beaucoup beaucoup plus long",
     },
     {
         user: "Thomas",
@@ -22,10 +22,35 @@ const messages = [
         user: "Bruno",
         content: "4e message",
     },
+    {
+        user: "Karine",
+        content: "🥳😇🥵👀",
+    },
 ];
 
 const ScrollingText = () => {
     const [displayMessage, setDisplayMessage] = useState(messages);
+
+    useEffect(() => {
+        allMessagesFetch();
+    }, []);
+
+    const allMessagesFetch = async () => {
+        try {
+            const response = await fetch(
+                `${import.meta.env.VITE_API_BASE_URL}/messages`,
+                {
+                    // headers: {
+                    //   Authorization: `bearer ${token}`
+                    // },
+                }
+            );
+            const result = await response.json();
+            console.log(result);
+        } catch (error) {
+            console.error("❌ Erreur ❌");
+        }
+    };
 
     // Affichage du 1er message
     const createMessage = useCallback(() => {
