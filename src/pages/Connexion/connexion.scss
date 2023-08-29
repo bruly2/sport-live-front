@@ -25,4 +25,15 @@ main#connexion {
             margin-bottom: 20px;
         }
     }
+    .loading {
+        h2 {
+            text-transform: initial;
+            text-align: center;
+            margin: 20px auto;
+        }
+        [cssproperties="loader"] {
+            display: block;
+            margin: 30px auto 5px;
+        }
+    }
 }

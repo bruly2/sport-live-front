@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./connexion.scss";
 import Button from "../../components/Button/Button";
 import Loader from "../../layout/Loader/Loader";
+import { motion } from "framer-motion";
 
 const Connexion = () => {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Connexion = () => {
 
     // FORM + FETCH
     // TODO Ajouter le catch d'erreur
-    // TODO Add Loader
+
     const {
         register,
         handleSubmit,
@@ -20,6 +21,7 @@ const Connexion = () => {
     } = useForm({ mode: "onTouched" });
 
     const onSubmit = async (data) => {
+        setIsLoading(true);
         const response = await fetch(
             `${import.meta.env.VITE_API_BASE_URL}/login_check`,
             {
@@ -33,12 +35,13 @@ const Connexion = () => {
         const result = await response.json();
         // response.headers.common.Authorization = `bearer ${result.token}`;
         if (response.status === 200) {
-            setIsLoading(true);
             console.log(`Connexion réussie !! 🥳🥳 Récupération du token :`);
             console.log(result.token);
             localStorage.setItem("token", result.token);
+            setIsLoading(false);
             navigate("/hub");
         } else {
+            setIsLoading(false);
             setError("root.serverError", {
                 type: "server",
                 message:
@@ -59,71 +62,78 @@ const Connexion = () => {
                     <h1>Connexion</h1>
                     <h2>Participer à votre événement</h2>
 
-                    {isLoading ? (
-                        <Loader />
-                    ) : (
-                        <main id="connexion">
-                            <form
-                                className="connexion"
-                                onSubmit={handleSubmit(onSubmit)}
-                            >
-                                {errors.root?.serverError && (
-                                    <p className="error-form server">
-                                        {errors.root.serverError.message}
-                                    </p>
-                                )}
-
-                                {/* PSEUDO */}
-
-                                <label htmlFor="username">Email</label>
-                                <input
-                                    type="email"
-                                    placeholder="Adresse email ?"
-                                    {...register("username", {
-                                        required: "Champs obligatoire",
-                                    })}
-                                />
-                                {errors.username && (
-                                    <span className="error-form">
-                                        {errors.username.message}
-                                    </span>
-                                )}
-
-                                {/* MOT DE PASSE */}
-                                <label htmlFor="password">Mot de passe</label>
-                                <input
-                                    type="password"
-                                    placeholder="mot de passe"
-                                    {...register("password", {
-                                        required: "Mot de passe obligatoire",
-                                    })}
-                                />
-                                {errors.password && (
-                                    <span className="error-form">
-                                        {errors.password.message}
-                                    </span>
-                                )}
-
-                                <Button
-                                    type={"submit"}
-                                    className={"btn-primary-2"}
+                    <main id="connexion">
+                        <form
+                            className="connexion"
+                            onSubmit={handleSubmit(onSubmit)}
+                        >
+                            {isLoading ? (
+                                <motion.div
+                                    className="loading"
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
                                 >
-                                    Se connecter
-                                </Button>
-                            </form>
-                            <aside>
-                                <h3>Pas encore de compte&nbsp;?</h3>
-                                <Button
-                                    className={"btn-secondary"}
-                                    type={"button"}
-                                >
-                                    <Link to="/inscription">
-                                        Créer un compte
-                                    </Link>
-                                </Button>
-                            </aside>
-                        </main>
-                    )}
+                                    <h2>Chargement en cours...</h2>
+                                    <Loader />
+                                </motion.div>
+                            ) : (
+                                <div>
+                                    {errors.root?.serverError && (
+                                        <p className="error-form server">
+                                            {errors.root.serverError.message}
+                                        </p>
+                                    )}
+
+                                    {/* PSEUDO */}
+
+                                    <label htmlFor="username">Email</label>
+                                    <input
+                                        type="email"
+                                        placeholder="Adresse email ?"
+                                        {...register("username", {
+                                            required: "Champs obligatoire",
+                                        })}
+                                    />
+                                    {errors.username && (
+                                        <span className="error-form">
+                                            {errors.username.message}
+                                        </span>
+                                    )}
+
+                                    {/* MOT DE PASSE */}
+                                    <label htmlFor="password">
+                                        Mot de passe
+                                    </label>
+                                    <input
+                                        type="password"
+                                        placeholder="mot de passe"
+                                        {...register("password", {
+                                            required:
+                                                "Mot de passe obligatoire",
+                                        })}
+                                    />
+                                    {errors.password && (
+                                        <span className="error-form">
+                                            {errors.password.message}
+                                        </span>
+                                    )}
+
+                                    <Button
+                                        type={"submit"}
+                                        className={"btn-primary-2"}
+                                    >
+                                        Se connecter
+                                    </Button>
+                                </div>
+                            )}
+                        </form>
+                        <aside>
+                            <h3>Pas encore de compte&nbsp;?</h3>
+                            <Button className={"btn-secondary"} type={"button"}>
+                                <Link to="/inscription">Créer un compte</Link>
+                            </Button>
+                        </aside>
+                    </main>
                 </>
             )}
         </>
