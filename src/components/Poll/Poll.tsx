@@ -2,13 +2,17 @@ import Button from "../Button/Button";
 import { IoIosClose } from "react-icons/io";
 import PollElement from "../PollElement/PollElement";
 import "./poll.scss";
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 import Authentication from "../../utils/authentication/Authentication";
 
-const Poll = ({ closeBigCard }) => {
+type IPoll = {
+    closeBigCard: string;
+};
+
+const Poll: FC<IPoll> = ({ closeBigCard }) => {
     // Ferme la Card au clavier
     useEffect(() => {
-        const close = (e) => {
+        const close = (e: KeyboardEvent) => {
             if (e.keyCode === 27) {
                 closeBigCard();
             }

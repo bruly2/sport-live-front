@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./footer.scss";
 
-const Footer = () => {
+const Footer: React.FC = () => {
     return (
         <footer>
             <hr />

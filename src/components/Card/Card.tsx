@@ -3,19 +3,25 @@ import Button from "../Button/Button";
 import Message from "../Message/Message";
 import Poll from "../Poll/Poll";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useCallback } from "react";
+import { useState, useCallback, FC } from "react";
 
-export const Card = ({ title, img, id }) => {
-    const [showBigCard, setShowBigCard] = useState(false);
+type IProps = {
+    title: string;
+    img: string;
+    id: number;
+};
+
+export const Card: FC<IProps> = ({ title, img, id }) => {
+    const [showBigCard, setShowBigCard] = useState<boolean>(false);
 
     // ! BUG SCROLL HAUT DE PAGE EN MOBILE
 
     // Affiche la Card en grand + scroll en haut de page pour le mobile
     const handleCard = useCallback(() => {
         setShowBigCard(true);
-        if (window.innerWidth < 768) {
-            window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-        }
+        // if (window.innerWidth < 768) {
+        //     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        // }
     }, []);
 
     return (

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ConnectedContext } from "../../utils/context/ConnectedProvider";
 import Deconnexion from "../../components/Deconnexion/Deconnexion";
 
-const Header = () => {
+const Header: React.FC = () => {
     const { connected } = useContext(ConnectedContext);
 
     return (

@@ -1,34 +1,38 @@
 import "./message.scss";
-import { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useEffect, useRef, FC } from "react";
 import Button from "../Button/Button";
 import { IoIosClose } from "react-icons/io";
 import { motion } from "framer-motion";
 import Authentication from "../../utils/authentication/Authentication";
 
-const Message = ({ closeBigCard }) => {
+type IMessage = {
+    closeBigCard: string;
+};
+
+const Message: FC<IMessage> = ({ closeBigCard }) => {
     // TODO vérifier les caractères espaces
     // TODO répeter l'animation à chaque fois que l'erreur est jouée
 
     const [textArea, setTextArea] = useState("");
 
-    const isWriting = (e) => {
+    const isWriting = (e: React.FormEvent<HTMLFormElement>) => {
         setTextArea(e.target.value);
     };
 
     // Focus le form
-    const textAreaElement = useRef(null);
+    const textAreaElement = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         textAreaElement.current.focus();
     }, []);
 
     // Validation du formulaire (btn valider)
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         checkForm();
     };
 
     // La touche Entrée envoi le form
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             e.preventDefault();
             checkForm();
@@ -36,8 +40,8 @@ const Message = ({ closeBigCard }) => {
     };
 
     // Vérification form
-    const [errorForm, setErrorForm] = useState("");
-    const [showConfirmation, setShowConfirmation] = useState(false);
+    const [errorForm, setErrorForm] = useState<string>("");
+    const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
     const checkForm = useCallback(() => {
         // Form vide
         if (textArea === "") {
@@ -54,7 +58,7 @@ const Message = ({ closeBigCard }) => {
 
     // Fermeture de la Card au clavier
     useEffect(() => {
-        const close = (e) => {
+        const close = (e: KeyboardEvent) => {
             if (e.keyCode === 27) {
                 closeBigCard();
             }

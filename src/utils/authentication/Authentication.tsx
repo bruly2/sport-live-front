@@ -2,11 +2,15 @@ import { Navigate } from "react-router-dom";
 import { ConnectedContext } from "../context/ConnectedProvider";
 import { useCallback, useContext } from "react";
 
-const Authentication = ({ children }) => {
+interface AuthenticationProps {
+    children: React.ReactNode;
+}
+
+const Authentication: React.FC<AuthenticationProps> = ({ children }) => {
     const { setConnected } = useContext(ConnectedContext);
 
     const isConnected = useCallback(() => {
-        let token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
         return !!token;
     }, []);
 

@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 //  TODO : Durée d'affichage des msg en fonction de la longueur du tableau
 
-const ScrollingText = () => {
-    const [displayMessage, setDisplayMessage] = useState([]);
+const ScrollingText: React.FC = () => {
+    const [displayMessage, setDisplayMessage] = useState<string[]>([]);
 
-    let token = localStorage.getItem("token");
+    let token: string = localStorage.getItem("token");
 
     useEffect(() => {
         allMessagesFetch();
@@ -28,15 +28,15 @@ const ScrollingText = () => {
     };
 
     // Calcul la longueur de l'écran en px
-    const [windowSize, setWindowSize] = useState(0);
+    const [windowSize, setWindowSize] = useState<number>(0);
     useEffect(() => {
         const windowsWidth = window.innerWidth;
         setWindowSize(windowsWidth);
     }, []);
 
     // Calcul la longueur du msg en px
-    const [divMessageWidth, setDivMessageWidth] = useState(0);
-    const messageElement = useRef(null);
+    const [divMessageWidth, setDivMessageWidth] = useState<number>(0);
+    const messageElement = useRef<HTMLDivElement>(null);
     useEffect(() => {
         let messageSize = messageElement.current.getBoundingClientRect();
         setDivMessageWidth(Math.round(messageSize.width));

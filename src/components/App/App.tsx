@@ -1,3 +1,4 @@
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "../../layout/Header/Header";
 import Footer from "../../layout/Footer/Footer";
@@ -8,7 +9,7 @@ import Message from "../Message/Message";
 import Poll from "../Poll/Poll";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 
-function App() {
+const App: React.FC = () => {
     return (
         <>
             <Header />
@@ -27,6 +28,6 @@ function App() {
             <Footer />
         </>
     );
-}
+};
 
 export default App;

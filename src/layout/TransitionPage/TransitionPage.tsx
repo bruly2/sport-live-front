@@ -1,6 +1,6 @@
 import { motion, useIsPresent } from "framer-motion";
 
-const TransitionPage = () => {
+const TransitionPage: React.FC = () => {
     const isPresent = useIsPresent();
 
     return (

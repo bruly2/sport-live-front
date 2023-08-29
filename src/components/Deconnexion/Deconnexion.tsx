@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import { useContext } from "react";
+import React, { useContext, } from "react";
 import { ConnectedContext } from "../../utils/context/ConnectedProvider";
 import { Link } from "react-router-dom";
 Link;
@@ -7,7 +7,7 @@ import Popup from "reactjs-popup";
 import { IoIosClose } from "react-icons/io";
 import "./deconnexion.scss";
 
-const Deconnexion = () => {
+const Deconnexion: React.FC = () => {
     const { logout } = useContext(ConnectedContext);
 
     return (

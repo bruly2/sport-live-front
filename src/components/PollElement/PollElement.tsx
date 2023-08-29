@@ -1,7 +1,7 @@
 import "./pollelement.scss";
 import { motion } from "framer-motion";
 
-const PollElement = () => {
+const PollElement: React.FC = () => {
     return (
         <>
             {/* A MAPPER */}

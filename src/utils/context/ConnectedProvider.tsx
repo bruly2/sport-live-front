@@ -1,9 +1,15 @@
 import { createContext, useCallback, useState } from "react";
 
-export const ConnectedContext = createContext();
+interface ConnectedContextProps {
+    connected: boolean;
+    logout: () => void;
+    setConnected: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const ConnectedProvider = (props) => {
-    const [connected, setConnected] = useState(false);
+export const ConnectedContext = createContext<ConnectedContextProps>();
+
+const ConnectedProvider: React.FC = (props) => {
+    const [connected, setConnected] = useState<boolean>(false);
 
     const logout = useCallback(() => {
         localStorage.removeItem("token");
