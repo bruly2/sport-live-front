@@ -49,7 +49,7 @@ const Inscription = () => {
           {/* TODO Redirection vers la page connexion */}
         </>
       ) : (
-        <>
+     
         <main>
           <h1>Création d'un compte</h1>
           <h2>En 30 secondes seulement</h2>
@@ -71,6 +71,7 @@ const Inscription = () => {
             {errors.alias && (
               <span className="error-form" role="alerte">{errors.alias.message}</span>
             )}
+
 
             {/* PRENOM */}
             <label htmlFor="firstname">Prénom</label>
@@ -161,7 +162,7 @@ const Inscription = () => {
               Valider
             </Button>
           </form>
-        </>
+        </main>
       )}
     </>
   );
