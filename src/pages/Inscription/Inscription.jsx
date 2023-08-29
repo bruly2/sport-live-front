@@ -41,14 +41,14 @@ const Inscription = () => {
     return (
         <>
             {isSubmitSuccessful ? (
-                <>
+                <div>
                     {/* TODO Redirection vers la page connexion ? */}
                     <h1>{watch("alias")}, votre compte est crée 🥳</h1>
                     <p>Cliquez ici pour vous connecter</p>
                     <Button className={"btn-primary-2"} type={"button"}>
                         <Link to="/connexion">Connexion</Link>
                     </Button>
-                </>
+                </div>
             ) : (
                 <main>
                     <h1>Création d'un compte</h1>
