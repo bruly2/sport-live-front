@@ -41,6 +41,9 @@
         color: $color-secondary;
         &.server {
             margin-top: 20px;
+            margin-bottom: 0;
+
+            font-size: 1.3em;
         }
     }
     button {
