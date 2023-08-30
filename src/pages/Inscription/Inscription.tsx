@@ -59,9 +59,11 @@ const Inscription: React.FC = () => {
                 <>
                     <h1>{watch("alias")}, votre compte est crée 🥳</h1>
                     <p>Cliquez ici pour vous connecter</p>
-                    <Button className={"btn-primary-2"} type={"button"}>
-                        <Link to="/connexion">Connexion</Link>
-                    </Button>
+                    <Link to="/connexion">
+                        <Button className={"btn-primary-2"} type={"button"}>
+                            Connexion
+                        </Button>
+                    </Link>
                     {/* TODO Redirection vers la page connexion */}
                 </>
             ) : (
