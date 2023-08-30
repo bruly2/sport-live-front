@@ -2,19 +2,13 @@ import Button from "../Button/Button";
 import { IoIosClose } from "react-icons/io";
 import PollElement from "../PollElement/PollElement";
 import "./poll.scss";
-import { useEffect } from "react";
 import Authentication from "../../utils/authentication/Authentication";
 
-const Poll = ({ closeBigCard }) => {
-    // Ferme la Card au clavier
-    useEffect(() => {
-        const close = (e) => {
-            if (e.keyCode === 27) {
-                closeBigCard();
-            }
-        };
-        window.addEventListener("keydown", close);
-    }, [closeBigCard]);
+type PollProps = {
+    closeBigCard: () => void;
+};
+
+const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
     return (
         <Authentication>
             <article id="poll">
@@ -28,7 +22,7 @@ const Poll = ({ closeBigCard }) => {
                     </span>
                 </Button>
 
-                <h2>Posez votre question poour le sondage ?</h2>
+                <h2>Posez votre question pour le sondage ?</h2>
                 <ul>
                     <PollElement />
                 </ul>

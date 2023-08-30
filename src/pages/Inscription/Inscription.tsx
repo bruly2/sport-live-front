@@ -4,9 +4,18 @@ import Button from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const Inscription = () => {
+interface FormData {
+    alias: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
+    passwordVerif: string;
+}
+
+const Inscription: React.FC = () => {
     // FETCH
-    const inscriptionFetch = async (data) => {
+    const inscriptionFetch = async (data: FormData) => {
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/users/register`,
@@ -33,8 +42,8 @@ const Inscription = () => {
         handleSubmit,
         watch,
         formState: { errors, isSubmitSuccessful },
-    } = useForm({ mode: "onTouched" });
-    const onSubmit = (data) => {
+    } = useForm<FormData>({ mode: "onTouched" });
+    const onSubmit = (data: FormData) => {
         inscriptionFetch(data);
     };
 
@@ -132,7 +141,7 @@ const Inscription = () => {
                             transition={{ delay: 0.3 }}
                             type="text"
                             placeholder="Nom"
-                            aria-invalid={errors.nom ? "true" : "false"}
+                            aria-invalid={errors.lastname ? "true" : "false"}
                             {...register("lastname", {
                                 required: "Nom obligatoire",
                                 pattern: {
@@ -186,6 +195,10 @@ const Inscription = () => {
                             placeholder="Mot de passe"
                             {...register("password", {
                                 required: "Mot de passe obligatoire",
+                                minLength: {
+                                    value: 6,
+                                    message: "6 carateres minimum",
+                                },
                             })}
                         />
                         {errors.password && (

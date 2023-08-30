@@ -1,6 +1,6 @@
 import "./Event.scss";
 
-export const Event = () => {
+export const Event: React.FC = () => {
     return (
         <>
             <main id="event">
