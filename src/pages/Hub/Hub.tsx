@@ -8,7 +8,7 @@ import TransitionPage from "../../layout/TransitionPage/TransitionPage";
 
 import "./hub.scss";
 
-const Hub = () => {
+const Hub: React.FC = () => {
     return (
         <Authentication>
             <Event />

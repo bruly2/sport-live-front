@@ -6,9 +6,14 @@ import Button from "../../components/Button/Button";
 import Loader from "../../layout/Loader/Loader";
 import { motion } from "framer-motion";
 
-const Connexion = () => {
+interface FormData {
+    username: string;
+    password: string;
+}
+
+const Connexion: React.FC = () => {
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     // FORM + FETCH
     // TODO Ajouter le catch d'erreur
@@ -18,9 +23,9 @@ const Connexion = () => {
         handleSubmit,
         setError,
         formState: { errors },
-    } = useForm({ mode: "onTouched" });
+    } = useForm<FormData>({ mode: "onTouched" });
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: FormData) => {
         setIsLoading(true);
         const response = await fetch(
             `${import.meta.env.VITE_API_BASE_URL}/login_check`,
@@ -85,7 +90,9 @@ const Connexion = () => {
                             </label>
                             <input
                                 type="email"
-                                aria-invalid={errors.email ? "true" : "false"}
+                                aria-invalid={
+                                    errors.username ? "true" : "false"
+                                }
                                 placeholder="Adresse email"
                                 {...register("username", {
                                     required: "Champs obligatoire",
@@ -125,9 +132,11 @@ const Connexion = () => {
                 </motion.form>
                 <aside>
                     <h3>Pas encore de compte&nbsp;?</h3>
-                    <Button className={"btn-secondary"} type={"button"}>
-                        <Link to="/inscription">Créer un compte</Link>
-                    </Button>
+                    <Link to="/inscription">
+                        <Button className={"btn-secondary"} type={"button"}>
+                            Créer un compte
+                        </Button>
+                    </Link>
                 </aside>
             </main>
         </>
