@@ -6,23 +6,25 @@ import { motion } from "framer-motion";
 import Authentication from "../../utils/authentication/Authentication";
 
 type IMessage = {
-    closeBigCard: string;
+    closeBigCard: () => void;
 };
 
 const Message: FC<IMessage> = ({ closeBigCard }) => {
     // TODO vérifier les caractères espaces
     // TODO répeter l'animation à chaque fois que l'erreur est jouée
 
-    const [textArea, setTextArea] = useState("");
+    const [textArea, setTextArea] = useState<string>("");
 
-    const isWriting = (e: React.FormEvent<HTMLFormElement>) => {
+    const isWriting = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTextArea(e.target.value);
     };
 
     // Focus le form
     const textAreaElement = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
-        textAreaElement.current.focus();
+        if (textAreaElement.current) {
+            textAreaElement.current.focus();
+        }
     }, []);
 
     // Validation du formulaire (btn valider)
@@ -31,13 +33,22 @@ const Message: FC<IMessage> = ({ closeBigCard }) => {
         checkForm();
     };
 
-    // La touche Entrée envoi le form
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            checkForm();
-        }
-    };
+    // La touche Entrée envoi le form + la touche Esc ferme la card
+    const handleKeyDown = useCallback(
+        (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+            console.log("validtion du clavier  🦁");
+
+            if (e.key === "Enter") {
+                e.preventDefault();
+                checkForm();
+            }
+            if (e.key === "Escape") {
+                console.log("fermé au clavier 👀");
+                closeBigCard();
+            }
+        },
+        [isWriting]
+    );
 
     // Vérification form
     const [errorForm, setErrorForm] = useState<string>("");
@@ -55,16 +66,6 @@ const Message: FC<IMessage> = ({ closeBigCard }) => {
         setShowConfirmation(true);
         console.log(textArea);
     }, [handleSubmit]);
-
-    // Fermeture de la Card au clavier
-    useEffect(() => {
-        const close = (e: KeyboardEvent) => {
-            if (e.keyCode === 27) {
-                closeBigCard();
-            }
-        };
-        window.addEventListener("keydown", close);
-    }, [closeBigCard]);
 
     return (
         <Authentication>

@@ -1,12 +1,12 @@
 import "./button.scss";
-import { FC, ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import { motion } from "framer-motion";
 
 type ButtonProps = ComponentPropsWithoutRef<"button"> & {
     ariaLabel?: string;
 };
 
-const Button: FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
     type,
     className,
     onClick,

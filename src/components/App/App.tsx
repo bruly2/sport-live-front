@@ -5,8 +5,8 @@ import Footer from "../../layout/Footer/Footer";
 import Inscription from "../../pages/Inscription/Inscription";
 import Connexion from "../../pages/Connexion/Connexion";
 import Hub from "../../pages/Hub/Hub";
-import Message from "../Message/Message";
-import Poll from "../Poll/Poll";
+// import Message from "../Message/Message";
+// import Poll from "../Poll/Poll";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 
 const App: React.FC = () => {
@@ -19,12 +19,11 @@ const App: React.FC = () => {
                 <Route path="/inscription" element={<Inscription />} />
                 <Route path="/connexion" element={<Connexion />} />
                 <Route path="*" element={<ErrorPage />} />
-
+                {/* 🔽🔐 Pages authentifiées  */}
                 <Route path="/hub" element={<Hub />} />
-                <Route path="/hub/message" element={<Message />} />
-                <Route path="/hub/sondage" element={<Poll />} />
+                {/* <Route path="/hub/message" element={<Message />} />
+                <Route path="/hub/sondage" element={<Poll />} /> */}
             </Routes>
-
             <Footer />
         </>
     );

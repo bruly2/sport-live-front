@@ -3,18 +3,20 @@ import Button from "../Button/Button";
 import Message from "../Message/Message";
 import Poll from "../Poll/Poll";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useCallback, FC } from "react";
+import { useState, useCallback } from "react";
 
-type IProps = {
+// TODO fix bug layoutID isnot a number 😥
+
+// TODO fermé la card au clavier
+
+type CardProps = {
     title: string;
     img: string;
     id: number;
 };
 
-export const Card: FC<IProps> = ({ title, img, id }) => {
+export const Card: React.FC<CardProps> = ({ title, img, id }) => {
     const [showBigCard, setShowBigCard] = useState<boolean>(false);
-
-    // ! BUG SCROLL HAUT DE PAGE EN MOBILE
 
     // Affiche la Card en grand + scroll en haut de page pour le mobile
     const handleCard = useCallback(() => {
@@ -22,6 +24,14 @@ export const Card: FC<IProps> = ({ title, img, id }) => {
         // if (window.innerWidth < 768) {
         //     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         // }
+    }, []);
+
+    const handleCloseCard = useCallback(() => {
+        setShowBigCard(false);
+        // FERME LA CARD AU CLAVIER
+        // if (e.keyCode === 27) {
+        //  console.log("fermé au clavier 👀");
+        // setShowBigCard(false);
     }, []);
 
     return (
@@ -38,7 +48,7 @@ export const Card: FC<IProps> = ({ title, img, id }) => {
                     transition={{ duration: 0.2 }}
                     className="card"
                     onClick={handleCard}
-                    layoutId={id}
+                    layoutId={id.toString()}
                 >
                     <Button className={"btn-primary"}>{title}</Button>
                 </motion.div>
@@ -48,20 +58,14 @@ export const Card: FC<IProps> = ({ title, img, id }) => {
                         style={{ flexGrow: 10 }}
                         role="dialog"
                         className="card card-open card-mobile"
-                        layoutId={id}
+                        layoutId={id.toString()}
                     >
                         {/* Ouverture de la CARD ID 1 = Message */}
                         {id === 1 ? (
-                            <Message
-                                closeBigCard={() => setShowBigCard(false)}
-                            />
+                            <Message closeBigCard={handleCloseCard} />
                         ) : (
                             //  Ouverture de la CARD ID 2 = Sondage
-                            id === 2 && (
-                                <Poll
-                                    closeBigCard={() => setShowBigCard(false)}
-                                />
-                            )
+                            id === 2 && <Poll closeBigCard={handleCloseCard} />
                         )}
                     </motion.div>
                 </AnimatePresence>
