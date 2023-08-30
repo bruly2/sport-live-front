@@ -4,10 +4,15 @@ import { motion } from "framer-motion";
 
 //  TODO : Durée d'affichage des msg en fonction de la longueur du tableau
 
-const ScrollingText: React.FC = () => {
-    const [displayMessage, setDisplayMessage] = useState<string[]>([]);
+interface IMesssage {
+    id: number;
+    content: string;
+}
 
-    let token: string = localStorage.getItem("token");
+const ScrollingText: React.FC = () => {
+    const [displayMessage, setDisplayMessage] = useState<IMesssage[]>([]);
+
+    const token: string | null = localStorage.getItem("token");
 
     useEffect(() => {
         allMessagesFetch();
@@ -38,8 +43,10 @@ const ScrollingText: React.FC = () => {
     const [divMessageWidth, setDivMessageWidth] = useState<number>(0);
     const messageElement = useRef<HTMLDivElement>(null);
     useEffect(() => {
-        let messageSize = messageElement.current.getBoundingClientRect();
-        setDivMessageWidth(Math.round(messageSize.width));
+        const messageSize = messageElement.current?.getBoundingClientRect();
+        if (messageSize) {
+            setDivMessageWidth(Math.round(messageSize.width));
+        }
     }, [displayMessage]);
 
     return (

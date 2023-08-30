@@ -2,7 +2,6 @@ import Button from "../Button/Button";
 import React, { useCallback, useContext, useState } from "react";
 import { ConnectedContext } from "../../utils/context/ConnectedProvider";
 import { Link } from "react-router-dom";
-Link;
 import Popup from "reactjs-popup";
 import { IoIosClose } from "react-icons/io";
 import "./deconnexion.scss";

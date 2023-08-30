@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useState, ReactNode } from "react";
 
 interface ConnectedContextProps {
     connected: boolean;
@@ -6,9 +6,13 @@ interface ConnectedContextProps {
     setConnected: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ConnectedContext = createContext<ConnectedContextProps>();
+export const ConnectedContext = createContext<ConnectedContextProps>( {} as ConnectedContextProps)
 
-const ConnectedProvider: React.FC = (props) => {
+interface ConnectedProviderProps {
+    children: ReactNode;
+}
+
+const ConnectedProvider: React.FC<ConnectedProviderProps> = ({ children }) => {
     const [connected, setConnected] = useState<boolean>(false);
 
     const logout = useCallback(() => {
@@ -18,7 +22,7 @@ const ConnectedProvider: React.FC = (props) => {
 
     return (
         <ConnectedContext.Provider value={{ connected, logout, setConnected }}>
-            {props.children}
+            {children}
         </ConnectedContext.Provider>
     );
 };

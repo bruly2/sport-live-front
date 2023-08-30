@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
 import { ConnectedContext } from "../context/ConnectedProvider";
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, ReactNode } from "react";
 
 interface AuthenticationProps {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 const Authentication: React.FC<AuthenticationProps> = ({ children }) => {
