@@ -39,8 +39,8 @@ const Connexion: React.FC = () => {
         );
         const result = await response.json();
         if (response.status === 200) {
-            console.log(`Connexion réussie !! 🥳🥳 Récupération du token :`);
-            console.log(result.token);
+            console.log(`Connexion réussie !! 🥳🥳`);
+            // console.log(result.token);
             localStorage.setItem("token", result.token);
             setIsLoading(false);
             navigate("/hub");

@@ -25,7 +25,7 @@ const ScrollingText: React.FC = () => {
                 { headers: { Authorization: `bearer ${token}` } }
             );
             const result = await response.json();
-            console.log(result);
+            // console.log(result);
             setDisplayMessage(result);
         } catch (error) {
             console.error("❌ Erreur ❌");

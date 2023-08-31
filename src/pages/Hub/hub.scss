@@ -5,7 +5,7 @@ section {
     // flex-wrap: wrap;
     gap: 30px;
     max-width: 1080px;
-    margin: 0 auto;
+    margin: 0 auto 50px;
     justify-content: center;
     @media (max-width: $layout-breakpoint-small) {
         flex-wrap: wrap;
