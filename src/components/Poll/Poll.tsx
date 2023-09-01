@@ -51,9 +51,7 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
 
                 <h2>{displayQuestionPoll}</h2>
 
-                <ul>
-                    <PollElement />
-                </ul>
+                <PollElement />
             </article>
         </Authentication>
     );
