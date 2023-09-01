@@ -8,7 +8,13 @@ import Authentication from "../../utils/authentication/Authentication";
 type IMessage = {
     closeBigCard: () => void;
 };
-
+type MessageData = {
+    content: string;
+    sent_date: Date;
+    is_deleted: boolean;
+    user_id: number;
+    is_approved: boolean;
+  };
 const Message: FC<IMessage> = ({ closeBigCard }) => {
     // TODO vérifier les caractères espaces
     // TODO répeter l'animation à chaque fois que l'erreur est jouée
@@ -28,16 +34,17 @@ const Message: FC<IMessage> = ({ closeBigCard }) => {
     }, []);
 
     // Validation du formulaire (btn valider)
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>, data: MessageData) => {
         e.preventDefault();
         checkForm();
+        fetchMessage(data);
     };
 
     // La touche Entrée envoi le form + la touche Esc ferme la card
     const handleKeyDown = useCallback(
         (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-            console.log("validtion du clavier  🦁");
-
+            // console.log("validtion du clavier  🦁");
+            
             if (e.key === "Enter") {
                 e.preventDefault();
                 checkForm();
@@ -49,7 +56,7 @@ const Message: FC<IMessage> = ({ closeBigCard }) => {
         },
         [isWriting]
     );
-
+   
     // Vérification form
     const [errorForm, setErrorForm] = useState<string>("");
     const [showConfirmation, setShowConfirmation] = useState<boolean>(false);
@@ -63,12 +70,40 @@ const Message: FC<IMessage> = ({ closeBigCard }) => {
             return setErrorForm("Votre message est trop court");
         }
         // => Formulaire validé
+      
         setShowConfirmation(true);
         console.log(textArea);
-    }, [handleSubmit]);
-
+    }, [handleSubmit], );
+    const token: string | null = localStorage.getItem("token");
+    const fetchMessage = async (data: MessageData) => {
+      
+        try {
+          const response = await fetch(
+            `${import.meta.env.VITE_API_BASE_URL}/messages`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`, 
+              },
+              body: JSON.stringify(data),
+            }
+          );
+      
+          if (!response.ok) {
+            throw new Error(`La requête a échoué avec le statut ${response.status}`);
+          }
+      
+          const result = await response.json();
+          console.log(result);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+     
     return (
         <Authentication>
+
             <article id="message">
                 <Button
                     type={"button"}
