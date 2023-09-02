@@ -18,7 +18,7 @@
             align-items: stretch;
             border: 0;
             gap: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             @media (max-width: $layout-breakpoint-small) {
                 flex-wrap: wrap;
             }
@@ -65,14 +65,30 @@
             .test {
                 background-color: color.scale($color-primary, $lightness: 0%);
                 width: 100%;
+                border-radius: 4px;
+                position: relative;
                 .test2 {
-                    background-color: color.scale(
-                        $color-secondary,
-                        $lightness: 0%
+                    background: linear-gradient(
+                        90deg,
+                        color.scale($color-secondary, $lightness: -20%) 0%,
+                        color.scale($color-secondary, $lightness: 20%) 100%
                     );
-                    border-radius: 0 50px 50px 0;
+
+                    color: color.scale($color-secondary, $lightness: 0%);
+                    border-radius: 0 99em 99em 0;
                 }
             }
+            .test3 {
+                font-size: 1em;
+                position: absolute;
+                right: 10px;
+                top: 0;
+                text-shadow: 1px 1px 2px $color-primary;
+            }
+        }
+        .total-vote {
+            color: $color-white;
+            font-size: 0.9em;
         }
     }
 }

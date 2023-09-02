@@ -105,43 +105,57 @@ const PollElement: React.FC = () => {
                                 />
                                 {answer.content}
                                 {isSubmitSuccessful && (
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        className="test"
-                                    >
+                                    <>
                                         <motion.div
-                                            initial={{ width: 0 }}
-                                            animate={{
-                                                width: `${
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            className="test"
+                                        >
+                                            <motion.div
+                                                initial={{ width: 0 }}
+                                                animate={{
+                                                    width: `${(
+                                                        (answer.ranking /
+                                                            sommeRankings) *
+                                                        100
+                                                    ).toFixed(0)}%`,
+                                                }}
+                                                transition={{
+                                                    duration: 0.6,
+                                                    ease: "easeOut",
+                                                }}
+                                                className="test2"
+                                            >
+                                                .
+                                            </motion.div>
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ duration: 0.6 }}
+                                                className="test3"
+                                            >
+                                                {(
                                                     (answer.ranking /
                                                         sommeRankings) *
                                                     100
-                                                }%`,
-                                            }}
-                                            transition={{
-                                                duration: 0.8,
-                                                ease: "easeOut",
-                                            }}
-                                            className="test2"
-                                        >
-                                            {(
-                                                (answer.ranking /
-                                                    sommeRankings) *
-                                                100
-                                            ).toFixed(0)}
-                                            %
+                                                ).toFixed(0)}
+                                                %
+                                            </motion.div>
                                         </motion.div>
-                                    </motion.div>
+                                    </>
                                 )}
                             </label>
                         </>
                     ))}
                 </fieldset>
-                {!isSubmitSuccessful && (
+                {!isSubmitSuccessful ? (
                     <Button type={"submit"} className={"btn-primary-2"}>
                         Voter
                     </Button>
+                ) : (
+                    <p className="total-vote">
+                        {sommeRankings} vote{sommeRankings > 1 && "s"}
+                    </p>
                 )}
             </form>
         </>
