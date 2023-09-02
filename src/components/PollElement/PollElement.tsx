@@ -109,7 +109,7 @@ const PollElement: React.FC = () => {
                                         <motion.div
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
-                                            className="test"
+                                            className="poll-row"
                                         >
                                             <motion.div
                                                 initial={{ width: 0 }}
@@ -124,7 +124,7 @@ const PollElement: React.FC = () => {
                                                     duration: 0.6,
                                                     ease: "easeOut",
                                                 }}
-                                                className="test2"
+                                                className="drawbar"
                                             >
                                                 .
                                             </motion.div>
@@ -132,7 +132,7 @@ const PollElement: React.FC = () => {
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                                 transition={{ duration: 0.6 }}
-                                                className="test3"
+                                                className="pourcent"
                                             >
                                                 {(
                                                     (answer.ranking /

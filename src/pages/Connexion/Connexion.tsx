@@ -40,7 +40,6 @@ const Connexion: React.FC = () => {
         const result = await response.json();
         if (response.status === 200) {
             console.log(`Connexion réussie !! 🥳🥳`);
-            // console.log(result.token);
             localStorage.setItem("token", result.token);
             setIsLoading(false);
             navigate("/hub");
@@ -52,6 +51,11 @@ const Connexion: React.FC = () => {
                     "L'identifiant ou mot de passe sont incorrects, merci de vous reconnecter",
             });
         }
+    };
+
+    const animateError = {
+        initial: { x: -50 },
+        animate: { x: 0 },
     };
 
     return (
@@ -78,9 +82,14 @@ const Connexion: React.FC = () => {
                     ) : (
                         <div>
                             {errors.root?.serverError && (
-                                <p className="error-form server">
+                                <motion.p
+                                    variants={animateError}
+                                    initial="initial"
+                                    animate="animate"
+                                    className="error-form server"
+                                >
                                     {errors.root.serverError.message}
-                                </p>
+                                </motion.p>
                             )}
 
                             {/* PSEUDO */}
@@ -99,9 +108,15 @@ const Connexion: React.FC = () => {
                                 })}
                             />
                             {errors.username && (
-                                <span className="error-form" role="alert">
+                                <motion.span
+                                    variants={animateError}
+                                    initial="initial"
+                                    animate="animate"
+                                    className="error-form"
+                                    role="alert"
+                                >
                                     {errors.username.message}
-                                </span>
+                                </motion.span>
                             )}
 
                             {/* MOT DE PASSE */}
@@ -119,9 +134,15 @@ const Connexion: React.FC = () => {
                                 })}
                             />
                             {errors.password && (
-                                <span className="error-form" role="alert">
+                                <motion.span
+                                    variants={animateError}
+                                    initial="initial"
+                                    animate="animate"
+                                    className="error-form"
+                                    role="alert"
+                                >
                                     {errors.password.message}
-                                </span>
+                                </motion.span>
                             )}
 
                             <Button type={"submit"} className={"btn-primary-2"}>

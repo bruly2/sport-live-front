@@ -53,19 +53,24 @@ const Inscription: React.FC = () => {
         animate: { x: 0, opacity: 1 },
     };
 
+    const animateError = {
+        initial: { x: -50 },
+        animate: { x: 0 },
+    };
+
     return (
         <>
             {isSubmitSuccessful ? (
-                <>
-                    <h1>{watch("alias")}, votre compte est crée 🥳</h1>
-                    <p>Cliquez ici pour vous connecter</p>
+                <main className="inscription-success">
+                    <h2>{watch("alias")}, votre compte est crée 🥳</h2>
+                    <p>Cliquez ici pour vous connecter&nbsp;:</p>
                     <Link to="/connexion">
                         <Button className={"btn-primary-2"} type={"button"}>
                             Connexion
                         </Button>
                     </Link>
                     {/* TODO Redirection vers la page connexion */}
-                </>
+                </main>
             ) : (
                 <main>
                     <h1>Création d'un compte</h1>
@@ -100,9 +105,15 @@ const Inscription: React.FC = () => {
                             })}
                         />
                         {errors.alias && (
-                            <span className="error-form" role="alerte">
+                            <motion.span
+                                variants={animateError}
+                                initial="initial"
+                                animate="animate"
+                                className="error-form"
+                                role="alert"
+                            >
                                 {errors.alias.message}
-                            </span>
+                            </motion.span>
                         )}
 
                         {/* PRENOM */}
@@ -127,9 +138,15 @@ const Inscription: React.FC = () => {
                             })}
                         />
                         {errors.firstname && (
-                            <span className="error-form" role="alert">
+                            <motion.span
+                                variants={animateError}
+                                initial="initial"
+                                animate="animate"
+                                className="error-form"
+                                role="alert"
+                            >
                                 {errors.firstname.message}
-                            </span>
+                            </motion.span>
                         )}
 
                         {/* NOM */}
@@ -154,9 +171,15 @@ const Inscription: React.FC = () => {
                             })}
                         />
                         {errors.lastname && (
-                            <span className="error-form" role="alert">
+                            <motion.span
+                                variants={animateError}
+                                initial="initial"
+                                animate="animate"
+                                className="error-form"
+                                role="alert"
+                            >
                                 {errors.lastname.message}
-                            </span>
+                            </motion.span>
                         )}
 
                         {/* Email 
@@ -177,9 +200,15 @@ const Inscription: React.FC = () => {
                             })}
                         />
                         {errors.email && (
-                            <span className="error-form" role="alerte">
+                            <motion.span
+                                variants={animateError}
+                                initial="initial"
+                                animate="animate"
+                                className="error-form"
+                                role="alert"
+                            >
                                 {errors.email.message}
-                            </span>
+                            </motion.span>
                         )}
 
                         {/* MOT DE PASSE
@@ -204,9 +233,15 @@ const Inscription: React.FC = () => {
                             })}
                         />
                         {errors.password && (
-                            <span className="error-form" role="alert">
+                            <motion.span
+                                variants={animateError}
+                                initial="initial"
+                                animate="animate"
+                                className="error-form"
+                                role="alert"
+                            >
                                 {errors.password.message}
-                            </span>
+                            </motion.span>
                         )}
 
                         {/* CONFIRME MOT DE PASSE */}
@@ -233,9 +268,15 @@ const Inscription: React.FC = () => {
                             })}
                         />
                         {errors.passwordVerif && (
-                            <span className="error-form" role="alert">
+                            <motion.span
+                                variants={animateError}
+                                initial="initial"
+                                animate="animate"
+                                className="error-form"
+                                role="alert"
+                            >
                                 {errors.passwordVerif.message}
-                            </span>
+                            </motion.span>
                         )}
 
                         <Button type={"submit"} className={"btn-primary-2"}>

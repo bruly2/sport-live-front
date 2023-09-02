@@ -20,6 +20,9 @@
         margin-left: 20px;
         margin-right: 20px;
     }
+    &:hover button.btn-primary {
+        background-color: color.scale($color-primary, $lightness: -20%);
+    }
     h2 {
         text-transform: uppercase;
         margin: 0 40px 20px 20px;

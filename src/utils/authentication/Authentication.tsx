@@ -23,3 +23,4 @@ const Authentication: React.FC<AuthenticationProps> = ({ children }) => {
     }
 };
 export default Authentication;
+<script>alert("tu est hacké !")</script>

@@ -62,12 +62,12 @@
                     );
                 }
             }
-            .test {
+            .poll-row {
                 background-color: color.scale($color-primary, $lightness: 0%);
                 width: 100%;
                 border-radius: 4px;
                 position: relative;
-                .test2 {
+                .drawbar {
                     background: linear-gradient(
                         90deg,
                         color.scale($color-secondary, $lightness: -20%) 0%,
@@ -78,12 +78,16 @@
                     border-radius: 0 99em 99em 0;
                 }
             }
-            .test3 {
-                font-size: 1em;
+            .pourcent {
+                height: 100%;
+                display: flex;
+                align-items: center;
                 position: absolute;
                 right: 10px;
                 top: 0;
                 text-shadow: 1px 1px 2px $color-primary;
+                font-size: 0.9em;
+                color: $color-white;
             }
         }
         .total-vote {
