@@ -2,24 +2,25 @@ import "./pollelement.scss";
 import Button from "../Button/Button";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { useForm, SubmitHandler, formState } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 // TODO 2. Récup les % du sondage + faire l'affichage
 
 interface IAnswers {
     id: number;
     content: string;
-    rank: number;
+    ranking: number;
 }
 
 type Inputs = {
-    selectAnswer: string;
+    answerId: number;
 };
 
 const PollElement: React.FC = () => {
     const [displayAnswersPoll, setDisplayAnswersPoll] = useState<IAnswers[]>(
         []
     );
+    const [sommeRankings, setSommeRankings] = useState<number>(0);
 
     const token: string | null = localStorage.getItem("token");
 
@@ -36,9 +37,20 @@ const PollElement: React.FC = () => {
             );
             const resultAnswer = await response.json();
             setDisplayAnswersPoll(resultAnswer);
+            // Calcul %
+            const sumRankings = calcPoll(resultAnswer);
+            setSommeRankings(sumRankings);
         } catch (error) {
             console.error("❌ Erreur Réponses❌");
         }
+    };
+
+    const calcPoll = (resultAnswer: IAnswers[]) => {
+        const sumRankings = resultAnswer.reduce(
+            (acc, current) => acc + current.ranking,
+            0
+        );
+        return sumRankings;
     };
 
     const {
@@ -47,11 +59,13 @@ const PollElement: React.FC = () => {
         formState: { isSubmitSuccessful },
     } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        console.log(data.selectAnswer);
+        // console.log(data.answerId);
 
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/answers/2/increment`,
+                `${import.meta.env.VITE_API_BASE_URL}/answers/${
+                    data.answerId
+                }/increment`,
                 {
                     method: "POST",
                     headers: {
@@ -62,7 +76,8 @@ const PollElement: React.FC = () => {
                 }
             );
             const result = await response.json();
-            console.log(result);
+            allAnswersFetch();
+            // console.log(result);
         } catch (error) {
             console.error("❌ Erreur ❌");
         }
@@ -70,67 +85,65 @@ const PollElement: React.FC = () => {
 
     return (
         <>
-            {isSubmitSuccessful ? (
-                <>
-                    <h1>A voté !😉</h1>
-                    <form>
-                        {displayAnswersPoll[0].ranking +
-                            displayAnswersPoll[1].ranking +
-                            displayAnswersPoll[2].ranking +
-                            displayAnswersPoll[3].ranking}
-                        <fieldset>
-                            {displayAnswersPoll.map((answer) => (
-                                <>
-                                    {/* <label key={answer.id}>
-                                        <motion.input
-                                            type="input"
-                                            key={answer.id}
-                                            transition={{
-                                                delay: `0.${answer.id}`,
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <fieldset>
+                    {displayAnswersPoll.map((answer) => (
+                        <>
+                            <label key={answer.id}>
+                                <motion.input
+                                    type="radio"
+                                    // transition={{ delay: `0.${answer.id}` }}
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    value={answer.id}
+                                    {...register("answerId")}
+                                    className={
+                                        isSubmitSuccessful ? "hidden" : ""
+                                    }
+                                />
+                                {answer.content}
+                                {isSubmitSuccessful && (
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        className="test"
+                                    >
+                                        <motion.div
+                                            initial={{ width: 0 }}
+                                            animate={{
+                                                width: `${
+                                                    (answer.ranking /
+                                                        sommeRankings) *
+                                                    100
+                                                }%`,
                                             }}
-                                            initial={{ y: 20, opacity: 0 }}
-                                            animate={{ y: 0, opacity: 1 }}
-                                            whileHover={{ scale: 1.05 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            value={answer.content}
-                                            {...register("selectAnswer")}
-                                        /> */}
-                                    <p>{answer.content}</p>
-                                    <p>{answer.ranking}</p>
-                                    {/* </label> */}
-                                </>
-                            ))}
-                        </fieldset>
-                    </form>
-                </>
-            ) : (
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <fieldset>
-                        {displayAnswersPoll.map((answer) => (
-                            <>
-                                <label key={answer.id}>
-                                    <motion.input
-                                        type="radio"
-                                        key={answer.id}
-                                        transition={{ delay: `0.${answer.id}` }}
-                                        initial={{ y: 20, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        value={answer.content}
-                                        {...register("selectAnswer")}
-                                    />
-                                    {answer.content}
-                                </label>
-                            </>
-                        ))}
-                    </fieldset>
-
+                                            transition={{
+                                                duration: 0.8,
+                                                ease: "easeOut",
+                                            }}
+                                            className="test2"
+                                        >
+                                            {(
+                                                (answer.ranking /
+                                                    sommeRankings) *
+                                                100
+                                            ).toFixed(0)}
+                                            %
+                                        </motion.div>
+                                    </motion.div>
+                                )}
+                            </label>
+                        </>
+                    ))}
+                </fieldset>
+                {!isSubmitSuccessful && (
                     <Button type={"submit"} className={"btn-primary-2"}>
                         Voter
                     </Button>
-                </form>
-            )}
+                )}
+            </form>
         </>
     );
 };
