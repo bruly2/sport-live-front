@@ -77,7 +77,7 @@ const PollElement: React.FC = () => {
             );
             const result = await response.json();
             allAnswersFetch();
-            // console.log(result);
+            console.log(result);
         } catch (error) {
             console.error("❌ Erreur ❌");
         }
