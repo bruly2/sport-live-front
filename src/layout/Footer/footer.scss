@@ -14,4 +14,10 @@ footer {
         margin-bottom: 30px;
         border: 1px solid $color-secondary;
     }
+    .separator {
+        color: $color-white;
+        @media (max-width: $layout-breakpoint-small) {
+            display: none;
+        }
+    }
 }

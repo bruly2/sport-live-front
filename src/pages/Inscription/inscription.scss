@@ -63,3 +63,16 @@
         }
     }
 }
+
+.inscription-success {
+    h2 {
+        margin-bottom: 20px;
+        font-size: 1.6em;
+    }
+    p {
+        display: inline;
+        margin-right: 10px;
+        font-size: 1.3em;
+        color: $color-white;
+    }
+}

@@ -1,10 +1,11 @@
 import "./pollelement.scss";
-import Button from "../Button/Button";
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { getCookie } from "../../utils/authentication/Authentication";
 import { useForm, SubmitHandler } from "react-hook-form";
-
-// TODO 2. Récup les % du sondage + faire l'affichage
+import Loader from "../../layout/Loader/Loader";
+import { motion } from "framer-motion";
+import Button from "../Button/Button";
+import LoaderText from "../../layout/Loader/LoaderText";
 
 interface IAnswers {
     id: number;
@@ -17,12 +18,12 @@ type Inputs = {
 };
 
 const PollElement: React.FC = () => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [displayAnswersPoll, setDisplayAnswersPoll] = useState<IAnswers[]>(
         []
     );
     const [sommeRankings, setSommeRankings] = useState<number>(0);
-
-    const token: string | null = localStorage.getItem("token");
+    const token = getCookie("token");
 
     useEffect(() => {
         allAnswersFetch();
@@ -30,6 +31,7 @@ const PollElement: React.FC = () => {
 
     // FETCH Réponses
     const allAnswersFetch = async () => {
+        setIsLoading(true);
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/answers`,
@@ -40,6 +42,7 @@ const PollElement: React.FC = () => {
             // Calcul %
             const sumRankings = calcPoll(resultAnswer);
             setSommeRankings(sumRankings);
+            setIsLoading(false);
         } catch (error) {
             console.error("❌ Erreur Réponses❌");
         }
@@ -56,7 +59,7 @@ const PollElement: React.FC = () => {
     const {
         register,
         handleSubmit,
-        formState: { isSubmitSuccessful },
+        formState: { isSubmitting, isSubmitSuccessful },
     } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         // console.log(data.answerId);
@@ -85,79 +88,102 @@ const PollElement: React.FC = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <fieldset>
-                    {displayAnswersPoll.map((answer) => (
-                        <>
-                            <label key={answer.id}>
-                                <motion.input
-                                    type="radio"
-                                    // transition={{ delay: `0.${answer.id}` }}
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    value={answer.id}
-                                    {...register("answerId")}
-                                    className={
-                                        isSubmitSuccessful ? "hidden" : ""
-                                    }
-                                />
-                                {answer.content}
-                                {isSubmitSuccessful && (
-                                    <>
+            {/* 1. Formulaire initial 🔽 */}
+            {!isSubmitSuccessful ? (
+                isLoading ? (
+                    <Loader />
+                ) : (
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <fieldset>
+                            {displayAnswersPoll.map((answer) => (
+                                <>
+                                    <motion.label
+                                        // transition={{ delay: `0.${answer.id}` }}
+                                        initial={{ y: 20, opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        key={answer.id}
+                                    >
+                                        <motion.input
+                                            type="radio"
+                                            value={answer.id}
+                                            {...register("answerId")}
+                                        />
+                                        {answer.content}
+                                    </motion.label>
+                                </>
+                            ))}
+                        </fieldset>
+                        {isSubmitting ? (
+                            <LoaderText />
+                        ) : (
+                            <Button type={"submit"} className={"btn-primary-2"}>
+                                Voter
+                            </Button>
+                        )}
+                    </form>
+                )
+            ) : (
+                // 2. Formulaire envoyé 🔽
+                <form>
+                    <fieldset>
+                        {displayAnswersPoll.map((answer) => (
+                            <>
+                                <label key={answer.id} className="label-send">
+                                    <motion.input
+                                        type="radio"
+                                        {...register("answerId")}
+                                    />
+                                    {answer.content}
+                                    {/* Affichage des % 🔽 */}
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        className="poll-row"
+                                    >
                                         <motion.div
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            className="test"
-                                        >
-                                            <motion.div
-                                                initial={{ width: 0 }}
-                                                animate={{
-                                                    width: `${(
-                                                        (answer.ranking /
-                                                            sommeRankings) *
-                                                        100
-                                                    ).toFixed(0)}%`,
-                                                }}
-                                                transition={{
-                                                    duration: 0.6,
-                                                    ease: "easeOut",
-                                                }}
-                                                className="test2"
-                                            >
-                                                .
-                                            </motion.div>
-                                            <motion.div
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                transition={{ duration: 0.6 }}
-                                                className="test3"
-                                            >
-                                                {(
+                                            initial={{ width: 0 }}
+                                            animate={{
+                                                width: `${(
                                                     (answer.ranking /
                                                         sommeRankings) *
                                                     100
-                                                ).toFixed(0)}
-                                                %
-                                            </motion.div>
+                                                ).toFixed(0)}%`,
+                                            }}
+                                            transition={{
+                                                duration: 0.6,
+                                                ease: "easeOut",
+                                            }}
+                                            className="drawbar"
+                                        >
+                                            .
                                         </motion.div>
-                                    </>
-                                )}
-                            </label>
-                        </>
-                    ))}
-                </fieldset>
-                {!isSubmitSuccessful ? (
-                    <Button type={"submit"} className={"btn-primary-2"}>
-                        Voter
-                    </Button>
-                ) : (
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{
+                                                duration: 0.6,
+                                            }}
+                                            className="pourcent"
+                                        >
+                                            {(
+                                                (answer.ranking /
+                                                    sommeRankings) *
+                                                100
+                                            ).toFixed(0)}
+                                            %
+                                        </motion.div>
+                                    </motion.div>
+                                </label>
+                            </>
+                        ))}
+                    </fieldset>
                     <p className="total-vote">
                         {sommeRankings} vote{sommeRankings > 1 && "s"}
                     </p>
-                )}
-            </form>
+                </form>
+            )}
         </>
     );
 };

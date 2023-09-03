@@ -22,15 +22,21 @@
             @media (max-width: $layout-breakpoint-small) {
                 flex-wrap: wrap;
             }
-            & input[type="button"] {
+            & input[type="radio"] {
                 white-space: pre-line;
                 word-wrap: break-word;
+                display: none;
             }
             & label {
                 height: auto;
                 width: 100%;
                 max-width: 200px;
                 min-width: 190px;
+                min-height: 90px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 flex-grow: 1;
                 border-radius: 4px;
                 background-color: $color-white;
@@ -42,7 +48,7 @@
                     max-width: 80%;
                     min-height: 7em;
                 }
-                &:hover {
+                &:not(.label-send):hover {
                     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
                     border: none;
                     color: color.scale($color-black, $lightness: -50%);
@@ -51,23 +57,27 @@
                         $lightness: 45%
                     );
                 }
-                &:focus,
-                &:active,
-                &:target,
-                &:checked {
+                &:not(.label-send):focus,
+                &:not(.label-send):active,
+                &:not(.label-send):target,
+                &:not(.label-send):checked {
                     border: none;
                     background-color: color.scale(
                         $color-secondary,
                         $lightness: 10%
                     );
                 }
+                &.label-send:hover {
+                    cursor: initial;
+                }
             }
-            .test {
+            .poll-row {
                 background-color: color.scale($color-primary, $lightness: 0%);
                 width: 100%;
                 border-radius: 4px;
                 position: relative;
-                .test2 {
+                margin-top: 10px;
+                .drawbar {
                     background: linear-gradient(
                         90deg,
                         color.scale($color-secondary, $lightness: -20%) 0%,
@@ -78,12 +88,16 @@
                     border-radius: 0 99em 99em 0;
                 }
             }
-            .test3 {
-                font-size: 1em;
+            .pourcent {
+                height: 100%;
+                display: flex;
+                align-items: center;
                 position: absolute;
                 right: 10px;
                 top: 0;
                 text-shadow: 1px 1px 2px $color-primary;
+                font-size: 0.9em;
+                color: $color-white;
             }
         }
         .total-vote {

@@ -1,0 +1,17 @@
+@use "../../assets/styles/variables" as *;
+
+#error-page {
+    padding-left: 40px;
+    padding-right: 40px;
+    h1 {
+        margin-bottom: 0;
+    }
+    .error-img {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+        @media (max-width: $layout-breakpoint-small) {
+            max-width: 100%;
+        }
+    }
+}

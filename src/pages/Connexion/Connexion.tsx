@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./connexion.scss";
 import Button from "../../components/Button/Button";
 import Loader from "../../layout/Loader/Loader";
 import { motion } from "framer-motion";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 interface FormData {
     username: string;
@@ -22,10 +23,11 @@ const Connexion: React.FC = () => {
         register,
         handleSubmit,
         setError,
+        setFocus,
         formState: { errors },
     } = useForm<FormData>({ mode: "onTouched" });
 
-    const onSubmit = async (data: FormData) => {
+    const onSubmit = useCallback(async (data: FormData) => {
         setIsLoading(true);
         const response = await fetch(
             `${import.meta.env.VITE_API_BASE_URL}/login_check`,
@@ -34,14 +36,14 @@ const Connexion: React.FC = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                // credentials: "include",
                 body: JSON.stringify(data),
             }
         );
         const result = await response.json();
         if (response.status === 200) {
-            console.log(`Connexion réussie !! 🥳🥳`);
-            // console.log(result.token);
-            localStorage.setItem("token", result.token);
+            // Création + durée de vie du cookie client
+            document.cookie = `token=${result.token}; max-age=3600`;
             setIsLoading(false);
             navigate("/hub");
         } else {
@@ -52,6 +54,25 @@ const Connexion: React.FC = () => {
                     "L'identifiant ou mot de passe sont incorrects, merci de vous reconnecter",
             });
         }
+    }, []);
+
+    // Password Visibilté
+    const [passwordVisibility, setPasswordVisibility] =
+        useState<boolean>(false);
+
+    const handleVisibiltyPassword = () => {
+        setPasswordVisibility(!passwordVisibility);
+    };
+
+    //  Focus
+    useEffect(() => {
+        setFocus("username");
+    }, [setFocus]);
+
+    // Animation Erreurs
+    const animateError = {
+        initial: { x: -50 },
+        animate: { x: 0 },
     };
 
     return (
@@ -65,6 +86,7 @@ const Connexion: React.FC = () => {
                     animate={{ scale: 1 }}
                     className="connexion"
                     onSubmit={handleSubmit(onSubmit)}
+                    noValidate
                 >
                     {isLoading ? (
                         <motion.div
@@ -78,9 +100,14 @@ const Connexion: React.FC = () => {
                     ) : (
                         <div>
                             {errors.root?.serverError && (
-                                <p className="error-form server">
+                                <motion.p
+                                    variants={animateError}
+                                    initial="initial"
+                                    animate="animate"
+                                    className="error-form server"
+                                >
                                     {errors.root.serverError.message}
-                                </p>
+                                </motion.p>
                             )}
 
                             {/* PSEUDO */}
@@ -96,33 +123,63 @@ const Connexion: React.FC = () => {
                                 placeholder="Adresse email"
                                 {...register("username", {
                                     required: "Champs obligatoire",
+                                    pattern: {
+                                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                        message: "Adresse email invalide",
+                                    },
                                 })}
                             />
                             {errors.username && (
-                                <span className="error-form" role="alert">
+                                <motion.span
+                                    variants={animateError}
+                                    initial="initial"
+                                    animate="animate"
+                                    className="error-form"
+                                    role="alert"
+                                >
                                     {errors.username.message}
-                                </span>
+                                </motion.span>
                             )}
 
                             {/* MOT DE PASSE */}
-                            <label className="hidden" htmlFor="password">
-                                Mot de passe
-                            </label>
-                            <input
-                                type="password"
-                                placeholder="Mot de passe"
-                                aria-invalid={
-                                    errors.password ? "true" : "false"
-                                }
-                                {...register("password", {
-                                    required: "Mot de passe obligatoire",
-                                })}
-                            />
-                            {errors.password && (
-                                <span className="error-form" role="alert">
-                                    {errors.password.message}
-                                </span>
-                            )}
+                            <fieldset>
+                                <label className="hidden" htmlFor="password">
+                                    Mot de passe
+                                </label>
+                                <input
+                                    type={
+                                        passwordVisibility ? "text" : "password"
+                                    }
+                                    placeholder="Mot de passe"
+                                    aria-invalid={
+                                        errors.password ? "true" : "false"
+                                    }
+                                    {...register("password", {
+                                        required: "Mot de passe obligatoire",
+                                    })}
+                                />
+                                <a
+                                    onClick={handleVisibiltyPassword}
+                                    className="password-visibilty"
+                                >
+                                    {passwordVisibility ? (
+                                        <BsEyeSlashFill />
+                                    ) : (
+                                        <BsEyeFill />
+                                    )}
+                                </a>
+                                {errors.password && (
+                                    <motion.span
+                                        variants={animateError}
+                                        initial="initial"
+                                        animate="animate"
+                                        className="error-form"
+                                        role="alert"
+                                    >
+                                        {errors.password.message}
+                                    </motion.span>
+                                )}
+                            </fieldset>
 
                             <Button type={"submit"} className={"btn-primary-2"}>
                                 Se connecter

@@ -3,6 +3,8 @@ import "./inscription.scss";
 import Button from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useState, useCallback, useEffect } from "react";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 interface FormData {
     alias: string;
@@ -41,10 +43,24 @@ const Inscription: React.FC = () => {
         register,
         handleSubmit,
         watch,
+        setFocus,
         formState: { errors, isSubmitSuccessful },
     } = useForm<FormData>({ mode: "onTouched" });
-    const onSubmit = (data: FormData) => {
+    const onSubmit = useCallback((data: FormData) => {
         inscriptionFetch(data);
+    }, []);
+
+    //  Focus
+    useEffect(() => {
+        setFocus("alias");
+    }, [setFocus]);
+
+    // MDP Visibilté
+    const [passwordVisibility, setPasswordVisibility] =
+        useState<boolean>(false);
+
+    const handleVisibiltyPassword = () => {
+        setPasswordVisibility(!passwordVisibility);
     };
 
     // MOTION
@@ -53,19 +69,24 @@ const Inscription: React.FC = () => {
         animate: { x: 0, opacity: 1 },
     };
 
+    const animateError = {
+        initial: { x: -50 },
+        animate: { x: 0 },
+    };
+
     return (
         <>
             {isSubmitSuccessful ? (
-                <>
-                    <h1>{watch("alias")}, votre compte est crée 🥳</h1>
-                    <p>Cliquez ici pour vous connecter</p>
+                <main className="inscription-success">
+                    <h2>{watch("alias")}, votre compte est crée 🥳</h2>
+                    <p>Cliquez ici pour vous connecter&nbsp;:</p>
                     <Link to="/connexion">
                         <Button className={"btn-primary-2"} type={"button"}>
                             Connexion
                         </Button>
                     </Link>
                     {/* TODO Redirection vers la page connexion */}
-                </>
+                </main>
             ) : (
                 <main>
                     <h1>Création d'un compte</h1>
@@ -73,6 +94,7 @@ const Inscription: React.FC = () => {
                     <form
                         className="connexion"
                         onSubmit={handleSubmit(onSubmit)}
+                        noValidate
                     >
                         {/* PSEUDO */}
                         <label className="hidden" htmlFor="alias">
@@ -89,9 +111,9 @@ const Inscription: React.FC = () => {
                             {...register("alias", {
                                 required: "Champs obligatoire",
                                 pattern: {
-                                    value: /^[A-Za-z\s]+$/,
+                                    value: /^[A-Za-z0-9]+$/,
                                     message:
-                                        "Le pseudo ne doit contenir que des lettres",
+                                        "Le pseudo ne doit contenir que des lettres et/ou des chiffres",
                                 },
                                 minLength: {
                                     value: 3,
@@ -100,9 +122,15 @@ const Inscription: React.FC = () => {
                             })}
                         />
                         {errors.alias && (
-                            <span className="error-form" role="alerte">
+                            <motion.span
+                                variants={animateError}
+                                initial="initial"
+                                animate="animate"
+                                className="error-form"
+                                role="alert"
+                            >
                                 {errors.alias.message}
-                            </span>
+                            </motion.span>
                         )}
 
                         {/* PRENOM */}
@@ -120,16 +148,22 @@ const Inscription: React.FC = () => {
                             {...register("firstname", {
                                 required: "Prénom obligatoire",
                                 pattern: {
-                                    value: /^[A-Za-z\s]+$/,
+                                    value: /^[A-Za-z-]*$/,
                                     message:
                                         "Le prénom ne doit contenir que des lettres",
                                 },
                             })}
                         />
                         {errors.firstname && (
-                            <span className="error-form" role="alert">
+                            <motion.span
+                                variants={animateError}
+                                initial="initial"
+                                animate="animate"
+                                className="error-form"
+                                role="alert"
+                            >
                                 {errors.firstname.message}
-                            </span>
+                            </motion.span>
                         )}
 
                         {/* NOM */}
@@ -147,20 +181,25 @@ const Inscription: React.FC = () => {
                             {...register("lastname", {
                                 required: "Nom obligatoire",
                                 pattern: {
-                                    value: /^[A-Za-z\s]+$/,
+                                    value: /^[A-Za-z-]*$/,
                                     message:
                                         "Le nom ne doit contenir que des lettres",
                                 },
                             })}
                         />
                         {errors.lastname && (
-                            <span className="error-form" role="alert">
+                            <motion.span
+                                variants={animateError}
+                                initial="initial"
+                                animate="animate"
+                                className="error-form"
+                                role="alert"
+                            >
                                 {errors.lastname.message}
-                            </span>
+                            </motion.span>
                         )}
 
-                        {/* Email 
-                TODO : Compléter la vérif email */}
+                        {/* Email */}
                         <label className="hidden" htmlFor="nom">
                             Email
                         </label>
@@ -174,69 +213,121 @@ const Inscription: React.FC = () => {
                             aria-invalid={errors.email ? "true" : "false"}
                             {...register("email", {
                                 required: "Email obligatoire",
+                                pattern: {
+                                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                    message: "Adresse email invalide",
+                                },
                             })}
                         />
                         {errors.email && (
-                            <span className="error-form" role="alerte">
+                            <motion.span
+                                variants={animateError}
+                                initial="initial"
+                                animate="animate"
+                                className="error-form"
+                                role="alert"
+                            >
                                 {errors.email.message}
-                            </span>
+                            </motion.span>
                         )}
 
-                        {/* MOT DE PASSE
-                TODO : Compléter la vérif password */}
-                        <label className="hidden" htmlFor="password">
-                            Mot de passe
-                        </label>
-                        <motion.input
-                            variants={xInput}
-                            initial="initial"
-                            animate="animate"
-                            transition={{ delay: 0.5 }}
-                            type="password"
-                            aria-invalid={errors.password ? "true" : "false"}
-                            placeholder="Mot de passe"
-                            {...register("password", {
-                                required: "Mot de passe obligatoire",
-                                minLength: {
-                                    value: 6,
-                                    message: "6 carateres minimum",
-                                },
-                            })}
-                        />
-                        {errors.password && (
-                            <span className="error-form" role="alert">
-                                {errors.password.message}
-                            </span>
-                        )}
+                        {/* MOT DE PASSE */}
+                        <fieldset>
+                            <label className="hidden" htmlFor="password">
+                                Mot de passe
+                            </label>
+                            <motion.input
+                                variants={xInput}
+                                initial="initial"
+                                animate="animate"
+                                transition={{ delay: 0.5 }}
+                                type={passwordVisibility ? "text" : "password"}
+                                aria-invalid={
+                                    errors.password ? "true" : "false"
+                                }
+                                placeholder="Mot de passe"
+                                {...register("password", {
+                                    required: "Mot de passe obligatoire",
+                                    minLength: {
+                                        value: 6,
+                                        message: "6 carateres minimum",
+                                    },
+                                    pattern: {
+                                        value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/,
+                                        message:
+                                            "Majuscule, nombre et caractère spécial obligatoire",
+                                    },
+                                })}
+                            />
+                            <a
+                                onClick={handleVisibiltyPassword}
+                                className="password-visibilty"
+                            >
+                                {passwordVisibility ? (
+                                    <BsEyeSlashFill />
+                                ) : (
+                                    <BsEyeFill />
+                                )}
+                            </a>
+                            {errors.password && (
+                                <motion.span
+                                    variants={animateError}
+                                    initial="initial"
+                                    animate="animate"
+                                    className="error-form"
+                                    role="alert"
+                                >
+                                    {errors.password.message}
+                                </motion.span>
+                            )}
+                        </fieldset>
 
                         {/* CONFIRME MOT DE PASSE */}
-                        <label className="hidden" htmlFor="passwordVerif">
-                            Confirmer le mot de passe
-                        </label>
-                        <motion.input
-                            variants={xInput}
-                            initial="initial"
-                            animate="animate"
-                            transition={{ delay: 0.6 }}
-                            type="password"
-                            placeholder="Confirmer votre mot de passe"
-                            aria-invalid={
-                                errors.passwordVerif ? "true" : "false"
-                            }
-                            {...register("passwordVerif", {
-                                required: "Champs obligatoire",
-                                validate: (val) => {
-                                    if (watch("password") != val) {
-                                        return "Les mots de passe ne correspondent pas";
-                                    }
-                                },
-                            })}
-                        />
-                        {errors.passwordVerif && (
-                            <span className="error-form" role="alert">
-                                {errors.passwordVerif.message}
-                            </span>
-                        )}
+                        <fieldset>
+                            <label className="hidden" htmlFor="passwordVerif">
+                                Confirmer le mot de passe
+                            </label>
+                            <motion.input
+                                variants={xInput}
+                                initial="initial"
+                                animate="animate"
+                                transition={{ delay: 0.6 }}
+                                type={passwordVisibility ? "text" : "password"}
+                                placeholder="Confirmer votre mot de passe"
+                                aria-invalid={
+                                    errors.passwordVerif ? "true" : "false"
+                                }
+                                {...register("passwordVerif", {
+                                    required: "Champs obligatoire",
+                                    validate: (val) => {
+                                        if (watch("password") != val) {
+                                            return "Les mots de passe ne correspondent pas";
+                                        }
+                                    },
+                                })}
+                            />
+                            <a
+                                onClick={handleVisibiltyPassword}
+                                className="password-visibilty"
+                            >
+                                {passwordVisibility ? (
+                                    <BsEyeSlashFill />
+                                ) : (
+                                    <BsEyeFill />
+                                )}
+                            </a>
+                            {errors.passwordVerif && (
+                                <motion.span
+                                    variants={animateError}
+                                    initial="initial"
+                                    animate="animate"
+                                    className="error-form"
+                                    role="alert"
+                                >
+                                    {errors.passwordVerif.message}
+                                </motion.span>
+                            )}
+                        </fieldset>
 
                         <Button type={"submit"} className={"btn-primary-2"}>
                             Valider

@@ -1,9 +1,11 @@
+import "./poll.scss";
+import { useState, useEffect } from "react";
+import Authentication from "../../utils/authentication/Authentication";
+import { getCookie } from "../../utils/authentication/Authentication";
+import PollElement from "../PollElement/PollElement";
 import Button from "../Button/Button";
 import { IoIosClose } from "react-icons/io";
-import PollElement from "../PollElement/PollElement";
-import "./poll.scss";
-import Authentication from "../../utils/authentication/Authentication";
-import { useState, useEffect } from "react";
+import LoaderText from "../../layout/Loader/LoaderText";
 
 type PollProps = {
     closeBigCard: () => void;
@@ -13,8 +15,8 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
     const [displayQuestionPoll, setDisplayQuestionPoll] = useState<string>(
         "Aucun sondage pour le moment"
     );
-
-    const token: string | null = localStorage.getItem("token");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const token = getCookie("token");
 
     // Init Fetch
     useEffect(() => {
@@ -24,13 +26,14 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
     // FETCH Questions
     const allQuestionsFetch = async () => {
         try {
+            setIsLoading(true);
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/polls`,
                 { headers: { Authorization: `bearer ${token}` } }
             );
             const resultQuestion = await response.json();
-            // console.log(result);
             setDisplayQuestionPoll(resultQuestion[0].content);
+            setIsLoading(false);
         } catch (error) {
             console.error("❌ Erreur Questions ❌");
         }
@@ -49,7 +52,19 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
                     </span>
                 </Button>
 
-                <h2>{displayQuestionPoll}</h2>
+                {isLoading ? (
+                    <p
+                        style={{
+                            height: 36,
+                            textAlign: "left",
+                            margin: "0 40px 20px 20px",
+                        }}
+                    >
+                        <LoaderText />
+                    </p>
+                ) : (
+                    <h2>{displayQuestionPoll}</h2>
+                )}
 
                 <PollElement />
             </article>

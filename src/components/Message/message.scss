@@ -5,6 +5,10 @@
     position: relative;
     padding: 20px;
     width: 100%;
+    h2 {
+        color: $color-white;
+        font-weight: 300;
+    }
     textarea {
         width: 100%;
         min-height: 200px;
@@ -29,8 +33,9 @@
             min-height: 60vh;
         }
     }
-    .errorform {
+    .error-form {
         margin: -10px 0 20px;
-        color: color.scale($color-primary, $lightness: -30%, $saturation: 90%);
+        color: $color-secondary;
+        text-align: left;
     }
 }
