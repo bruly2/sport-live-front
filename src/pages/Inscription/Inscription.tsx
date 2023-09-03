@@ -3,7 +3,7 @@ import "./inscription.scss";
 import Button from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 interface FormData {
@@ -43,11 +43,17 @@ const Inscription: React.FC = () => {
         register,
         handleSubmit,
         watch,
+        setFocus,
         formState: { errors, isSubmitSuccessful },
     } = useForm<FormData>({ mode: "onTouched" });
     const onSubmit = useCallback((data: FormData) => {
         inscriptionFetch(data);
     }, []);
+
+    //  Focus
+    useEffect(() => {
+        setFocus("alias");
+    }, [setFocus]);
 
     // MDP Visibilté
     const [passwordVisibility, setPasswordVisibility] =

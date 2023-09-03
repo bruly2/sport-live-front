@@ -51,33 +51,27 @@ const ScrollingText: React.FC = () => {
 
     return (
         <>
-            {displayMessage.length !== 0 && (
+            <motion.div id="scrolling">
                 <motion.div
-                    id="scrolling"
-                    initial={{ y: -100 }}
-                    animate={{ y: 0 }}
+                    className="scrolling-text"
+                    style={{ marginRight: `-${divMessageWidth}px` }}
+                    animate={{
+                        transform: `translate3d(-${
+                            windowSize + divMessageWidth
+                        }px,0,0)`,
+                    }}
+                    transition={{
+                        repeat: Infinity,
+                        duration: 40,
+                        ease: "linear",
+                    }}
+                    ref={messageElement}
                 >
-                    <motion.div
-                        className="scrolling-text"
-                        style={{ marginRight: `-${divMessageWidth}px` }}
-                        animate={{
-                            transform: `translate3d(-${
-                                windowSize + divMessageWidth
-                            }px,0,0)`,
-                        }}
-                        transition={{
-                            repeat: Infinity,
-                            duration: 40,
-                            ease: "linear",
-                        }}
-                        ref={messageElement}
-                    >
-                        {displayMessage.map((message) => (
-                            <span key={message.id}>{message.content}</span>
-                        ))}
-                    </motion.div>
+                    {displayMessage.map((message) => (
+                        <span key={message.id}>{message.content}</span>
+                    ))}
                 </motion.div>
-            )}
+            </motion.div>
         </>
     );
 };

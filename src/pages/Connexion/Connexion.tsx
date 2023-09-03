@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./connexion.scss";
@@ -23,6 +23,7 @@ const Connexion: React.FC = () => {
         register,
         handleSubmit,
         setError,
+        setFocus,
         formState: { errors },
     } = useForm<FormData>({ mode: "onTouched" });
 
@@ -62,6 +63,12 @@ const Connexion: React.FC = () => {
         setPasswordVisibility(!passwordVisibility);
     };
 
+    //  Focus
+    useEffect(() => {
+        setFocus("username");
+    }, [setFocus]);
+
+    // Animation Erreurs
     const animateError = {
         initial: { x: -50 },
         animate: { x: 0 },
