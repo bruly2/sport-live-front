@@ -36,13 +36,14 @@ const Connexion: React.FC = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                // credentials: "include",
                 body: JSON.stringify(data),
             }
         );
         const result = await response.json();
         if (response.status === 200) {
-            console.log(`Connexion réussie !! 🥳🥳`);
-            localStorage.setItem("token", result.token);
+            // Création + durée de vie du cookie client
+            document.cookie = `token=${result.token}; max-age=3600`;
             setIsLoading(false);
             navigate("/hub");
         } else {

@@ -6,17 +6,24 @@ interface ConnectedContextProps {
     setConnected: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ConnectedContext = createContext<ConnectedContextProps>( {} as ConnectedContextProps)
+export const ConnectedContext = createContext<ConnectedContextProps>(
+    {} as ConnectedContextProps
+);
 
 interface ConnectedProviderProps {
     children: ReactNode;
 }
 
+const deleteCookie = (name: string) => {
+    document.cookie =
+        name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+};
+
 const ConnectedProvider: React.FC<ConnectedProviderProps> = ({ children }) => {
     const [connected, setConnected] = useState<boolean>(false);
 
     const logout = useCallback(() => {
-        localStorage.removeItem("token");
+        deleteCookie("token");
         setConnected(false);
     }, []);
 

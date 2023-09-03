@@ -22,15 +22,21 @@
             @media (max-width: $layout-breakpoint-small) {
                 flex-wrap: wrap;
             }
-            & input[type="button"] {
+            & input[type="radio"] {
                 white-space: pre-line;
                 word-wrap: break-word;
+                display: none;
             }
             & label {
                 height: auto;
                 width: 100%;
                 max-width: 200px;
                 min-width: 190px;
+                min-height: 90px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 flex-grow: 1;
                 border-radius: 4px;
                 background-color: $color-white;
@@ -42,7 +48,7 @@
                     max-width: 80%;
                     min-height: 7em;
                 }
-                &:hover {
+                &:not(.label-send):hover {
                     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
                     border: none;
                     color: color.scale($color-black, $lightness: -50%);
@@ -51,15 +57,18 @@
                         $lightness: 45%
                     );
                 }
-                &:focus,
-                &:active,
-                &:target,
-                &:checked {
+                &:not(.label-send):focus,
+                &:not(.label-send):active,
+                &:not(.label-send):target,
+                &:not(.label-send):checked {
                     border: none;
                     background-color: color.scale(
                         $color-secondary,
                         $lightness: 10%
                     );
+                }
+                &.label-send:hover {
+                    cursor: initial;
                 }
             }
             .poll-row {
@@ -67,6 +76,7 @@
                 width: 100%;
                 border-radius: 4px;
                 position: relative;
+                margin-top: 10px;
                 .drawbar {
                     background: linear-gradient(
                         90deg,

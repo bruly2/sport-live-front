@@ -6,11 +6,24 @@ interface AuthenticationProps {
     children: ReactNode;
 }
 
+// Récupere le Cookies
+export const getCookie = (name: string) => {
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith(name + "=")) {
+            return cookie.substring(name.length + 1);
+        }
+    }
+    return null;
+};
+
 const Authentication: React.FC<AuthenticationProps> = ({ children }) => {
     const { setConnected } = useContext(ConnectedContext);
 
     const isConnected = useCallback(() => {
-        const token = localStorage.getItem("token");
+        const token = getCookie("token");
+        console.log(token);
         return !!token;
     }, []);
 
@@ -23,4 +36,3 @@ const Authentication: React.FC<AuthenticationProps> = ({ children }) => {
     }
 };
 export default Authentication;
-<script>alert("tu est hacké !")</script>

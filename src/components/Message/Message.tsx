@@ -16,7 +16,6 @@ interface FormData {
 
 const Message: React.FC<IMessage> = ({ closeBigCard }) => {
     // TODO vérifier les caractères espaces
-    // TODO répeter l'animation à chaque fois que l'erreur est jouée
 
     // Form
     const {

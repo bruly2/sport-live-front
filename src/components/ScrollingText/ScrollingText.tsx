@@ -1,6 +1,7 @@
 import "./scrollingtext.scss";
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { getCookie } from "../../utils/authentication/Authentication";
 
 //  TODO : Durée d'affichage des msg en fonction de la longueur du tableau
 
@@ -11,8 +12,7 @@ interface IMesssage {
 
 const ScrollingText: React.FC = () => {
     const [displayMessage, setDisplayMessage] = useState<IMesssage[]>([]);
-
-    const token: string | null = localStorage.getItem("token");
+    const token = getCookie("token");
 
     useEffect(() => {
         allMessagesFetch();
