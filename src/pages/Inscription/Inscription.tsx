@@ -199,8 +199,7 @@ const Inscription: React.FC = () => {
                             </motion.span>
                         )}
 
-                        {/* Email 
-                TODO : Compléter la vérif email */}
+                        {/* Email */}
                         <label className="hidden" htmlFor="nom">
                             Email
                         </label>
