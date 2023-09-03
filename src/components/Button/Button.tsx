@@ -20,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({
             aria-label={ariaLabel}
             onClick={onClick}
             // whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.2 }}
         >
             {children}

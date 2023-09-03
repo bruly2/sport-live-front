@@ -89,14 +89,16 @@ const PollElement: React.FC = () => {
                 <fieldset>
                     {displayAnswersPoll.map((answer) => (
                         <>
-                            <label key={answer.id}>
+                            <motion.label
+                                // transition={{ delay: `0.${answer.id}` }}
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
+                                key={answer.id}
+                            >
                                 <motion.input
                                     type="radio"
-                                    // transition={{ delay: `0.${answer.id}` }}
-                                    initial={{ y: 20, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.98 }}
                                     value={answer.id}
                                     {...register("answerId")}
                                     className={
@@ -144,7 +146,7 @@ const PollElement: React.FC = () => {
                                         </motion.div>
                                     </>
                                 )}
-                            </label>
+                            </motion.label>
                         </>
                     ))}
                 </fieldset>
