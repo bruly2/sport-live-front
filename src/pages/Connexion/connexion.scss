@@ -37,3 +37,22 @@ main#connexion {
         }
     }
 }
+.connexion fieldset,
+#connexion fieldset {
+    position: relative;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+    .password-visibilty {
+        color: $color-primary;
+        position: absolute;
+        top: 52px;
+        right: 10px;
+        transition: 0.3s;
+        cursor: pointer;
+        &:hover {
+            color: color.scale($color-primary, $lightness: -30%);
+        }
+    }
+}

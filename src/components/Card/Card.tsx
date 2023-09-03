@@ -40,7 +40,7 @@ export const Card: React.FC<CardProps> = ({ title, img, id }) => {
                     style={{
                         backgroundImage: `url( ${img} )`,
                     }}
-                    whileHover={{ scale: 1.04 }}
+                    whileHover={{ y: -6 }}
                     whileTap={{ scale: 0.98 }}
                     transition={{ duration: 0.2 }}
                     className="card"

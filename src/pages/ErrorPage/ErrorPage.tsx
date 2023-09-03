@@ -1,4 +1,12 @@
+import img404 from "../../assets/img/error-page.png";
+import "./errorpage.scss";
+
 const ErrorPage: React.FC = () => {
-    return <h1>Error</h1>;
+    return (
+        <main id="error-page">
+            <h1>Error</h1>
+            <img src={img404} className="error-img" />
+        </main>
+    );
 };
 export default ErrorPage;

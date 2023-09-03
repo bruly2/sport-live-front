@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./connexion.scss";
 import Button from "../../components/Button/Button";
 import Loader from "../../layout/Loader/Loader";
 import { motion } from "framer-motion";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 interface FormData {
     username: string;
@@ -25,7 +26,7 @@ const Connexion: React.FC = () => {
         formState: { errors },
     } = useForm<FormData>({ mode: "onTouched" });
 
-    const onSubmit = async (data: FormData) => {
+    const onSubmit = useCallback(async (data: FormData) => {
         setIsLoading(true);
         const response = await fetch(
             `${import.meta.env.VITE_API_BASE_URL}/login_check`,
@@ -51,6 +52,14 @@ const Connexion: React.FC = () => {
                     "L'identifiant ou mot de passe sont incorrects, merci de vous reconnecter",
             });
         }
+    }, []);
+
+    // Password Visibilté
+    const [passwordVisibility, setPasswordVisibility] =
+        useState<boolean>(false);
+
+    const handleVisibiltyPassword = () => {
+        setPasswordVisibility(!passwordVisibility);
     };
 
     const animateError = {
@@ -69,6 +78,7 @@ const Connexion: React.FC = () => {
                     animate={{ scale: 1 }}
                     className="connexion"
                     onSubmit={handleSubmit(onSubmit)}
+                    noValidate
                 >
                     {isLoading ? (
                         <motion.div
@@ -105,6 +115,10 @@ const Connexion: React.FC = () => {
                                 placeholder="Adresse email"
                                 {...register("username", {
                                     required: "Champs obligatoire",
+                                    pattern: {
+                                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                        message: "Adresse email invalide",
+                                    },
                                 })}
                             />
                             {errors.username && (
@@ -120,30 +134,44 @@ const Connexion: React.FC = () => {
                             )}
 
                             {/* MOT DE PASSE */}
-                            <label className="hidden" htmlFor="password">
-                                Mot de passe
-                            </label>
-                            <input
-                                type="password"
-                                placeholder="Mot de passe"
-                                aria-invalid={
-                                    errors.password ? "true" : "false"
-                                }
-                                {...register("password", {
-                                    required: "Mot de passe obligatoire",
-                                })}
-                            />
-                            {errors.password && (
-                                <motion.span
-                                    variants={animateError}
-                                    initial="initial"
-                                    animate="animate"
-                                    className="error-form"
-                                    role="alert"
+                            <fieldset>
+                                <label className="hidden" htmlFor="password">
+                                    Mot de passe
+                                </label>
+                                <input
+                                    type={
+                                        passwordVisibility ? "text" : "password"
+                                    }
+                                    placeholder="Mot de passe"
+                                    aria-invalid={
+                                        errors.password ? "true" : "false"
+                                    }
+                                    {...register("password", {
+                                        required: "Mot de passe obligatoire",
+                                    })}
+                                />
+                                <a
+                                    onClick={handleVisibiltyPassword}
+                                    className="password-visibilty"
                                 >
-                                    {errors.password.message}
-                                </motion.span>
-                            )}
+                                    {passwordVisibility ? (
+                                        <BsEyeSlashFill />
+                                    ) : (
+                                        <BsEyeFill />
+                                    )}
+                                </a>
+                                {errors.password && (
+                                    <motion.span
+                                        variants={animateError}
+                                        initial="initial"
+                                        animate="animate"
+                                        className="error-form"
+                                        role="alert"
+                                    >
+                                        {errors.password.message}
+                                    </motion.span>
+                                )}
+                            </fieldset>
 
                             <Button type={"submit"} className={"btn-primary-2"}>
                                 Se connecter
