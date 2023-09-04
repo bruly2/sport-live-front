@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./connexion.scss";
@@ -7,6 +7,7 @@ import Button from "../../components/Button/Button";
 import Loader from "../../layout/Loader/Loader";
 import { motion } from "framer-motion";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+import { ConnectedContext } from "../../utils/context/ConnectedProvider";
 
 interface FormData {
     username: string;
@@ -16,6 +17,10 @@ interface FormData {
 const Connexion: React.FC = () => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const { logout } = useContext(ConnectedContext);
+
+    // Détruit les cookies
+    logout();
 
     // FORM + FETCH
     // TODO Ajouter le catch d'erreur
