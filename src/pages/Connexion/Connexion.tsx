@@ -40,8 +40,8 @@ const Connexion: React.FC = () => {
                 body: JSON.stringify(data),
             }
         );
-        const result = await response.json();
         if (response.status === 200) {
+            const result = await response.json();
             // Création + durée de vie client du cookie
             document.cookie = `token=${result.token}; max-age=3600`;
             document.cookie = `user_id=${result.user_id}; max-age=3600`;

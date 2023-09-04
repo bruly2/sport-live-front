@@ -29,12 +29,14 @@ const Inscription: React.FC = () => {
                     body: JSON.stringify(data),
                 }
             );
-            const result = await response.json();
-            console.log(
-                `🥳🥳 Utilisateur : ${result.firstname} enregistré en BDD !! 🥳🥳`
-            );
+            if (response.ok) {
+                // const result = await response.json();
+                return null;
+            } else {
+                console.log("error serveur");
+            }
         } catch (error) {
-            console.error("❌ Erreur ❌");
+            console.error("❌ Erreur :" + error);
         }
     };
 

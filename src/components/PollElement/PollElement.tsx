@@ -78,11 +78,11 @@ const PollElement: React.FC = () => {
                     body: JSON.stringify(data),
                 }
             );
-            const result = await response.json();
-            allAnswersFetch();
-            console.log(result);
+            if (response.ok) {
+                return allAnswersFetch();
+            }
         } catch (error) {
-            console.error("❌ Erreur ❌");
+            console.error("❌ Erreur " + error);
         }
     };
 

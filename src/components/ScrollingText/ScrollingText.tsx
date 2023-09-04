@@ -21,10 +21,12 @@ const ScrollingText: React.FC = () => {
                 `${import.meta.env.VITE_API_BASE_URL}/messages`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-            const result = await response.json();
-            setDisplayMessage(result);
+            if (response.ok) {
+                const result = await response.json();
+                return setDisplayMessage(result);
+            }
         } catch (error) {
-            console.error("❌ Erreur ❌");
+            console.error("❌ Erreur :" + error);
         }
     };
 
