@@ -37,6 +37,7 @@ const Message: FC<IMessage> = ({ closeBigCard }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>, data: MessageData) => {
         e.preventDefault();
         checkForm();
+
         fetchMessage(data);
     };
 
@@ -75,8 +76,10 @@ const Message: FC<IMessage> = ({ closeBigCard }) => {
         console.log(textArea);
     }, [handleSubmit], );
     const token: string | null = localStorage.getItem("token");
+   
+
     const fetchMessage = async (data: MessageData) => {
-      
+
         try {
           const response = await fetch(
             `${import.meta.env.VITE_API_BASE_URL}/messages`,
@@ -85,6 +88,7 @@ const Message: FC<IMessage> = ({ closeBigCard }) => {
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`, 
+                
               },
               body: JSON.stringify(data),
             }
