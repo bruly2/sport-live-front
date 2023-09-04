@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -41,10 +42,9 @@ const Connexion: React.FC = () => {
         );
         const result = await response.json();
         if (response.status === 200) {
-            // Création + durée de vie du cookie client
-            console.log(result);
-
+            // Création + durée de vie client du cookie
             document.cookie = `token=${result.token}; max-age=3600`;
+            document.cookie = `user_id=${result.user_id}; max-age=3600`;
             setIsLoading(false);
             navigate("/hub");
         } else {

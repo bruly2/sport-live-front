@@ -1,7 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./message.scss";
 import { useCallback, useEffect, useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { getCookie } from "../../utils/authentication/Authentication";
+import {
+    getCookieString,
+    getCookieNumber,
+} from "../../utils/authentication/Authentication";
 import Authentication from "../../utils/authentication/Authentication";
 import { MessageContext } from "../../utils/context/MessageProvider";
 import { motion } from "framer-motion";
@@ -18,12 +22,11 @@ interface FormData {
 }
 
 const Message: React.FC<IMessage> = ({ closeBigCard }) => {
+    // TODO vérifier les caractères espaces vides avant d'envoyer le form
     const { displayMessage, setDisplayMessage } = useContext(MessageContext);
-
-    // TODO vérifier les caractères espaces
-    const token = getCookie("token");
-    // TODO récupérer le user ID ici
-    const user_id = 1;
+    const token: string | null = getCookieString("token");
+    // parseInt pour corriger erreur TS
+    const user_id: number = parseInt(getCookieNumber("user_id") || "0", 10);
 
     // Form
     const {
@@ -33,10 +36,11 @@ const Message: React.FC<IMessage> = ({ closeBigCard }) => {
         setFocus,
         formState: { errors, isSubmitSuccessful },
     } = useForm<FormData>();
+
     // TODO Fetch en useEffect ?
     const onSubmit: SubmitHandler<FormData> = useCallback(async (data) => {
         try {
-            const response = await fetch(
+            const response: Response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/messages`,
                 {
                     method: "POST",

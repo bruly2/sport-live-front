@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./poll.scss";
 import { useState, useEffect } from "react";
 import Authentication from "../../utils/authentication/Authentication";
-import { getCookie } from "../../utils/authentication/Authentication";
+import { getCookieString } from "../../utils/authentication/Authentication";
 import PollElement from "../PollElement/PollElement";
 import Button from "../Button/Button";
 import { IoIosClose } from "react-icons/io";
@@ -16,7 +17,7 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
         "Aucun sondage pour le moment"
     );
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const token = getCookie("token");
+    const token = getCookieString("token");
 
     // Init Fetch
     useEffect(() => {
@@ -28,14 +29,14 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
         try {
             setIsLoading(true);
             const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/polls`,
+                `${import.meta.env.VITE_API_BASE_URL}/polls/1`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             const resultQuestion = await response.json();
-            setDisplayQuestionPoll(resultQuestion[0].content);
+            setDisplayQuestionPoll(resultQuestion.content);
             setIsLoading(false);
         } catch (error) {
-            console.error("❌ Erreur Questions ❌");
+            console.error("❌ Erreur Questions :" + error);
         }
     };
 

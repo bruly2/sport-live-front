@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./pollelement.scss";
 import { useState, useEffect } from "react";
-import { getCookie } from "../../utils/authentication/Authentication";
+import { getCookieString } from "../../utils/authentication/Authentication";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Loader from "../../layout/Loader/Loader";
 import { motion } from "framer-motion";
@@ -23,7 +24,7 @@ const PollElement: React.FC = () => {
         []
     );
     const [sommeRankings, setSommeRankings] = useState<number>(0);
-    const token = getCookie("token");
+    const token = getCookieString("token");
 
     useEffect(() => {
         allAnswersFetch();
@@ -34,17 +35,17 @@ const PollElement: React.FC = () => {
         setIsLoading(true);
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/answers`,
+                `${import.meta.env.VITE_API_BASE_URL}/polls/1/answers`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             const resultAnswer = await response.json();
-            setDisplayAnswersPoll(resultAnswer);
+            setDisplayAnswersPoll(resultAnswer.answers);
             // Calcul %
-            const sumRankings = calcPoll(resultAnswer);
+            const sumRankings = calcPoll(resultAnswer.answers);
             setSommeRankings(sumRankings);
             setIsLoading(false);
         } catch (error) {
-            console.error("❌ Erreur Réponses❌");
+            console.error("❌ Erreur Réponses :" + error);
         }
     };
 
@@ -95,23 +96,21 @@ const PollElement: React.FC = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <fieldset>
                             {displayAnswersPoll.map((answer) => (
-                                <>
-                                    <motion.label
-                                        // transition={{ delay: `0.${answer.id}` }}
-                                        initial={{ y: 20, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        key={answer.id}
-                                    >
-                                        <motion.input
-                                            type="radio"
-                                            value={answer.id}
-                                            {...register("answerId")}
-                                        />
-                                        {answer.content}
-                                    </motion.label>
-                                </>
+                                <motion.label
+                                    // transition={{ delay: `0.${answer.id}` }}
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    key={answer.id}
+                                >
+                                    <motion.input
+                                        type="radio"
+                                        value={answer.id}
+                                        {...register("answerId")}
+                                    />
+                                    {answer.content}
+                                </motion.label>
                             ))}
                         </fieldset>
                         {isSubmitting ? (

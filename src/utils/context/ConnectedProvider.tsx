@@ -14,7 +14,7 @@ interface ConnectedProviderProps {
     children: ReactNode;
 }
 
-const deleteCookie = (name: string) => {
+const deleteCookie = (name: string | number) => {
     document.cookie =
         name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 };
@@ -24,6 +24,7 @@ const ConnectedProvider: React.FC<ConnectedProviderProps> = ({ children }) => {
 
     const logout = useCallback(() => {
         deleteCookie("token");
+        deleteCookie("user_id");
         setConnected(false);
     }, []);
 

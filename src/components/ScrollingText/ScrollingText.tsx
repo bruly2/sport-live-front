@@ -1,14 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./scrollingtext.scss";
 import { useState, useRef, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
-import { getCookie } from "../../utils/authentication/Authentication";
+import { getCookieString } from "../../utils/authentication/Authentication";
 import { MessageContext, IMesssage } from "../../utils/context/MessageProvider";
 
 //  TODO : Durée d'affichage des msg en fonction de la longueur du tableau
 
 const ScrollingText: React.FC = () => {
     const { displayMessage, setDisplayMessage } = useContext(MessageContext);
-    const token = getCookie("token");
+    const token = getCookieString("token");
 
     useEffect(() => {
         allMessagesFetch();
@@ -57,7 +58,7 @@ const ScrollingText: React.FC = () => {
                     }}
                     transition={{
                         repeat: Infinity,
-                        duration: 10,
+                        duration: 30,
                         ease: "linear",
                     }}
                     ref={messageElement}
