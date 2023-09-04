@@ -35,7 +35,7 @@ const PollElement: React.FC = () => {
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/answers`,
-                { headers: { Authorization: `bearer ${token}` } }
+                { headers: { Authorization: `Bearer ${token}` } }
             );
             const resultAnswer = await response.json();
             setDisplayAnswersPoll(resultAnswer);
@@ -61,9 +61,8 @@ const PollElement: React.FC = () => {
         handleSubmit,
         formState: { isSubmitting, isSubmitSuccessful },
     } = useForm<Inputs>();
+    // TODO Fetch useEffect ou useCallback
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        // console.log(data.answerId);
-
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/answers/${
@@ -73,7 +72,7 @@ const PollElement: React.FC = () => {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `bearer ${token}`,
+                        Authorization: `Bearer ${token}`,
                     },
                     body: JSON.stringify(data),
                 }

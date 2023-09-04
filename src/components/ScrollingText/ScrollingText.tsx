@@ -1,17 +1,13 @@
 import "./scrollingtext.scss";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import { getCookie } from "../../utils/authentication/Authentication";
+import { MessageContext, IMesssage } from "../../utils/context/MessageProvider";
 
 //  TODO : Durée d'affichage des msg en fonction de la longueur du tableau
 
-interface IMesssage {
-    id: number;
-    content: string;
-}
-
 const ScrollingText: React.FC = () => {
-    const [displayMessage, setDisplayMessage] = useState<IMesssage[]>([]);
+    const { displayMessage, setDisplayMessage } = useContext(MessageContext);
     const token = getCookie("token");
 
     useEffect(() => {
@@ -22,10 +18,9 @@ const ScrollingText: React.FC = () => {
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/messages`,
-                { headers: { Authorization: `bearer ${token}` } }
+                { headers: { Authorization: `Bearer ${token}` } }
             );
             const result = await response.json();
-            // console.log(result);
             setDisplayMessage(result);
         } catch (error) {
             console.error("❌ Erreur ❌");
@@ -62,12 +57,12 @@ const ScrollingText: React.FC = () => {
                     }}
                     transition={{
                         repeat: Infinity,
-                        duration: 40,
+                        duration: 10,
                         ease: "linear",
                     }}
                     ref={messageElement}
                 >
-                    {displayMessage.map((message) => (
+                    {displayMessage.map((message: IMesssage) => (
                         <span key={message.id}>{message.content}</span>
                     ))}
                 </motion.div>

@@ -23,7 +23,6 @@ const Authentication: React.FC<AuthenticationProps> = ({ children }) => {
 
     const isConnected = useCallback(() => {
         const token = getCookie("token");
-        console.log(token);
         return !!token;
     }, []);
 

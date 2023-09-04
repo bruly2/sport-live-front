@@ -29,7 +29,7 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
             setIsLoading(true);
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/polls`,
-                { headers: { Authorization: `bearer ${token}` } }
+                { headers: { Authorization: `Bearer ${token}` } }
             );
             const resultQuestion = await response.json();
             setDisplayQuestionPoll(resultQuestion[0].content);

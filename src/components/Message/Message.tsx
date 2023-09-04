@@ -1,21 +1,29 @@
 import "./message.scss";
+import { useCallback, useEffect, useContext } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { getCookie } from "../../utils/authentication/Authentication";
+import Authentication from "../../utils/authentication/Authentication";
+import { MessageContext } from "../../utils/context/MessageProvider";
+import { motion } from "framer-motion";
 import Button from "../Button/Button";
 import { IoIosClose } from "react-icons/io";
-import { motion } from "framer-motion";
-import Authentication from "../../utils/authentication/Authentication";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useCallback, useEffect } from "react";
 
 type IMessage = {
     closeBigCard: () => void;
 };
 
 interface FormData {
-    messageContent: string;
+    content: string;
+    user_id: number;
 }
 
 const Message: React.FC<IMessage> = ({ closeBigCard }) => {
+    const { displayMessage, setDisplayMessage } = useContext(MessageContext);
+
     // TODO vérifier les caractères espaces
+    const token = getCookie("token");
+    // TODO récupérer le user ID ici
+    const user_id = 1;
 
     // Form
     const {
@@ -25,14 +33,31 @@ const Message: React.FC<IMessage> = ({ closeBigCard }) => {
         setFocus,
         formState: { errors, isSubmitSuccessful },
     } = useForm<FormData>();
-    const onSubmit: SubmitHandler<FormData> = useCallback(
-        (data) => console.log(data),
-        []
-    );
+    // TODO Fetch en useEffect ?
+    const onSubmit: SubmitHandler<FormData> = useCallback(async (data) => {
+        try {
+            const response = await fetch(
+                `${import.meta.env.VITE_API_BASE_URL}/messages`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(data),
+                }
+            );
+            if (response.ok) {
+                setDisplayMessage([...displayMessage, data]);
+            }
+        } catch (error) {
+            console.error("❌ Erreur :" + error);
+        }
+    }, []);
 
     // Focus TextArea
     useEffect(() => {
-        setFocus("messageContent");
+        setFocus("content");
     }, [setFocus]);
 
     // Entrée envoi le form + Esc ferme la card
@@ -68,31 +93,35 @@ const Message: React.FC<IMessage> = ({ closeBigCard }) => {
                 {isSubmitSuccessful ? (
                     <>
                         <h1>Message envoyé</h1>
-                        <h3>{watch("messageContent")}</h3>
+                        <h3>{watch("content")}</h3>
                     </>
                 ) : (
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <label className="hidden" htmlFor="messageContent">
+                        <input
+                            type="number"
+                            className="hidden"
+                            value={user_id}
+                            {...register("user_id")}
+                        />
+                        <label className="hidden" htmlFor="content">
                             Entrez votre message
                         </label>
                         <textarea
                             placeholder="Go spurs go !!"
-                            {...register("messageContent", {
+                            {...register("content", {
                                 required: "Champs obligatoire",
                             })}
-                            aria-invalid={
-                                errors.messageContent ? "true" : "false"
-                            }
+                            aria-invalid={errors.content ? "true" : "false"}
                             onKeyDown={handleKeyDown}
                         />
-                        {errors.messageContent && (
+                        {errors.content && (
                             <motion.p
                                 initial={{ x: -50 }}
                                 animate={{ x: 0 }}
                                 className="error-form"
                                 role="alert"
                             >
-                                {errors.messageContent.message}
+                                {errors.content.message}
                             </motion.p>
                         )}
                         <Button type={"submit"} className={"btn-primary-2"}>
