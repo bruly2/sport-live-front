@@ -41,4 +41,24 @@ button {
         top: 0;
         right: 0;
     }
+    &.arrow-nav {
+        background-color: transparent;
+        font-size: 2.5em;
+        position: absolute;
+        top: 37%;
+        color: color.scale($color-primary, $lightness: 60%);
+        transition: 0.3s;
+        &:hover {
+            color: color.scale($color-primary, $lightness: 80%);
+        }
+        @media (max-width: $layout-breakpoint-small) {
+            padding: 12px 8px;
+        }
+        &.next {
+            right: 0;
+        }
+        &.prev {
+            left: 0;
+        }
+    }
 }

@@ -18,7 +18,11 @@ type Inputs = {
     answerId: number;
 };
 
-const PollElement: React.FC = () => {
+type PollElementProps = {
+    displayPoll: number;
+};
+
+const PollElement: React.FC<PollElementProps> = ({ displayPoll }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [displayAnswersPoll, setDisplayAnswersPoll] = useState<IAnswers[]>(
         []
@@ -28,14 +32,16 @@ const PollElement: React.FC = () => {
 
     useEffect(() => {
         allAnswersFetch();
-    }, []);
+    }, [displayPoll]);
 
     // FETCH Réponses
     const allAnswersFetch = async () => {
         setIsLoading(true);
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/polls/1/answers`,
+                `${
+                    import.meta.env.VITE_API_BASE_URL
+                }/polls/${displayPoll}/answers`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             const resultAnswer = await response.json();
