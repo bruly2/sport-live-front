@@ -22,7 +22,7 @@
         background-color: color.scale($color-primary, $lightness: -10%);
         font-family: "Climate Crisis", display;
         &::placeholder {
-            color: color.scale($color-black, $lightness: 5%);
+            color: color.scale($color-primary, $lightness: 30%);
         }
         &:focus {
             outline: none;
