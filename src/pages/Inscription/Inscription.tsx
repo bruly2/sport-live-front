@@ -32,8 +32,6 @@ const Inscription: React.FC = () => {
             if (response.ok) {
                 // const result = await response.json();
                 return null;
-            } else {
-                console.log("error serveur");
             }
         } catch (error) {
             console.error("❌ Erreur :" + error);

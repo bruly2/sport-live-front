@@ -23,9 +23,6 @@ const Connexion: React.FC = () => {
     logout();
 
     // FORM + FETCH
-    // TODO Ajouter le catch d'erreur
-    // TODO Message erreur mdp en 401/404
-
     const {
         register,
         handleSubmit,
