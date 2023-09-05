@@ -8,6 +8,8 @@ import Loader from "../../layout/Loader/Loader";
 import { motion } from "framer-motion";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { ConnectedContext } from "../../utils/context/ConnectedProvider";
+import { useLocation } from "react-router-dom";
+
 
 interface FormData {
     username: string;
@@ -18,7 +20,7 @@ const Connexion: React.FC = () => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { logout } = useContext(ConnectedContext);
-
+    const { state } = useLocation<{ pseudo: string }>();
     // Détruit les cookies
     logout();
 
@@ -89,6 +91,10 @@ const Connexion: React.FC = () => {
         <>
             <h1>Connexion</h1>
             <h2>Participer à votre événement</h2>
+        {/* cela génèr l'affichage duspedo  */}
+            {state && state.pseudo && (
+                    <p>{state.pseudo}, votre compte a été créé </p>
+                )}
 
             <main id="connexion">
                 <motion.form
