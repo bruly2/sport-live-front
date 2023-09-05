@@ -60,7 +60,7 @@ const ScrollingText: React.FC = () => {
                     }}
                     transition={{
                         repeat: Infinity,
-                        duration: 30,
+                        duration: 40,
                         ease: "linear",
                     }}
                     ref={messageElement}

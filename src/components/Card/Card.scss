@@ -3,14 +3,6 @@
 
 .card {
     background-color: color.scale($color-primary, $lightness: 10%);
-    // background-image: linear-gradient(
-    //     100deg,
-    //     transparent,
-    //     rgba(255, 255, 255, 0.5) 50%,
-    //     transparent 80%
-    // );
-    // background-size: 75px 100%;
-    // animation: animloader 1s linear infinite;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
     background-repeat: no-repeat;
     background-position: center;
@@ -23,14 +15,6 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    // @keyframes animloader {
-    //     0% {
-    //         background-position: 0% 0, 0 0, 70px 5px, 70px 38px, 0px 66px;
-    //     }
-    //     100% {
-    //         background-position: 150% 0, 0 0, 70px 5px, 70px 38px, 0px 66px;
-    //     }
-    // }
     @media (max-width: $layout-breakpoint-small) {
         width: 100%;
         margin-left: 20px;
