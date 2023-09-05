@@ -44,14 +44,20 @@ const PollElement: React.FC<PollElementProps> = ({ displayPoll }) => {
                 }/polls/${displayPoll}/answers`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-            const resultAnswer = await response.json();
-            setDisplayAnswersPoll(resultAnswer.answers);
-            // Calcul %
-            const sumRankings = calcPoll(resultAnswer.answers);
-            setSommeRankings(sumRankings);
-            setIsLoading(false);
+            if (response.ok) {
+                const resultAnswer = await response.json();
+                setDisplayAnswersPoll(resultAnswer.answers);
+                // Calcul %
+                const sumRankings = calcPoll(resultAnswer.answers);
+                setSommeRankings(sumRankings);
+                setIsLoading(false);
+            } else {
+                console.error("❌ Erreur :");
+                return setIsLoading(false);
+            }
         } catch (error) {
             console.error("❌ Erreur Réponses :" + error);
+            return setIsLoading(false);
         }
     };
 
@@ -122,7 +128,14 @@ const PollElement: React.FC<PollElementProps> = ({ displayPoll }) => {
                         {isSubmitting ? (
                             <LoaderText />
                         ) : (
-                            <Button type={"submit"} className={"btn-primary-2"}>
+                            <Button
+                                type={"submit"}
+                                className={
+                                    displayAnswersPoll
+                                        ? "hidden"
+                                        : "btn-primary-2"
+                                }
+                            >
                                 Voter
                             </Button>
                         )}

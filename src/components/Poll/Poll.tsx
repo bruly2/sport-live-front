@@ -70,6 +70,7 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
             }
         } catch (error) {
             console.error("❌ Erreur Questions :" + error);
+            return setIsLoading(false);
         }
     };
 
@@ -92,6 +93,7 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
                             height: 36,
                             textAlign: "left",
                             margin: "0 40px 20px 20px",
+                            paddingTop: 10,
                         }}
                     >
                         <LoaderText />
@@ -132,9 +134,7 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
                     </>
                 )}
 
-                <PollElement
-                    displayPoll={displayPoll}
-                />
+                <PollElement displayPoll={displayPoll} />
             </article>
         </Authentication>
     );

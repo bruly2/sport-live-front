@@ -53,12 +53,18 @@ const Connexion: React.FC = () => {
             document.cookie = `user_id=${result.user_id}; max-age=3600`;
             setIsLoading(false);
             navigate("/hub");
-        } else {
+        } else if (response.status === 401) {
             setIsLoading(false);
             setError("root.serverError", {
                 type: "server",
                 message:
                     "L'identifiant ou mot de passe sont incorrects, merci de vous reconnecter",
+            });
+        } else {
+            setIsLoading(false);
+            setError("root.serverError", {
+                type: "server",
+                message: "Erreur connexion serveur",
             });
         }
     }, []);
