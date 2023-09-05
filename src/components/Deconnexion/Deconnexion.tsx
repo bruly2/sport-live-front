@@ -4,6 +4,7 @@ import { ConnectedContext } from "../../utils/context/ConnectedProvider";
 import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import { IoIosClose } from "react-icons/io";
+import { AiOutlineLogout } from "react-icons/ai";
 import "./deconnexion.scss";
 
 const Deconnexion: React.FC = () => {
@@ -16,10 +17,10 @@ const Deconnexion: React.FC = () => {
         <>
             <Button
                 type={"button"}
-                className={"bn-secondary"}
+                className={"bn-secondary logout"}
                 onClick={() => setOpen((o) => !o)}
             >
-                Déconnexion
+                Déconnexion <AiOutlineLogout />
             </Button>
             <Popup open={open} closeOnDocumentClick onClose={closeModal}>
                 <div className="modal">
