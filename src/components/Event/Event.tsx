@@ -1,17 +1,24 @@
 import "./Event.scss";
+import React  from "react";
 
-export const Event: React.FC = () => {
+type EventProps = {
+    name:string;
+    date: number; 
+    time: number; 
+    location: string;
+  };
+  const Event: React.FC<EventProps> = () => {
     return (
         <>
             <main id="event">
                 <div>
-                    <h1>Meeting de Paris</h1>
+                    <h1>{name}</h1>
                 </div>
 
                 <div className="description_event">
                     <p>
-                        <span>27/05/23</span> - <span>19h</span> -&nbsp;
-                        <span>Paris</span>
+                        <span>{date}</span> - <span>{time}</span> -&nbsp;
+                        <span>{location}</span>
                     </p>
                 </div>
             </main>

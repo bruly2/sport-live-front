@@ -1,13 +1,108 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Sport Live</title>
-    </head>
-    <body>
-        <h1>Bienvenue sur Sport Live</h1>
-        <a href="/connexion">Connexion</a>
-        <a href="/inscription">Inscription</a>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- meta titre -->
+    <meta
+      name="title"
+      content="Sport Live - Interagissez en direct avec les athlètes et les événements sportifs"
+    />
+
+    <!-- meta descrition -->
+    <meta
+      name="description"
+      content="Découvrez Sport Live, le site révolutionnaire pour les spectateurs qui veulent vivre le sport autrement. Participez en direct avec les athlètes, envoyez des messages, pronostiquez les vainqueurs et bien plus encore. Rejoignez-nous pour une expérience sportive interactive inédite."
+    />
+
+    <!-- robot  (Cette balise indique au robot d'exploration Web que toutes les pages seront indexées et qu'il les explorera. )-->
+    <meta name="robots" content="index, follow" />
+
+    <!-- canonical -->
+    <!-- <link rel="canonical" href="https://projet-08-sport-live-front.vercel.app/" /> -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../public/favicon/favicon.ico"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="style.scss" />
+    <title>Sport Live</title>
+  </head>
+  <body>
+  
+      <!-- header -->
+      <header>
+        <figure>
+          <img src="../public/sport-live.png" alt="sport live" />
+          <figcaption><h1>Bienvenue sur Sport Live</h1></figcaption>
+        </figure>
+        <nav>
+          <ul class="nav_connexion">
+            <li><a href="/connexion">Connexion</a></li>
+            <li><a href="/inscription">Inscription</a></li>
+          </ul>
+        </nav>
+      </header>
+  
+      <!-- main -->
+      
+        <main class="container">
+          <section>
+            <article>
+              <figure>
+                <img src="./img/stade.jpg" alt="un stade bondé">
+              </figure>
+              <h2>Qui sommes nous ?</h2>
+              <p>
+                Découvrez l'histoire, la mission et les personnes derrière Sport
+                Live, la plateforme révolutionnaire d'interaction entre les
+                spectateurs et les athlètes.
+              </p>
+            </article>
+          </section>
+          <section>
+            <article>
+              <figure>
+                <img src="./img/message.jpg" alt="des supporters qui encourage leurs équipe" />
+              </figure>
+              <h2>Interagissez en Direct - Envoi de Messages</h2>
+              <p>
+                Communiquez directement avec les athlètes et les autres spectateurs
+                lors des événements sportifs. Partagez vos réactions, encouragements
+                et commentaires en temps réel
+              </p>
+            </article>
+          </section>
+          <section>
+            <article>
+              <figure>
+                <img src="./img/sondage.jpg" alt="des supporters qui encourage leurs équipes " />
+              </figure>
+              <h2>Participation Interactive - Sondages en Direct</h2>
+              <p>
+                Exprimez votre opinion et influencez l'événement en participant à
+                nos sondages en direct. Choisissez la musique d'entrée, la prochaine
+                épreuve et plus encore
+              </p>
+            </article>
+          </section>
+        </main>
+  
+      <!-- footer -->
+      <footer>
+        <nav>
+          <ul>
+            <li><a href="/Mentions-légales">Mentions Légales</a></li>
+            <li><a href="/Documentation">Documentation</a></li>
+          </ul>
+        </nav>
+      </footer>
+  </body>
 </html>
