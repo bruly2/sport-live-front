@@ -12,6 +12,7 @@ const App: React.FC = () => {
         <>
             <Header />
             <Routes>
+                <Route path="/" element={<Hub />} />
                 <Route path="/hub" element={<Hub />} />
                 <Route path="/connexion" element={<Connexion />} />
                 <Route path="/inscription" element={<Inscription />} />
