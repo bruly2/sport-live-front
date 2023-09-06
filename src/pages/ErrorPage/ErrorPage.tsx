@@ -9,8 +9,10 @@ const ErrorPage: React.FC = () => {
             <motion.img
                 src={img404}
                 animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 15, -15, 0],
+                    scale: [1, 1.1, 1],
+                    x: [0, -50, 0],
+                    y: [0, 25, -25, 0],
+                    rotate: [0, 10, -10, 0],
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
                 className="error-img"
