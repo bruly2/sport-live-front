@@ -18,10 +18,10 @@ const Header: React.FC = () => {
                     // className={connected && "connected"}
                 >
                     <div>
-                        <a href="/accueil.html">
+                        <a href={import.meta.env.VITE_API_BASE_URL_FRONT}>
                             <img src={LogoSportLive} alt="" />
                         </a>
-                        <a href="/accueil.html">
+                        <a href={import.meta.env.VITE_API_BASE_URL_FRONT}>
                             <p>Sport Live</p>
                         </a>
                     </div>

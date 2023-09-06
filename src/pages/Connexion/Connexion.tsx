@@ -57,6 +57,12 @@ const Connexion: React.FC = () => {
                 message:
                     "L'identifiant ou mot de passe sont incorrects, merci de vous reconnecter",
             });
+        } else if (response.status === 404) {
+            setIsLoading(false);
+            setError("root.serverError", {
+                type: "server",
+                message: "Erreur serveur ?",
+            });
         } else {
             setIsLoading(false);
             setError("root.serverError", {
