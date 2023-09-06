@@ -1,15 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useCallback, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./connexion.scss";
 import Button from "../../components/Button/Button";
 import Loader from "../../layout/Loader/Loader";
 import { motion } from "framer-motion";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { ConnectedContext } from "../../utils/context/ConnectedProvider";
-import { useLocation } from "react-router-dom";
-
 
 interface FormData {
     username: string;
