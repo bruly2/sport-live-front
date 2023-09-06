@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 
 function Connexion() {
-    return <a href="./hub.html">Connexion</a>;
+    return <a href="./">Connexion</a>;
 }
 
 const domNode = document.getElementById("connexion");

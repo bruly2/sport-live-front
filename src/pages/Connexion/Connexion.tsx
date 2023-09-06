@@ -87,98 +87,59 @@ const Connexion: React.FC = () => {
 
     return (
         <>
-            <h1>Connexion</h1>
-            <h2>Participer à votre événement</h2>
-
             <main id="connexion">
-                <motion.form
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="connexion"
-                    onSubmit={handleSubmit(onSubmit)}
-                    noValidate
-                >
-                    {isLoading ? (
-                        <motion.div
-                            className="loading"
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                        >
-                            <h2>Connexion en cours...</h2>
-                            <Loader />
-                        </motion.div>
-                    ) : (
-                        <div>
-                            {errors.root?.serverError && (
-                                <motion.p
-                                    variants={animateError}
-                                    initial="initial"
-                                    animate="animate"
-                                    className="error-form server"
-                                >
-                                    {errors.root.serverError.message}
-                                </motion.p>
-                            )}
+                <h1>Connexion</h1>
+                <h2>Participer à votre événement</h2>
+                <section>
+                    <motion.form
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="connexion"
+                        onSubmit={handleSubmit(onSubmit)}
+                        noValidate
+                    >
+                        {isLoading ? (
+                            <motion.div
+                                className="loading"
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                            >
+                                <h2>Connexion en cours...</h2>
+                                <Loader />
+                            </motion.div>
+                        ) : (
+                            <div>
+                                {errors.root?.serverError && (
+                                    <motion.p
+                                        variants={animateError}
+                                        initial="initial"
+                                        animate="animate"
+                                        className="error-form server"
+                                    >
+                                        {errors.root.serverError.message}
+                                    </motion.p>
+                                )}
 
-                            {/* PSEUDO */}
+                                {/* PSEUDO */}
 
-                            <label className="hidden" htmlFor="username">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                aria-invalid={
-                                    errors.username ? "true" : "false"
-                                }
-                                placeholder="Adresse email"
-                                {...register("username", {
-                                    required: "Champs obligatoire",
-                                    pattern: {
-                                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                                        message: "Adresse email invalide",
-                                    },
-                                })}
-                            />
-                            {errors.username && (
-                                <motion.span
-                                    variants={animateError}
-                                    initial="initial"
-                                    animate="animate"
-                                    className="error-form"
-                                    role="alert"
-                                >
-                                    {errors.username.message}
-                                </motion.span>
-                            )}
-
-                            {/* MOT DE PASSE */}
-                            <fieldset>
-                                <label className="hidden" htmlFor="password">
-                                    Mot de passe
+                                <label className="hidden" htmlFor="username">
+                                    Email
                                 </label>
                                 <input
-                                    type={
-                                        passwordVisibility ? "text" : "password"
-                                    }
-                                    placeholder="Mot de passe"
+                                    type="email"
                                     aria-invalid={
-                                        errors.password ? "true" : "false"
+                                        errors.username ? "true" : "false"
                                     }
-                                    {...register("password", {
-                                        required: "Mot de passe obligatoire",
+                                    placeholder="Adresse email"
+                                    {...register("username", {
+                                        required: "Champs obligatoire",
+                                        pattern: {
+                                            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                            message: "Adresse email invalide",
+                                        },
                                     })}
                                 />
-                                <a
-                                    onClick={handleVisibiltyPassword}
-                                    className="password-visibilty"
-                                >
-                                    {passwordVisibility ? (
-                                        <BsEyeSlashFill />
-                                    ) : (
-                                        <BsEyeFill />
-                                    )}
-                                </a>
-                                {errors.password && (
+                                {errors.username && (
                                     <motion.span
                                         variants={animateError}
                                         initial="initial"
@@ -186,25 +147,74 @@ const Connexion: React.FC = () => {
                                         className="error-form"
                                         role="alert"
                                     >
-                                        {errors.password.message}
+                                        {errors.username.message}
                                     </motion.span>
                                 )}
-                            </fieldset>
 
-                            <Button type={"submit"} className={"btn-primary-2"}>
-                                Se connecter
+                                {/* MOT DE PASSE */}
+                                <fieldset>
+                                    <label
+                                        className="hidden"
+                                        htmlFor="password"
+                                    >
+                                        Mot de passe
+                                    </label>
+                                    <input
+                                        type={
+                                            passwordVisibility
+                                                ? "text"
+                                                : "password"
+                                        }
+                                        placeholder="Mot de passe"
+                                        aria-invalid={
+                                            errors.password ? "true" : "false"
+                                        }
+                                        {...register("password", {
+                                            required:
+                                                "Mot de passe obligatoire",
+                                        })}
+                                    />
+                                    <a
+                                        onClick={handleVisibiltyPassword}
+                                        className="password-visibilty"
+                                    >
+                                        {passwordVisibility ? (
+                                            <BsEyeSlashFill />
+                                        ) : (
+                                            <BsEyeFill />
+                                        )}
+                                    </a>
+                                    {errors.password && (
+                                        <motion.span
+                                            variants={animateError}
+                                            initial="initial"
+                                            animate="animate"
+                                            className="error-form"
+                                            role="alert"
+                                        >
+                                            {errors.password.message}
+                                        </motion.span>
+                                    )}
+                                </fieldset>
+
+                                <Button
+                                    type={"submit"}
+                                    className={"btn-primary-2"}
+                                >
+                                    Se connecter
+                                </Button>
+                            </div>
+                        )}
+                    </motion.form>
+                    <aside>
+                        <h3>Pas encore de compte&nbsp;?</h3>
+                        <Link to="/inscription">
+                            <Button className={"btn-secondary"} type={"button"}>
+                                Créer un compte
                             </Button>
-                        </div>
-                    )}
-                </motion.form>
-                <aside>
-                    <h3>Pas encore de compte&nbsp;?</h3>
-                    <Link to="/inscription">
-                        <Button className={"btn-secondary"} type={"button"}>
-                            Créer un compte
-                        </Button>
-                    </Link>
-                </aside>
+                        </Link>
+                    </aside>
+                </section>
             </main>
         </>
     );

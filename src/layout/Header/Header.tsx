@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { ConnectedContext } from "../../utils/context/ConnectedProvider";
 import LogoSportLive from "../../assets/img/sport-live.png";
 import Deconnexion from "../../components/Deconnexion/Deconnexion";
@@ -19,12 +18,12 @@ const Header: React.FC = () => {
                     // className={connected && "connected"}
                 >
                     <div>
-                        <Link to="/">
+                        <a href="/accueil.html">
                             <img src={LogoSportLive} alt="" />
-                        </Link>
-                        <Link to="/">
+                        </a>
+                        <a href="/accueil.html">
                             <p>Sport Live</p>
-                        </Link>
+                        </a>
                     </div>
                     {connected && <Deconnexion />}
                 </nav>

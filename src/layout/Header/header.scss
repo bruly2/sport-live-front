@@ -2,7 +2,7 @@
 @use "sass:color";
 
 header {
-    background-color: color.scale($color-primary, $lightness: -7%);
+    background-color: color.scale($color-primary, $lightness: -5%);
     nav {
         width: 100%;
         border-bottom: 1px solid $color-black;

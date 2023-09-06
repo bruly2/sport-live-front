@@ -4,7 +4,7 @@ import "./errorpage.scss";
 const ErrorPage: React.FC = () => {
     return (
         <main id="error-page">
-            <h1>Error</h1>
+            <h1>Demi-tour&nbsp;!</h1>
             <img src={img404} className="error-img" />
         </main>
     );

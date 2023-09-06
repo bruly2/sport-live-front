@@ -13,7 +13,7 @@ const App: React.FC = () => {
             <Header />
             <Routes>
                 {/* Page "/" d'index provisoire */}
-                <Route path="http://localhost:5173/" />
+                <Route path="/" element={<Hub />} />
                 <Route path="/hub" element={<Hub />} />
                 <Route path="/connexion" element={<Connexion />} />
                 <Route path="/inscription" element={<Inscription />} />

@@ -1,12 +1,13 @@
 @use "../../assets/styles/variables" as *;
 @use "sass:color";
 
-main#connexion {
+main#connexion section {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
+    margin: 0 20px;
     @media (max-width: $layout-breakpoint-small) {
-        gap: 0;
+        gap: 0 30px;
     }
     form {
         flex-grow: 8;
