@@ -1,43 +1,66 @@
 @use "../../assets/styles/variables" as *;
 @use "sass:color";
 
-main#connexion section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin: 0 20px;
-    @media (max-width: $layout-breakpoint-small) {
-        gap: 0 30px;
-    }
-    form {
-        flex-grow: 8;
-    }
-    aside {
-        flex-grow: 1;
-        background-color: color.scale($color-primary, $lightness: 30%);
-        height: 100%;
-        color: $color-black;
-        margin-top: 30px;
-        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
-        border-radius: 8px;
-        padding: 30px;
-        h3 {
-            font-weight: 500;
-            margin-bottom: 20px;
+main#connexion {
+    section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin: 0 20px;
+        @media (max-width: $layout-breakpoint-small) {
+            gap: 0 30px;
+            order: 2;
         }
-    }
-    .loading {
-        h2 {
-            text-transform: initial;
-            text-align: center;
-            margin: 20px auto;
+        form {
+            flex-grow: 8;
         }
-        [cssproperties="loader"] {
-            display: block;
-            margin: 30px auto 5px;
+        aside {
+            flex-grow: 1;
+            height: 100%;
+
+            .success {
+                order: 1;
+                padding: 20px;
+                background-color: #b3e9c7;
+                font-size: 1.2em;
+                display: block;
+                span {
+                    display: block;
+                    font-size: 1.3em;
+                }
+                svg {
+                    margin: 0 auto;
+                    text-align: center;
+                    font-size: 1.3em;
+                }
+            }
+            div {
+                background-color: color.scale($color-primary, $lightness: 30%);
+                color: $color-black;
+                margin-top: 30px;
+                box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+                border-radius: 8px;
+                padding: 30px;
+                h3 {
+                    font-weight: 500;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+        .loading {
+            h2 {
+                text-transform: initial;
+                text-align: center;
+                margin: 20px auto;
+            }
+            [cssproperties="loader"] {
+                display: block;
+                margin: 30px auto 5px;
+            }
         }
     }
 }
+
 .connexion fieldset,
 #connexion fieldset {
     position: relative;

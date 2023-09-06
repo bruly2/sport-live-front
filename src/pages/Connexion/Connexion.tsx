@@ -6,7 +6,7 @@ import "./connexion.scss";
 import Button from "../../components/Button/Button";
 import Loader from "../../layout/Loader/Loader";
 import { motion } from "framer-motion";
-import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
+import { BsEyeFill, BsEyeSlashFill, BsCheck2Circle } from "react-icons/bs";
 import { ConnectedContext } from "../../utils/context/ConnectedProvider";
 
 interface FormData {
@@ -96,10 +96,6 @@ const Connexion: React.FC = () => {
             <main id="connexion">
                 <h1>Connexion</h1>
                 <h2>Participer à votre événement</h2>
-                {/* cela génèr l'affichage duspedo  */}
-                {state && state.pseudo && (
-                    <p>{state.pseudo}, votre compte a été créé </p>
-                )}
                 <section>
                     <motion.form
                         initial={{ scale: 0 }}
@@ -217,12 +213,34 @@ const Connexion: React.FC = () => {
                         )}
                     </motion.form>
                     <aside>
-                        <h3>Pas encore de compte&nbsp;?</h3>
-                        <Link to="/inscription">
-                            <Button className={"btn-secondary"} type={"button"}>
-                                Créer un compte
-                            </Button>
-                        </Link>
+                        {/* cela génèr l'affichage duspedo  */}
+                        {state && state.pseudo ? (
+                            <motion.div
+                                className="success"
+                                initial={{ y: -50, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 1 }}
+                            >
+                                <BsCheck2Circle />
+                                <span>
+                                    <strong>{state.pseudo}</strong>{" "}
+                                    félicitations&nbsp;
+                                </span>
+                                Votre compte a été créé
+                            </motion.div>
+                        ) : (
+                            <div>
+                                <h3>Pas encore de compte&nbsp;?</h3>
+                                <Link to="/inscription">
+                                    <Button
+                                        className={"btn-secondary"}
+                                        type={"button"}
+                                    >
+                                        Créer un compte
+                                    </Button>
+                                </Link>
+                            </div>
+                        )}
                     </aside>
                 </section>
             </main>
