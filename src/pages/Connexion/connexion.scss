@@ -10,15 +10,13 @@ main#connexion {
         @media (max-width: $layout-breakpoint-small) {
             gap: 0 30px;
         }
-        .order-inscription-mobile {
-            @media (max-width: $layout-breakpoint-small) {
-                order: 2;
-            }
-        }
         form {
             flex-grow: 8;
-            @media (max-width: $layout-breakpoint-small) {
-                order: 2;
+            &.order-inscription-mobile {
+                @media (max-width: $layout-breakpoint-small) {
+                    order: 2;
+                    margin-top: 40px;
+                }
             }
         }
         aside {
