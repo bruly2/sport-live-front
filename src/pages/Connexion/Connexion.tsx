@@ -18,7 +18,7 @@ const Connexion: React.FC = () => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { logout } = useContext(ConnectedContext);
-    const { state } = useLocation<{ pseudo: string }>();
+    const { state } = useLocation();
     // Détruit les cookies
     logout();
 
