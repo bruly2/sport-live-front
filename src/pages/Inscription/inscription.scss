@@ -3,7 +3,7 @@
 
 .connexion {
     max-width: 1080px;
-    margin: 30px auto 70px;
+    margin: 30px auto;
     background-color: color.scale($color-primary, $lightness: -10%);
     padding: 1px 30px 30px;
     border-radius: 8px;
@@ -61,18 +61,5 @@
             margin-left: auto;
             margin-right: auto;
         }
-    }
-}
-
-.inscription-success {
-    h2 {
-        margin-bottom: 20px;
-        font-size: 1.6em;
-    }
-    p {
-        display: inline;
-        margin-right: 10px;
-        font-size: 1.3em;
-        color: $color-white;
     }
 }

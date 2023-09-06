@@ -9,15 +9,21 @@ main#connexion {
         margin: 0 20px;
         @media (max-width: $layout-breakpoint-small) {
             gap: 0 30px;
-            order: 2;
+        }
+        .order-inscription-mobile {
+            @media (max-width: $layout-breakpoint-small) {
+                order: 2;
+            }
         }
         form {
             flex-grow: 8;
+            @media (max-width: $layout-breakpoint-small) {
+                order: 2;
+            }
         }
         aside {
             flex-grow: 1;
             height: 100%;
-
             .success {
                 order: 1;
                 padding: 20px;
@@ -59,6 +65,9 @@ main#connexion {
             }
         }
     }
+}
+#inscription form {
+    margin-bottom: 70px;
 }
 
 .connexion fieldset,

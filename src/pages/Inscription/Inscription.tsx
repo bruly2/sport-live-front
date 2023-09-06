@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import "./inscription.scss";
 import Button from "../../components/Button/Button";
-import {Navigate} from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, useCallback, useEffect } from "react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
@@ -77,14 +77,9 @@ const Inscription: React.FC = () => {
     return (
         <>
             {isSubmitSuccessful ? (
-                <main className="inscription-success">
-                    {/* <h2>{watch("alias")}, votre compte est crée 🥳</h2>
-                    <p>Cliquez ici pour vous connecter&nbsp;:</p>  */}
-                    <Navigate to="/connexion" state={{pseudo: watch("alias")}} />
-                    {/* TODO Redirection vers la page connexion */}
-                </main>
+                <Navigate to="/connexion" state={{ pseudo: watch("alias") }} />
             ) : (
-                <main>
+                <main id="inscription">
                     <h1>Création d'un compte</h1>
                     <h2>En 30 secondes seulement</h2>
                     <form

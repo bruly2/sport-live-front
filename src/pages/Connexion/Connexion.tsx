@@ -100,7 +100,11 @@ const Connexion: React.FC = () => {
                     <motion.form
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        className="connexion"
+                        className={
+                            state && state.pseudo
+                                ? "connexion order-inscription-mobile"
+                                : "connexion"
+                        }
                         onSubmit={handleSubmit(onSubmit)}
                         noValidate
                     >

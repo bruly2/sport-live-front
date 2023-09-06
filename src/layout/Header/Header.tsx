@@ -19,7 +19,7 @@ const Header: React.FC = () => {
                 >
                     <div>
                         <a href={import.meta.env.VITE_API_BASE_URL_FRONT}>
-                            <img src={LogoSportLive} alt="" />
+                            <img src={LogoSportLive} alt="logo sport live" />
                         </a>
                         <a href={import.meta.env.VITE_API_BASE_URL_FRONT}>
                             <p>Sport Live</p>
