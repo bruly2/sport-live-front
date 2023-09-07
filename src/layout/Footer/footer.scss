@@ -2,7 +2,10 @@
 @use "sass:color";
 
 footer {
-    margin: 30px auto;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 30px auto 0;
     text-align: center;
     background-color: color.scale($color-primary, $lightness: -5%);
     min-height: 85px;

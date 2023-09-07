@@ -120,7 +120,10 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
                             <Button
                                 type={"button"}
                                 className={"arrow-nav next"}
-                                onClick={() => setDisplayPoll(displayPoll + 1)}
+                                onClick={() => {
+                                    setDisplayPoll(displayPoll + 1);
+                                    allQuestionFetch();
+                                }}
                             >
                                 <motion.span
                                     initial={{ opacity: 0 }}
