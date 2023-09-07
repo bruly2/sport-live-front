@@ -37,7 +37,7 @@ const Connexion: React.FC = () => {
             `${import.meta.env.VITE_API_BASE_URL}/login_check`,
             {
                 method: "POST",
-                mode: "no-cors",
+                mode: "cors",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -51,12 +51,18 @@ const Connexion: React.FC = () => {
             document.cookie = `user_id=${result.user_id}; max-age=3600`;
             setIsLoading(false);
             navigate("/hub");
-        } else if (response.status === 401 || response.status === 404) {
+        } else if (response.status === 401) {
             setIsLoading(false);
             setError("root.serverError", {
                 type: "server",
                 message:
                     "L'identifiant ou mot de passe sont incorrects, merci de vous reconnecter",
+            });
+        } else if (response.status === 404) {
+            setIsLoading(false);
+            setError("root.serverError", {
+                type: "server",
+                message: "Erreur serveur ?",
             });
         } else {
             setIsLoading(false);
