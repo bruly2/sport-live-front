@@ -131,7 +131,7 @@ const PollElement: React.FC<PollElementProps> = ({ displayPoll }) => {
                             <Button
                                 type={"submit"}
                                 className={
-                                    displayAnswersPoll
+                                    !displayAnswersPoll
                                         ? "hidden"
                                         : "btn-primary-2"
                                 }

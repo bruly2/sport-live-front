@@ -40,7 +40,7 @@ const Authentication: React.FC<AuthenticationProps> = ({ children }) => {
 
     if (isConnected()) {
         setConnected(true);
-        return <>{children};</>;
+        return <>{children}</>;
     } else {
         setConnected(false);
         return <Navigate to="/connexion" />;
