@@ -2,33 +2,17 @@
 import "./scrollingtext.scss";
 import { useState, useRef, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
-import { getCookieString } from "../../utils/authentication/Authentication";
 import { MessageContext, IMesssage } from "../../utils/context/MessageProvider";
 
 //  TODO : Durée d'affichage des msg en fonction de la longueur du tableau
 
 const ScrollingText: React.FC = () => {
-    const { displayMessage, setDisplayMessage } = useContext(MessageContext);
-    const token = getCookieString("token");
+    const { displayMessage, allMessagesFetch } =
+        useContext(MessageContext);
 
     useEffect(() => {
         allMessagesFetch();
     }, []);
-
-    const allMessagesFetch = async () => {
-        try {
-            const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/messages`,
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-            if (response.ok) {
-                const result = await response.json();
-                return setDisplayMessage(result);
-            }
-        } catch (error) {
-            console.error("❌ Erreur :" + error);
-        }
-    };
 
     // Calcul la longueur de l'écran en px
     const [windowSize, setWindowSize] = useState<number>(0);

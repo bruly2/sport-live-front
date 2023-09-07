@@ -23,7 +23,8 @@ interface FormData {
 
 const Message: React.FC<IMessage> = ({ closeBigCard }) => {
     // TODO vérifier les caractères espaces vides avant d'envoyer le form
-    const { displayMessage, setDisplayMessage } = useContext(MessageContext);
+    const { displayMessage, setDisplayMessage, allMessagesFetch } =
+        useContext(MessageContext);
     const token: string | null = getCookieString("token");
     // parseInt pour corriger erreur TS
     const user_id: number = parseInt(getCookieNumber("user_id") || "0", 10);
@@ -52,7 +53,8 @@ const Message: React.FC<IMessage> = ({ closeBigCard }) => {
                 }
             );
             if (response.ok) {
-                setDisplayMessage([...displayMessage, data]);
+                setDisplayMessage(displayMessage);
+                allMessagesFetch();
             }
         } catch (error) {
             console.error("❌ Erreur :" + error);

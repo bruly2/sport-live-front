@@ -25,33 +25,13 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
 
     // Init Fetch
     useEffect(() => {
-        allQuestionFetch();
-    }, []);
-
-    useEffect(() => {
         oneQuestionFetch();
     }, [displayPoll]);
 
-    // Fetch nb Questions dispo pour affichage nav flechée
-    const allQuestionFetch = async () => {
-        try {
-            const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/polls`,
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-            if (response.ok) {
-                let nbPoll = await response.json();
-                nbPoll = nbPoll.length;
-                return setNbTotalPoll(nbPoll);
-            } else {
-                console.error("❌ Erreur :");
-            }
-        } catch (error) {
-            console.error("❌ Erreur Questions :" + error);
-        }
-    };
+    useEffect(() => {
+        allQuestionFetch();
+    }, []);
 
-    // TODO revoir l'affichage d'erreur du fetch
     // FETCH Affichage des questions
     const oneQuestionFetch = async () => {
         try {
@@ -71,6 +51,25 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
         } catch (error) {
             console.error("❌ Erreur Questions :" + error);
             return setIsLoading(false);
+        }
+    };
+
+    // Fetch nb Questions dispo pour affichage nav flechée
+    const allQuestionFetch = async () => {
+        try {
+            const response = await fetch(
+                `${import.meta.env.VITE_API_BASE_URL}/polls`,
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            if (response.ok) {
+                let nbPoll = await response.json();
+                nbPoll = nbPoll.length;
+                return setNbTotalPoll(nbPoll);
+            } else {
+                console.error("❌ Erreur :");
+            }
+        } catch (error) {
+            console.error("❌ Erreur Questions :" + error);
         }
     };
 
