@@ -56,9 +56,15 @@ button {
         }
         &.next {
             right: -20px;
+            @media (max-width: $layout-breakpoint-small) {
+                right: 0;
+            }
         }
         &.prev {
             left: -20px;
+            @media (max-width: $layout-breakpoint-small) {
+                left: 0;
+            }
         }
     }
 }
