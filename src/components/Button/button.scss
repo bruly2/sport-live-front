@@ -43,7 +43,7 @@ button {
     }
     &.arrow-nav {
         background-color: transparent;
-        font-size: 3em;
+        font-size: 2.5em;
         position: absolute;
         top: 37%;
         color: color.scale($color-black, $lightness: 20%);
@@ -55,13 +55,13 @@ button {
             padding: 12px 8px;
         }
         &.next {
-            right: -20px;
+            right: -30px;
             @media (max-width: $layout-breakpoint-small) {
                 right: 0;
             }
         }
         &.prev {
-            left: -20px;
+            left: -30px;
             @media (max-width: $layout-breakpoint-small) {
                 left: 0;
             }
