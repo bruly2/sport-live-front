@@ -55,10 +55,10 @@ button {
             padding: 12px 8px;
         }
         &.next {
-            right: 0;
+            right: -20px;
         }
         &.prev {
-            left: 0;
+            left: -20px;
         }
     }
 }
