@@ -8,52 +8,54 @@ import { AiOutlineLogout } from "react-icons/ai";
 import "./deconnexion.scss";
 
 const Deconnexion: React.FC = () => {
-    const { logout } = useContext(ConnectedContext);
+  const { logout } = useContext(ConnectedContext);
 
-    const [open, setOpen] = useState<boolean>(false);
-    const closeModal = useCallback(() => setOpen(false), []);
+  const [open, setOpen] = useState<boolean>(false);
+  const closeModal = useCallback(() => setOpen(false), []);
 
-    return (
-        <>
+  return (
+    <>
+      <Button
+        type={"button"}
+        className={"bn-secondary logout"}
+        onClick={() => setOpen((o) => !o)}
+      >
+        Déconnexion <AiOutlineLogout />
+      </Button>
+      <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+        <div className="modal">
+          <h2>Etes vous sur de vouloir vous déconnecter&nbsp;?</h2>
+          <Button
+            type={"button"}
+            className={"close"}
+            ariaLabel={"Close"}
+            onClick={closeModal}
+          >
+            <span>
+              <IoIosClose />
+            </span>
+          </Button>
+          <div id="popin-deco">
             <Button
-                type={"button"}
-                className={"bn-secondary logout"}
-                onClick={() => setOpen((o) => !o)}
+              type={"button"}
+              className={"btn-secondary"}
+              onClick={closeModal}
             >
-                Déconnexion <AiOutlineLogout />
+              Non
             </Button>
-            <Popup open={open} closeOnDocumentClick onClose={closeModal}>
-                <div className="modal">
-                    <h2>Etes vous sur de vouloir vous déconnecter&nbsp;?</h2>
-                    <Button
-                        type={"button"}
-                        className={"close"}
-                        ariaLabel={"Close"}
-                        onClick={closeModal}
-                    >
-                        <span>
-                            <IoIosClose />
-                        </span>
-                    </Button>
-                    <div id="popin-deco">
-                        <Button
-                            type={"button"}
-                            className={"btn-secondary"}
-                            onClick={closeModal}
-                        >
-                            Non
-                        </Button>
-                        <Button
-                            type={"button"}
-                            className={"btn-primary-2"}
-                            onClick={logout}
-                        >
-                            <Link to="/">Oui</Link>
-                        </Button>
-                    </div>
-                </div>
-            </Popup>
-        </>
-    );
+            <Button
+              type={"button"}
+              className={"btn-primary-2"}
+              onClick={logout}
+            >
+              <Link to="/connexion" >
+                Oui
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </Popup>
+    </>
+  );
 };
 export default Deconnexion;
