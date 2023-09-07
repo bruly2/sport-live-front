@@ -83,6 +83,7 @@
 }
 header nav ul li button[disable] {
 	background-color: #c3cc64;
+	cursor:not-allowed!important;
 }
  header nav ul li a:focus, header nav ul li a:active, header nav ul li a:target {
 	 transform: scale(0.9);
