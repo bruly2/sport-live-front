@@ -62,21 +62,27 @@
 		 gap: 30px;
 	}
 }
- header nav ul li a {
+ header nav ul li button {
 	 text-decoration: none;
 	 padding: 10px 18px;
 	 background-color: #ecf954;
 	 color: #262626;
 	 border-radius: 5px;
 	 transition: 0.2s;
+	 border: 0;
+	 outline: 0;
+	 cursor: pointer;
 }
  @media (max-width: 768px) {
 	 header nav ul li a {
 		 padding: 8px 16px;
 	}
 }
- header nav ul li a:hover {
+ header nav ul li button:hover {
 	 background-color: #dff108;
+}
+header nav ul li button[disable] {
+	background-color: #c3cc64;
 }
  header nav ul li a:focus, header nav ul li a:active, header nav ul li a:target {
 	 transform: scale(0.9);
