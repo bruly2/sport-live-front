@@ -37,6 +37,7 @@ const Connexion: React.FC = () => {
             `${import.meta.env.VITE_API_BASE_URL}/login_check`,
             {
                 method: "POST",
+                mode: "cors",
                 headers: {
                     "Content-Type": "application/json",
                 },
