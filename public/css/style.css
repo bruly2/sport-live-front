@@ -225,11 +225,11 @@ header nav ul li button[disable] {
 }
  footer nav ul li a {
 	 text-decoration: none;
-	 color: #fdfdfd;
+	 color: #ecf954;
 	 border-radius: 5px;
 }
  footer nav .separator {
-	 color: #fdfdfd;
+	 color: #ecf954;
 }
  @media (max-width: 768px) {
 	 footer nav .separator {
