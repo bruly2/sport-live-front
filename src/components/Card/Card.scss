@@ -2,7 +2,7 @@
 @use "../../assets/styles/variables" as *;
 
 .card {
-    background-color: color.scale($color-primary, $lightness: 10%);
+    background-color: color.scale($color-primary, $lightness: 20%);
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
     background-repeat: no-repeat;
     background-position: center;
