@@ -59,7 +59,7 @@
  @media (max-width: 768px) {
 	 header nav ul {
 		 flex-direction: column;
-		 gap: 30px;
+		 gap: 15px 0; 
 	}
 }
  header nav ul li button {
@@ -74,6 +74,10 @@
 	 cursor: pointer;
 }
  @media (max-width: 768px) {
+	header nav ul li {
+		text-align: center;
+  width: 150px;
+   }
 	 header nav ul li a {
 		 padding: 8px 16px;
 	}
@@ -131,6 +135,8 @@ header nav ul li button[disable] {
 	 font-size: 2.4em;
 	 text-align: center;
 	 margin-bottom: 70px;
+	 margin-left: 30px;
+	 margin-right: 30px;
 }
  main article {
 	 display: flex;
@@ -138,11 +144,13 @@ header nav ul li button[disable] {
 	 justify-content: center;
 	 align-items: center;
 	 margin-bottom: 200px;
+	 margin-left: 30px;
+	 margin-right: 30px;
 	 gap: 50px;
 }
  @media (max-width: 768px) {
 	 main article {
-		 margin-bottom: 100px;
+		margin: 0 20px 100px;
 	}
 }
  main article:last-child {
@@ -167,7 +175,7 @@ header nav ul li button[disable] {
 	 box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
 }
  main article div {
-	 background-color: rgba(253, 253, 253, 0.2);
+	 background-color: rgba(253, 253, 253, 0.3);
 	 border-radius: 12px;
 	 box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
 	 border: 2px solid #fdfdfd;
