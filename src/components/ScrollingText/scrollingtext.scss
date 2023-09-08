@@ -8,7 +8,7 @@
     overflow-x: hidden;
     min-height: 120px;
     @media (max-width: $layout-breakpoint-small) {
-        min-height: 144px;
+        min-height: 115px;
     }
     .scrolling-text {
         color: $color-secondary;
@@ -18,8 +18,8 @@
         text-transform: uppercase;
         font-family: "Climate Crisis", display;
         @media (max-width: $layout-breakpoint-small) {
-            font-size: 6em;
-            min-height: 144px;
+            font-size: 4em;
+            min-height: 104px;
         }
         span {
             margin-right: 500px;

@@ -3,12 +3,13 @@
 
 footer {
     // position: absolute;
-    bottom: 0;
+    // bottom: 0;
     width: 100%;
-    margin: 30px auto 0;
+    margin: 30px auto -30px;
     text-align: center;
     background-color: color.scale($color-primary, $lightness: -5%);
     min-height: 85px;
+    padding-bottom: 10px;
     a {
         margin: 20px;
         color: $color-white;

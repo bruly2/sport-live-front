@@ -7,8 +7,7 @@ import { MessageContext, IMesssage } from "../../utils/context/MessageProvider";
 //  TODO : Durée d'affichage des msg en fonction de la longueur du tableau
 
 const ScrollingText: React.FC = () => {
-    const { displayMessage, allMessagesFetch } =
-        useContext(MessageContext);
+    const { displayMessage, allMessagesFetch } = useContext(MessageContext);
 
     useEffect(() => {
         allMessagesFetch();
@@ -44,7 +43,7 @@ const ScrollingText: React.FC = () => {
                     }}
                     transition={{
                         repeat: Infinity,
-                        duration: 40,
+                        duration: 60,
                         ease: "linear",
                     }}
                     ref={messageElement}
