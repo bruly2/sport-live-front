@@ -5,6 +5,15 @@
     position: relative;
     max-width: 1080px;
     width: 100%;
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 20px;
+    .carousel-root {
+        .carousel {
+            .control-arrow {
+                margin-top: 0;
+                top: 45% !important;
+                height: fit-content;
+            }
+        }
+    }
 }
