@@ -1,77 +1,51 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import "./poll.scss";
-import { useState, useEffect } from "react";
-import Authentication from "../../utils/authentication/Authentication";
-import { getCookieString } from "../../utils/authentication/Authentication";
-import PollElement from "../PollElement/PollElement";
-import LoaderText from "../../layout/Loader/LoaderText";
-import { motion } from "framer-motion";
 import Button from "../Button/Button";
 import { IoIosClose } from "react-icons/io";
-import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
+import { getCookieString } from "../../utils/authentication/Authentication";
+import { useState, useEffect } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import PollElement from "../PollElement/PollElement";
+import Authentication from "../../utils/authentication/Authentication";
+import LoaderText from "../../layout/Loader/LoaderText";
 
 type PollProps = {
     closeBigCard: () => void;
 };
 
+interface IQuestions {
+    id: number;
+    answers: [];
+    content: string;
+}
+
 const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
-    const token = getCookieString("token");
-    const [displayPoll, setDisplayPoll] = useState<number>(1);
-    const [nbTotalPoll, setNbTotalPoll] = useState<number>(0);
+    const [displayPoll, setDispayPoll] = useState<IQuestions[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [displayQuestionPoll, setDisplayQuestionPoll] = useState<string>(
-        "Aucun sondage pour le moment"
-    );
 
-    // Init Fetch
-    useEffect(() => {
-        oneQuestionFetch();
-    }, [displayPoll]);
+    const token = getCookieString("token");
 
-    useEffect(() => {
-        allQuestionFetch();
-    }, []);
-
-    // FETCH Affichage des questions
-    const oneQuestionFetch = async () => {
-        try {
-            setIsLoading(true);
-            const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/polls/${displayPoll}`,
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-            if (response.ok) {
-                const resultQuestion = await response.json();
-                setDisplayQuestionPoll(resultQuestion.content);
-                setIsLoading(false);
-            } else {
-                console.error("❌ Erreur :");
-                return setIsLoading(false);
-            }
-        } catch (error) {
-            console.error("❌ Erreur Questions :" + error);
-            return setIsLoading(false);
-        }
-    };
-
-    // Fetch nb Questions dispo pour affichage nav flechée
-    const allQuestionFetch = async () => {
+    const allQuestionsFetch = async () => {
+        setIsLoading(true);
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/polls`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             if (response.ok) {
-                let nbPoll = await response.json();
-                nbPoll = nbPoll.length;
-                return setNbTotalPoll(nbPoll);
-            } else {
-                console.error("❌ Erreur :");
+                const result = await response.json();
+                console.log(result);
+                setDispayPoll(result);
+                setIsLoading(false);
             }
         } catch (error) {
-            console.error("❌ Erreur Questions :" + error);
+            console.error(error);
+            setIsLoading(false);
         }
     };
+    useEffect(() => {
+        allQuestionsFetch();
+    }, []);
 
     return (
         <Authentication>
@@ -98,45 +72,20 @@ const Poll: React.FC<PollProps> = ({ closeBigCard }) => {
                         <LoaderText />
                     </p>
                 ) : (
-                    <>
-                        <h2>{displayQuestionPoll}</h2>
-                        {/* Btn précent si sup à 0 */}
-                        {nbTotalPoll > 0 && displayPoll > 1 && (
-                            <Button
-                                type={"button"}
-                                className={"arrow-nav prev"}
-                                onClick={() => setDisplayPoll(displayPoll - 1)}
-                            >
-                                <motion.span
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                >
-                                    <MdOutlineNavigateBefore />
-                                </motion.span>
-                            </Button>
-                        )}
-                        {/* Btn suivant si inf à nbTotalPoll */}
-                        {nbTotalPoll > 0 && displayPoll < nbTotalPoll && (
-                            <Button
-                                type={"button"}
-                                className={"arrow-nav next"}
-                                onClick={() => {
-                                    setDisplayPoll(displayPoll + 1);
-                                    allQuestionFetch();
-                                }}
-                            >
-                                <motion.span
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                >
-                                    <MdOutlineNavigateNext />
-                                </motion.span>
-                            </Button>
-                        )}
-                    </>
+                    <Carousel
+                        showThumbs={false}
+                        showIndicators={false}
+                        showStatus={false}
+                        useKeyboardArrows={true}
+                    >
+                        {displayPoll.map((poll) => (
+                            <div key={poll.id}>
+                                <h2>{poll.content}</h2>
+                                <PollElement pollNumber={poll.id} />
+                            </div>
+                        ))}
+                    </Carousel>
                 )}
-
-                <PollElement displayPoll={displayPoll} />
             </article>
         </Authentication>
     );
