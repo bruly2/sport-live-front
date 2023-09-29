@@ -78,7 +78,7 @@ main#connexion {
     .password-visibilty {
         color: $color-primary;
         background-color: color.scale($color-primary, $lightness: 85%);
-
+        border-radius: 0 4px 4px 0;
         position: absolute;
         right: 0;
         top: 35px;
