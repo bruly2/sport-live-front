@@ -6,11 +6,9 @@ const Footer: React.FC = () => {
         <footer>
             <hr />
             <nav role="navigation" aria-label="footer navigation">
-                <Link to="/donnees-personnelles">Données personnelles</Link>
                 <span className="separator">|</span>
                 <Link to="/mentions-legales">Mentions légales</Link>
                 <span className="separator">|</span>
-                <Link to="/contact">Contact</Link>
             </nav>
         </footer>
     );

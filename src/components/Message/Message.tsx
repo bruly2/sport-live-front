@@ -117,7 +117,7 @@ const Message: React.FC<IMessage> = ({ closeBigCard }) => {
                             {...register("content", {
                                 required: "Champs obligatoire",
                             })}
-                            aria-invalid={errors.content ? "true" : "false"}
+                            aria-invalid={errors.content ? true : false}
                             onKeyDown={handleKeyDown}
                         />
                         {errors.content && (
